@@ -2,7 +2,6 @@ package Dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 
 /**
  * 用于获得数据库的连接
