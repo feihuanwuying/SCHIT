@@ -22,6 +22,7 @@ public class PostDao {
      */
     public Post getPost(long id) {
         try {
+            con = Dao.getConnection();
             Statement sta = con.createStatement();
             ResultSet rs = sta.executeQuery("SELECT * FROM post WHERE id = " + id);
             if (rs.next()) {

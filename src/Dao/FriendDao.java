@@ -24,6 +24,7 @@ public class FriendDao {
      */
     public List<Friend> getFriends(String username) {
         try {
+            con = Dao.getConnection();
             Statement sta = con.createStatement();
             ResultSet rs = sta.executeQuery("SELECT * FROM friend WHERE username = '" + username + "'");
             List<Friend> list = new ArrayList<>();
@@ -36,6 +37,7 @@ public class FriendDao {
                 friend.setRemark(rs.getString(4));
                 list.add(friend);
             }
+            con.close();
             return list;
         } catch (SQLException e) {
             e.printStackTrace();

@@ -22,6 +22,7 @@ public class UserDao {
      */
     public User getUser(String username) {
         try {
+            con = Dao.getConnection();
             Statement sta = con.createStatement();
             ResultSet rs = sta.executeQuery("SELECT * FROM user WHERE username = '" + username + "'");
             if (rs.next()) {
