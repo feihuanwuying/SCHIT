@@ -1,4 +1,4 @@
-package Dao;
+package Data;
 
 /**
  * 对应数据表favorite_post

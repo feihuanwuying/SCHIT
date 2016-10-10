@@ -1,4 +1,4 @@
-package Dao;
+package Data;
 
 /**
  * 对应于数据表user
