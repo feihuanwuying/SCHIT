@@ -12,8 +12,14 @@ import java.util.List;
 public class FriendApplyDao {
     private Connection con;
 
-    //// TODO: 2016/10/10 继续 
+    /**
+     * 获得某个用户的好友申请列表
+     *
+     * @param username 用户名
+     * @return 好友申请列表
+     */
     public List<FriendApply> getFriendApplies(String username) {
+        //// TODO: 2016/10/10  
         return null;
     }
 }
