@@ -7,8 +7,8 @@ package Data;
 public class Friend {
     private long id;
     private String username;  //用户名
-    private String friendName;  //好友名
     private String remark;  //备注
+    private User friend;  //好友
 
     public long getId() {
         return id;
@@ -26,19 +26,19 @@ public class Friend {
         this.username = username;
     }
 
-    public String getFriendName() {
-        return friendName;
-    }
-
-    public void setFriendName(String friendName) {
-        this.friendName = friendName;
-    }
-
     public String getRemark() {
         return remark;
     }
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public User getFriend() {
+        return friend;
+    }
+
+    public void setFriend(User friend) {
+        this.friend = friend;
     }
 }
