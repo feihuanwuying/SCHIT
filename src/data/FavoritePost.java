@@ -1,4 +1,4 @@
-package Data;
+package data;
 
 /**
  * 对应数据表favorite_post

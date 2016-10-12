@@ -1,6 +1,6 @@
-package Dao;
+package dao;
 
-import Data.Post;
+import data.Post;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

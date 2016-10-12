@@ -1,4 +1,4 @@
-package Data;
+package data;
 
 /**
  * 对应于数据表friend

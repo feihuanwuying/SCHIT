@@ -1,6 +1,6 @@
-package Dao;
+package dao;
 
-import Data.FriendApply;
+import data.FriendApply;
 
 import java.sql.Connection;
 import java.util.List;

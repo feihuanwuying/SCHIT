@@ -1,6 +1,6 @@
-package Dao;
+package dao;
 
-import Data.Friend;
+import data.Friend;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

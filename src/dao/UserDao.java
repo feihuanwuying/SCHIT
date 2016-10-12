@@ -1,6 +1,6 @@
-package Dao;
+package dao;
 
-import Data.User;
+import data.User;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
