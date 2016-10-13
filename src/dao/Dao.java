@@ -1,9 +1,6 @@
 package dao;
 
 import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
 
 /**
  * 用于获得数据库的连接

@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: ZouKaifa
@@ -7,10 +8,14 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-
-  </body>
+<head>
+    <title>主页</title>
+</head>
+<body>
+    <%
+        out.print("欢迎，");
+        out.print(request.getSession().getAttribute("username"));
+        out.println("!");
+    %>
+</body>
 </html>
