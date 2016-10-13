@@ -1,6 +1,6 @@
 package dao;
 
-import data.User;
+import vo.User;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,8 +11,7 @@ import java.sql.Statement;
  * 与数据库交互，获得user表的信息
  * Created by ZouKaifa on 2016/10/10.
  */
-public class UserDao {
-    private Connection con;
+public class UserDao extends Dao{
 
     /**
      * 通过用户名获得一个User对象
@@ -22,9 +21,9 @@ public class UserDao {
      */
     public User getUser(String username) {
         try {
-            con = Dao.getConnection();
-            Statement sta = con.createStatement();
-            ResultSet rs = sta.executeQuery("SELECT * FROM user WHERE username = '" + username + "'");
+            setCon();
+            String sql = "SELECT * FROM user WHERE username = ?";
+            ResultSet rs = getResultSet(sql, new Object[]{username});
             if (rs.next()) {
                 User user = getUser(rs);
                 con.close();
