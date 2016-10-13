@@ -12,10 +12,6 @@
     <title>主页</title>
 </head>
 <body>
-    <%
-        out.print("欢迎，");
-        out.print(request.getSession().getAttribute("username"));
-        out.println("!");
-    %>
+    <%@include file="Head.jsp"%>
 </body>
 </html>

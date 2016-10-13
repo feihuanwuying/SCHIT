@@ -1,11 +1,10 @@
 package service;
 
 import com.opensymphony.xwork2.ActionContext;
-import dao.Dao;
+import com.opensymphony.xwork2.ActionSupport;
 import dao.UserDao;
+import vo.User;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 /** 登录相关的服务
  * Created by ZouKaifa on 2016/10/13.
@@ -19,8 +18,24 @@ public class LoginService {
      */
     public boolean login(String username, String password) {
         UserDao userDao = new UserDao();
-        if (userDao.exits(username, password)) {
+        User user = userDao.getUser(username, password);
+        if (user != null) {
             ActionContext.getContext().getSession().put("username", username);
+            ActionContext.getContext().getSession().put("nickname", user.getNickname());
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 注册
+     * @param user 要注册的信息
+     * @return 注册是否成功
+     */
+    public boolean register(User user) {
+        UserDao userDao = new UserDao();
+        if (userDao.getUser(user.getUsername()) == null) {
+            userDao.addUser(user);
             return true;
         }
         return false;

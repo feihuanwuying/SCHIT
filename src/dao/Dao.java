@@ -26,9 +26,51 @@ public class Dao {
      * @param params 参数数组
      * @return 结果集
      */
-    protected ResultSet getResultSet(String sql, Object... params) {
+    protected ResultSet executeQuery(String sql, Object... params) {
         try {
-            PreparedStatement ps = con.prepareStatement(sql);
+            return getPreparedStatement(sql, params).executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 根据sql语句及参数完成更新
+     * @param sql 语句
+     * @param params 参数
+     */
+    protected void executeUpdate(String sql, Object... params) {
+        try {
+            getPreparedStatement(sql, params).executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 根据sql语句及参数完成操作
+     * @param sql 语句
+     * @param params 参数
+     */
+    protected void execute(String sql, Object... params) {
+        try {
+            getPreparedStatement(sql, params).execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 根据sql语句及参数完成预编译及设置参数
+     * @param sql 语句
+     * @param params 参数
+     * @return PreparedStatement对象
+     */
+    private PreparedStatement getPreparedStatement(String sql, Object... params) {
+        PreparedStatement ps;
+        try {
+            ps = con.prepareStatement(sql);
             for (int i = 0; i < params.length; i++) {
                 Object pa = params[i];
                 if (pa.getClass() == String.class) {
@@ -41,7 +83,7 @@ public class Dao {
                     ps.setTimestamp(i + 1, (Timestamp) pa);
                 }
             }
-            return ps.executeQuery();
+            return ps;
         } catch (SQLException e) {
             e.printStackTrace();
         }

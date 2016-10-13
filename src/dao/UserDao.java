@@ -2,10 +2,8 @@ package dao;
 
 import vo.User;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  * 与数据库交互，获得user表的信息
@@ -23,7 +21,7 @@ public class UserDao extends Dao{
         try {
             setCon();
             String sql = "SELECT * FROM user WHERE (username = ?)";
-            ResultSet rs = getResultSet(sql, new Object[]{username});
+            ResultSet rs = executeQuery(sql, new Object[]{username});
             if (rs.next()) {
                 User user = getUser(rs);
                 con.close();
@@ -36,19 +34,21 @@ public class UserDao extends Dao{
         return null;
     }
 
-    public boolean exits(String username, String password) {
+    public User getUser(String username, String password) {
         try {
             setCon();
             String sql = "SELECT * FROM user WHERE (username = ?) AND (password = ?)";
-            if (getResultSet(sql, new Object[]{username, password}).next()) {
+            ResultSet rs = executeQuery(sql, new Object[]{username, password});
+            if (rs.next()) {
+                User user = getUser(rs);
                 con.close();
-                return true;
+                return user;
             }
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return null;
     }
 
     /**
@@ -69,5 +69,26 @@ public class UserDao extends Dao{
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 更新一条数据
+     * @param user user数据
+     */
+    public void updateUser(User user) {
+        String sql = "UPDATE user SET password = ?, nickname = ?, email = ? WHERE username = ?";
+        Object[] params = {user.getPassword(), user.getNickname(), user.getEmail(), user.getUsername()};
+        executeUpdate(sql, params);
+    }
+
+    /**
+     * 添加一条数据
+     * @param user 要添加的数据
+     */
+    public void addUser(User user) {
+        String sql = "INSERT INTO user (username, password, nickname, email)" +
+                "values(?, ?, ?, ?)";
+        Object[] params = {user.getUsername(), user.getPassword(), user.getNickname(), user.getEmail()};
+        execute(sql, params);
     }
 }

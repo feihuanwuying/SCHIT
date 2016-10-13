@@ -12,6 +12,9 @@
     <title>登录</title>
 </head>
 <body>
+    <s:if test="%{errCode == 1}">
+        用户名不存在或密码错误!
+    </s:if>
     <s:form action="login" method="post">
         <s:textfield name="username" value="%{username}" label="用户名"></s:textfield>
         <s:password name="password" value="%{username}" label="密码"></s:password>
