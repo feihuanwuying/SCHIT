@@ -76,9 +76,15 @@ public class UserDao extends Dao{
      * @param user user数据
      */
     public void updateUser(User user) {
+        setCon();
         String sql = "UPDATE user SET password = ?, nickname = ?, email = ? WHERE username = ?";
         Object[] params = {user.getPassword(), user.getNickname(), user.getEmail(), user.getUsername()};
         executeUpdate(sql, params);
+        try {
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -86,9 +92,15 @@ public class UserDao extends Dao{
      * @param user 要添加的数据
      */
     public void addUser(User user) {
+        setCon();
         String sql = "INSERT INTO user (username, password, nickname, email)" +
                 "values(?, ?, ?, ?)";
         Object[] params = {user.getUsername(), user.getPassword(), user.getNickname(), user.getEmail()};
         execute(sql, params);
+        try {
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

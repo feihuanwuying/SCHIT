@@ -56,10 +56,10 @@ public class LoginAction extends ActionSupport {
             setUrl(ServletActionContext.getRequest().getHeader("referer"));
             setErrCode(0);
         } else if (loginService.login(username, password)) {
-            setErrCode(1);
+            setErrCode(2);
             return SUCCESS;
         } else {
-            setErrCode(2);
+            setErrCode(1);
         }
         return LOGIN;
     }

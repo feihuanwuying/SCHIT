@@ -18,6 +18,7 @@
     <s:form action="login" method="post">
         <s:textfield name="username" value="%{username}" label="用户名"></s:textfield>
         <s:password name="password" value="%{username}" label="密码"></s:password>
+        <s:hidden name="url" value="%{url}"></s:hidden>
         <s:submit value="登录"></s:submit>
     </s:form>
 

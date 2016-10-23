@@ -13,7 +13,9 @@
     boolean login;
     if (request.getSession().getAttribute("username") != null) {
         out.print("欢迎回来，"+request.getSession().getAttribute("nickname")+"！");
+        out.print("<button type=\"button\" onclick=\"window.location.href='logout.action'\">注销</button>");
     } else {
         out.print("<button type=\"button\" onclick=\"window.location.href='login.action'\">登录</button>");
+        out.print("<button type=\"button\" onclick=\"window.location.href='register.action'\">注册</button>");
     }
 %>
