@@ -3,7 +3,7 @@ package action;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import org.apache.struts2.ServletActionContext;
-import service.LoginService;
+import service.UserService;
 import vo.User;
 
 /**
@@ -46,11 +46,11 @@ public class RegisterAction extends ActionSupport implements ModelDriven<User>{
 
     @Override
     public String execute() throws Exception {
-        LoginService loginService = new LoginService();
+        UserService userService = new UserService();
         if (user.getUsername() == null) {
             setUrl(ServletActionContext.getRequest().getHeader("referer"));
             setErrCode(0);
-        } else if (loginService.register(getUser())) {
+        } else if (userService.register(getUser())) {
             setErrCode(2);
             return SUCCESS;
         } else {

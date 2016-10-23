@@ -12,7 +12,7 @@ import java.util.Map;
 /** 登录相关的服务
  * Created by ZouKaifa on 2016/10/13.
  */
-public class LoginService {
+public class UserService {
     /**
      * 登录
      * @param username 用户名
