@@ -6,6 +6,9 @@
 
 <struts>
     <package name="default" extends="struts-default">
+        <interceptors>
+            <interceptor name="loginInterceptor" class="interceptor.LoginInterceptor"></interceptor>
+        </interceptors>
         <action name="login" class="action.LoginAction">
             <result type="redirect">${url}</result>
             <result name="login">/Login.jsp</result>
@@ -16,6 +19,18 @@
         </action>
         <action name="logout" class="action.LogoutAction">
             <result type="redirect">${url}</result>
+        </action>
+
+
+        
+        <action name="test">
+            <result>/test.jsp</result>
+            <result name="login">
+                <param name="location">/Login.jsp</param>
+                <param name="url">${url}</param>
+            </result>
+            <interceptor-ref name="loginInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
         <action name="index">
             <result>/Index.jsp</result>
