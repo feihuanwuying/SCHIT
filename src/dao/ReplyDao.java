@@ -117,7 +117,7 @@ public class ReplyDao extends Dao {
      * @return
      */
     public List<Reply> getReplyList(long id, long pageNumber, int pageSize) {
-        String sql = "SELECT * FROM reply WHERE post_id = ? limit ?, ?";
+        String sql = "SELECT * FROM reply WHERE post_id = ? ORDER BY time LIMIT ?, ? ";
         ResultSet rs = executeQuery(sql, new Object[]{id, (pageNumber-1)*pageSize, pageSize});
         return getReplyList(rs);
     }

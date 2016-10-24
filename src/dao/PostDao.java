@@ -68,16 +68,9 @@ public class PostDao extends Dao {
             post.setType(rs.getInt("type"));
             post.setTime(TimeTransform.timeStampToDate(rs.getTimestamp("time")));
             ReplyDao replyDao = new ReplyDao();
-            post.setReplies(replyDao.getReplyCount(post.getId()));
-            long replyId = rs.getLong("last_reply");
-            if (rs.wasNull()) {
-                post.setReplyName(post.getPosterName());
-                post.setReplyTime(post.getTime());  //无人回复，则回复时间与创建时间相同
-            } else {
-                Reply reply = replyDao.getReply(replyId);
-                post.setReplyTime(reply.getTime());
-                post.setReplyName(reply.getReplierName());
-            }
+            post.setReplyCount(replyDao.getReplyCount(post.getId()));
+            post.setReplyTime(TimeTransform.timeStampToDate(rs.getTimestamp("reply_time")));
+            post.setReplyName(rs.getString("reply_name"));
             replyDao.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -112,7 +105,7 @@ public class PostDao extends Dao {
      */
     public List<Post> getPostList(int type, long pageNumber, int pageSize) {
         List<Post> postList = null;
-        String sql = "SELECT * FROM post WHERE type = ? limit ?, ?";
+        String sql = "SELECT * FROM post WHERE type = ? ORDER BY reply_time DESC LIMIT ?, ?";
         ResultSet rs = executeQuery(sql, new Object[]{type, (pageNumber-1)*pageSize, pageSize});
         postList = getPostList(rs);
         return postList;
