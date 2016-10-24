@@ -60,10 +60,11 @@ public class UserDao extends Dao{
     private User getUser(ResultSet rs) {
         try {
             User user = new User();
-            user.setUsername(rs.getString(1));
-            user.setPassword(rs.getString(2));
-            user.setNickname(rs.getString(3));
-            user.setEmail(rs.getString(4));
+            user.setUsername(rs.getString("username"));
+            user.setPassword(rs.getString("password"));
+            user.setNickname(rs.getString("nickname"));
+            user.setEmail(rs.getString("email"));
+            user.setPower(rs.getInt("power"));
             return user;
         } catch (SQLException e) {
             e.printStackTrace();
