@@ -22,6 +22,7 @@ public class UserService {
     public boolean login(String username, String password) {
         UserDao userDao = new UserDao();
         User user = userDao.getUser(username, password);
+        userDao.close();
         if (user != null) {
             ActionContext.getContext().getSession().put("username", username);
             ActionContext.getContext().getSession().put("nickname", user.getNickname());
@@ -39,10 +40,12 @@ public class UserService {
         UserDao userDao = new UserDao();
         if (userDao.getUser(user.getUsername()) == null) {
             userDao.addUser(user);
+            userDao.close();
             ActionContext.getContext().getSession().put("username", user.getUsername());
             ActionContext.getContext().getSession().put("nickname", user.getNickname());
             return true;
         }
+        userDao.close();
         return false;
     }
 

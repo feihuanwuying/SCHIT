@@ -23,6 +23,12 @@
         <action name="showForum" class="action.ShowForumAction">
             <result>/Forum.jsp</result>
         </action>
+        <action name="showForumDetail" class="action.ShowForumDetailAction">
+            <result>/ForumDetail.jsp</result>
+        </action>
+        <action name="showPost" class="action.ShowPostAction">
+            <result>/Post.jsp</result>
+        </action>
         <action name="index">
             <result>/Index.jsp</result>
         </action>

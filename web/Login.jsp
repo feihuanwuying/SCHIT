@@ -15,7 +15,7 @@
     <s:if test="%{errCode == 1}">
         用户名不存在或密码错误!
     </s:if>
-    <form action="register.action" method="post" id="reg">
+    <form action="register.action" method="post" pid="reg">
         <input type="hidden" name="url" value="${url}">
     </form>
     <s:form action="login" method="post">

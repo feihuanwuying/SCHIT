@@ -12,16 +12,16 @@
 </head>
 <body>
     <%@include file="Head.jsp"%>
-    聊天灌水区  主题数：<s:property value="map[5][0]"></s:property>
+    <a href="showForumDetail.action?type=5">聊天灌水区</a> 主题数：<s:property value="map[5][0]"></s:property>
     回复数：<s:property value="map[5][1]"></s:property>
     <br>
-    学习交流区  主题数：<s:property value="map[6][0]"></s:property>
+    <a href="showForumDetail.action?type=6">学习交流区</a>  主题数：<s:property value="map[6][0]"></s:property>
     回复数：<s:property value="map[6][1]"></s:property>
     <br>
-    交友征婚区  主题数：<s:property value="map[7][0]"></s:property>
+    <a href="showForumDetail.action?type=7">交友征婚区</a>  主题数：<s:property value="map[7][0]"></s:property>
     回复数：<s:property value="map[7][1]"></s:property>
     <br>
-    咨询求助区  主题数：<s:property value="map[8][0]"></s:property>
+    <a href="showForumDetail.action?type=5">咨询求助区</a>  主题数：<s:property value="map[8][0]"></s:property>
     回复数：<s:property value="map[8][1]"></s:property>
 </body>
 </html>

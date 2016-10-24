@@ -15,6 +15,7 @@ public class Post {
     private Date time;  //发帖时间
     private String replyName;  //最后回复人
     private Date replyTime;  //最后回复时间
+    private long replies;  //回复量
 
     public long getId() {
         return id;
@@ -78,5 +79,13 @@ public class Post {
 
     public void setReplyTime(Date replyTime) {
         this.replyTime = replyTime;
+    }
+
+    public long getReplies() {
+        return replies;
+    }
+
+    public void setReplies(long replies) {
+        this.replies = replies;
     }
 }
