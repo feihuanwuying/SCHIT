@@ -13,6 +13,7 @@ public class Reply {
     private String replierName;  //回帖人
     private String content;  //回帖内容
     private Date time;  //回帖时间
+    private int type;  //回帖所处分区类型
 
     public long getId() {
         return id;
@@ -60,5 +61,13 @@ public class Reply {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

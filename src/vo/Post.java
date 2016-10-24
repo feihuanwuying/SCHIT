@@ -13,6 +13,8 @@ public class Post {
     private String content;  //内容
     private int type;  //帖子形式（如聊天灌水）
     private Date time;  //发帖时间
+    private String replyName;  //最后回复人
+    private Date replyTime;  //最后回复时间
 
     public long getId() {
         return id;
@@ -60,5 +62,21 @@ public class Post {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public String getReplyName() {
+        return replyName;
+    }
+
+    public void setReplyName(String replyName) {
+        this.replyName = replyName;
+    }
+
+    public Date getReplyTime() {
+        return replyTime;
+    }
+
+    public void setReplyTime(Date replyTime) {
+        this.replyTime = replyTime;
     }
 }

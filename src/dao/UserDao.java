@@ -18,37 +18,35 @@ public class UserDao extends Dao{
      * @return 若该用户存在，则返回对应的User对象，否则返回null
      */
     public User getUser(String username) {
+        User user = null;
         try {
             setCon();
             String sql = "SELECT * FROM user WHERE (username = ?)";
             ResultSet rs = executeQuery(sql, new Object[]{username});
             if (rs.next()) {
-                User user = getUser(rs);
-                con.close();
-                return user;
+                user = getUser(rs);
             }
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return user;
     }
 
     public User getUser(String username, String password) {
+        User user = null;
         try {
             setCon();
             String sql = "SELECT * FROM user WHERE (username = ?) AND (password = ?)";
             ResultSet rs = executeQuery(sql, new Object[]{username, password});
             if (rs.next()) {
-                User user = getUser(rs);
-                con.close();
-                return user;
+                user = getUser(rs);
             }
             con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return user;
     }
 
     /**

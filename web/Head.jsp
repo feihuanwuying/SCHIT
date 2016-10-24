@@ -19,3 +19,5 @@
         out.print("<button type=\"button\" onclick=\"window.location.href='register.action'\">注册</button>");
     }
 %>
+<button type="button" onclick="window.location.href='index.action'">主页</button>
+<br>

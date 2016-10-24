@@ -20,17 +20,8 @@
         <action name="logout" class="action.LogoutAction">
             <result type="redirect">${url}</result>
         </action>
-
-
-        
-        <action name="test">
-            <result>/test.jsp</result>
-            <result name="login">
-                <param name="location">/Login.jsp</param>
-                <param name="url">${url}</param>
-            </result>
-            <interceptor-ref name="loginInterceptor"></interceptor-ref>
-            <interceptor-ref name="defaultStack"></interceptor-ref>
+        <action name="showForum" class="action.ShowForumAction">
+            <result>/Forum.jsp</result>
         </action>
         <action name="index">
             <result>/Index.jsp</result>
