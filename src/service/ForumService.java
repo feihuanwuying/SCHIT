@@ -1,14 +1,14 @@
 package service;
 
+import com.opensymphony.xwork2.ActionContext;
 import dao.PostDao;
 import dao.ReplyDao;
+import dao.UserDao;
 import vo.Post;
 import vo.Reply;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
 
 /**
  * 论坛相关服务
@@ -19,7 +19,7 @@ public class ForumService {
     private int LEARN = 6;  //学习
     private int MAKE_FRIEND = 7;  //交友
     private int QUERY = 8;  //求助
-    protected int pageSize = 2;  //一页的帖子数
+    protected int pageSize = 5;  //一页的帖子数
     protected long pageNumber;  //页码
     protected long pageCount;  //总页数
 
@@ -162,6 +162,46 @@ public class ForumService {
 
     public int getPageSize() {
         return pageSize;
+    }
+
+    /**
+     * 添加一条回复
+     * @param reply
+     * @return
+     */
+    public boolean addReply(Reply reply) {
+        PostDao postDao = new PostDao();
+        ReplyDao replyDao = new ReplyDao();
+        Post post = postDao.getPost(reply.getPostId());
+        if (post == null) {  //无主题帖
+            return false;
+        } else if (post.getType() != reply.getType()) {  //分区不符
+            return false;
+        }
+        if (reply.getParentId() != -1) {
+            Reply parent = replyDao.getReply(reply.getParentId());
+            if (parent == null) {  //不存在父贴
+                return false;
+            }
+        }
+        if (reply.getReplierName() == null ||
+                !reply.getReplierName().equals((String)
+                        ActionContext.getContext().getSession().get("username"))) {
+            return false;  //用户名不对
+        }
+        UserDao userDao = new UserDao();
+        reply.setReplierNickName(userDao.getUser(reply.getReplierName()).getNickname());
+        int length = reply.getContent().length();
+        if (length < 4 || length > 4000) {  //长度验证
+            return false;
+        }
+        reply.setFloor(post.getReplyCount()+2);
+        reply.setTime(new Date());
+        replyDao.addReply(reply);
+        userDao.close();
+        postDao.close();
+        replyDao.close();
+        return true;
     }
 
 }

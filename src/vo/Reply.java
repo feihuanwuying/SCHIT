@@ -11,9 +11,12 @@ public class Reply {
     private long postId;  //帖子id
     private long parentId;  //父贴id，为-1则表示无父贴（直接回复）
     private String replierName;  //回帖人
+    private String replierNickName;  //回帖人昵称
     private String content;  //回帖内容
     private Date time;  //回帖时间
     private int type;  //回帖所处分区类型
+    private long floor;  //层数
+    private Reply parentReply = null;  //父贴
 
     public long getId() {
         return id;
@@ -69,5 +72,29 @@ public class Reply {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public String getReplierNickName() {
+        return replierNickName;
+    }
+
+    public void setReplierNickName(String replierNickName) {
+        this.replierNickName = replierNickName;
+    }
+
+    public Reply getParentReply() {
+        return parentReply;
+    }
+
+    public void setParentReply(Reply parentReply) {
+        this.parentReply = parentReply;
+    }
+
+    public long getFloor() {
+        return floor;
+    }
+
+    public void setFloor(long floor) {
+        this.floor = floor;
     }
 }

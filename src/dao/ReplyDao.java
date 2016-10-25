@@ -62,11 +62,16 @@ public class ReplyDao extends Dao {
             reply.setId(rs.getLong("id"));
             reply.setPostId(rs.getLong("post_id"));
             reply.setParentId(rs.getLong("parent_id"));
+            UserDao userDao = new UserDao();
+            if (rs.wasNull()) {
+                reply.setParentId(-1);  //直接回复楼主
+            }
             reply.setReplierName(rs.getString("replier_name"));
             reply.setContent(rs.getString("content"));
             reply.setTime(TimeTransform.timeStampToDate(rs.getTimestamp("time")));
             reply.setType(rs.getInt("type"));
-
+            reply.setFloor(rs.getLong("floor"));
+            reply.setReplierNickName(userDao.getUser(reply.getReplierName()).getNickname());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -101,7 +106,11 @@ public class ReplyDao extends Dao {
         List<Reply> replyList = new ArrayList<>();
         try {
             while (rs.next()) {
-                replyList.add(getReply(rs));
+                Reply reply = getReply(rs);
+                if (reply.getParentId() != -1) {
+                    reply.setParentReply(getReply(reply.getParentId()));
+                }
+                replyList.add(reply);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -120,5 +129,48 @@ public class ReplyDao extends Dao {
         String sql = "SELECT * FROM reply WHERE post_id = ? ORDER BY time LIMIT ?, ? ";
         ResultSet rs = executeQuery(sql, new Object[]{id, (pageNumber-1)*pageSize, pageSize});
         return getReplyList(rs);
+    }
+
+    /**
+     * 向数据库中添加一条回复
+     * @param reply
+     */
+    public void addReply(Reply reply) {
+        String sql = null;
+        Object[] param = null;
+        if (reply.getParentId() == -1) {  //直接回复
+            sql = "INSERT INTO reply (post_id, replier_name, content, time, type, floor) values (?, ?, ?, ?, ?, ?)";
+            param = new Object[]{reply.getPostId(), reply.getReplierName(), reply.getContent(),
+            TimeTransform.dateTotimeStamp(reply.getTime()), reply.getType(), reply.getFloor()};
+        } else {
+            sql = "INSERT INTO reply (post_id, parent_id, replier_name, content, time, type, floor) values (?, ?, ?, ?, ?, ?, ?)";
+            param = new Object[]{reply.getPostId(), reply.getParentId(), reply.getReplierName(),
+            reply.getContent(), TimeTransform.dateTotimeStamp(reply.getTime()), reply.getType(), reply.getFloor()};
+        }
+        execute(sql, param);
+    }
+
+    /**
+     * 父贴发帖人昵称
+     * @param id
+     * @return
+     */
+    private String getParentNickName(long id) {
+        String name = null;
+        try {
+            String sql = "SELECT replier_name FROM reply WHERE id = ?";
+            ResultSet rs = executeQuery(sql, new Object[]{id});
+            if (rs.next()) {
+                String username = rs.getString(1);
+                sql = "SELECT nickname FROM user WHERE username = ?";
+                rs = executeQuery(sql, new Object[]{username});
+                if (rs.next()) {
+                    name = rs.getString(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return name;
     }
 }

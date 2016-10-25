@@ -1,5 +1,6 @@
 package util;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -26,8 +27,7 @@ public class TimeTransform {
      * @return
      */
     public static Timestamp dateTotimeStamp(Date date) {
-        DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        String time = df.format(date);
-        return Timestamp.valueOf(time);
+        Timestamp times = new Timestamp(date.getTime());
+        return times;
     }
 }

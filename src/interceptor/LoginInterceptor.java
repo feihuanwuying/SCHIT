@@ -5,6 +5,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 import org.apache.struts2.ServletActionContext;
+import service.UserService;
 
 import java.util.Map;
 
@@ -25,9 +26,11 @@ public class LoginInterceptor extends AbstractInterceptor {
     @Override
     public String intercept(ActionInvocation actionInvocation) throws Exception {
         Map<String, Object> session = ActionContext.getContext().getSession();
-        if (! session.containsKey("username")) {
+        if (!session.containsKey("username")
+                || new UserService().exist((String)session.get("username"))) {
             setUrl(ServletActionContext.getRequest().getHeader("referer"));
             return Action.LOGIN;
+        } else {
         }
         return actionInvocation.invoke();
     }

@@ -29,6 +29,9 @@
         <action name="showPost" class="action.ShowPostAction">
             <result>/Post.jsp</result>
         </action>
+        <action name="addReply" class="action.AddReplyAction">
+            <result type="redirect">${url}</result>
+        </action>
         <action name="index">
             <result>/Index.jsp</result>
         </action>

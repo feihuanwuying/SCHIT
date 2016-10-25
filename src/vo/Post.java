@@ -9,11 +9,13 @@ import java.util.Date;
 public class Post {
     private long id;
     private String posterName;  //发帖人
+    private String posterNickName;
     private String title;  //题目
     private String content;  //内容
     private int type;  //帖子形式（如聊天灌水）
     private Date time;  //发帖时间
     private String replyName;  //最后回复人
+    private String replyNickName;  //最后回复人昵称
     private Date replyTime;  //最后回复时间
     private long replyCount;  //回复量
 
@@ -87,5 +89,21 @@ public class Post {
 
     public void setReplyCount(long replyCount) {
         this.replyCount = replyCount;
+    }
+
+    public String getReplyNickName() {
+        return replyNickName;
+    }
+
+    public void setReplyNickName(String replyNickName) {
+        this.replyNickName = replyNickName;
+    }
+
+    public String getPosterNickName() {
+        return posterNickName;
+    }
+
+    public void setPosterNickName(String posterNickName) {
+        this.posterNickName = posterNickName;
     }
 }

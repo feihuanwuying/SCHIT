@@ -71,7 +71,9 @@ public class PostDao extends Dao {
             post.setReplyCount(replyDao.getReplyCount(post.getId()));
             post.setReplyTime(TimeTransform.timeStampToDate(rs.getTimestamp("reply_time")));
             post.setReplyName(rs.getString("reply_name"));
-            replyDao.close();
+            UserDao userDao = new UserDao();
+            post.setReplyNickName(userDao.getUser(post.getReplyName()).getNickname());
+            post.setPosterNickName(userDao.getUser(post.getPosterName()).getNickname());
         } catch (SQLException e) {
             e.printStackTrace();
         }
