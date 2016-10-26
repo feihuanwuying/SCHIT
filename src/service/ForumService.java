@@ -184,20 +184,23 @@ public class ForumService {
                 return false;
             }
         }
-        if (reply.getReplierName() == null ||
-                !reply.getReplierName().equals((String)
-                        ActionContext.getContext().getSession().get("username"))) {
+        UserService userService = new UserService();
+        if (reply.getReplier() == null ||
+                !reply.getReplier().getUsername().equals((String)
+                        ActionContext.getContext().getSession().get("username"))
+                || !userService.exist(reply.getReplier().getUsername())) {
             return false;  //用户名不对
         }
         UserDao userDao = new UserDao();
-        reply.setReplierNickName(userDao.getUser(reply.getReplierName()).getNickname());
         int length = reply.getContent().length();
         if (length < 4 || length > 4000) {  //长度验证
             return false;
         }
         reply.setFloor(post.getReplyCount()+2);
         reply.setTime(new Date());
+        post.setLastReplyTime(reply.getTime());
         replyDao.addReply(reply);
+        postDao.updatePost(post);
         userDao.close();
         postDao.close();
         replyDao.close();

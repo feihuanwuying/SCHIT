@@ -10,8 +10,7 @@ public class Reply {
     private long id;
     private long postId;  //帖子id
     private long parentId;  //父贴id，为-1则表示无父贴（直接回复）
-    private String replierName;  //回帖人
-    private String replierNickName;  //回帖人昵称
+    private User replier;  //回帖人
     private String content;  //回帖内容
     private Date time;  //回帖时间
     private int type;  //回帖所处分区类型
@@ -42,14 +41,6 @@ public class Reply {
         this.parentId = parentId;
     }
 
-    public String getReplierName() {
-        return replierName;
-    }
-
-    public void setReplierName(String replierName) {
-        this.replierName = replierName;
-    }
-
     public String getContent() {
         return content;
     }
@@ -74,14 +65,6 @@ public class Reply {
         this.type = type;
     }
 
-    public String getReplierNickName() {
-        return replierNickName;
-    }
-
-    public void setReplierNickName(String replierNickName) {
-        this.replierNickName = replierNickName;
-    }
-
     public Reply getParentReply() {
         return parentReply;
     }
@@ -96,5 +79,13 @@ public class Reply {
 
     public void setFloor(long floor) {
         this.floor = floor;
+    }
+
+    public User getReplier() {
+        return replier;
+    }
+
+    public void setReplier(User replier) {
+        this.replier = replier;
     }
 }

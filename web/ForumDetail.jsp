@@ -22,12 +22,17 @@
         <s:iterator value="postList">
             <tr>
                 <td><a href="showPost.action?pid=${id}" target="_blank"><s:property value="title"></s:property></a></td>
-                <td><s:property value="posterNickName"></s:property>
+                <td><s:property value="poster.nickname"></s:property>
                     <br><s:property value="time"></s:property>
                 </td>
                 <td><s:property value="replyCount"></s:property> </td>
-                <td><s:property value="replyNickName"></s:property>
-                    <br><s:property value="replyTime"></s:property>
+                <td><s:if test="%{lastReply == null}">
+                        ${poster.nickname}
+                    </s:if>
+                    <s:else>
+                        ${lastReply.replier.nickname}
+                    </s:else>
+                    <br><s:property value="lastReplyTime"></s:property>
                 </td>
             </tr>
         </s:iterator>

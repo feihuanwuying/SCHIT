@@ -66,12 +66,11 @@ public class ReplyDao extends Dao {
             if (rs.wasNull()) {
                 reply.setParentId(-1);  //直接回复楼主
             }
-            reply.setReplierName(rs.getString("replier_name"));
             reply.setContent(rs.getString("content"));
             reply.setTime(TimeTransform.timeStampToDate(rs.getTimestamp("time")));
             reply.setType(rs.getInt("type"));
             reply.setFloor(rs.getLong("floor"));
-            reply.setReplierNickName(userDao.getUser(reply.getReplierName()).getNickname());
+            reply.setReplier(userDao.getUser(rs.getString("replier_name")));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -140,37 +139,31 @@ public class ReplyDao extends Dao {
         Object[] param = null;
         if (reply.getParentId() == -1) {  //直接回复
             sql = "INSERT INTO reply (post_id, replier_name, content, time, type, floor) values (?, ?, ?, ?, ?, ?)";
-            param = new Object[]{reply.getPostId(), reply.getReplierName(), reply.getContent(),
+            param = new Object[]{reply.getPostId(), reply.getReplier().getUsername(), reply.getContent(),
             TimeTransform.dateTotimeStamp(reply.getTime()), reply.getType(), reply.getFloor()};
         } else {
             sql = "INSERT INTO reply (post_id, parent_id, replier_name, content, time, type, floor) values (?, ?, ?, ?, ?, ?, ?)";
-            param = new Object[]{reply.getPostId(), reply.getParentId(), reply.getReplierName(),
+            param = new Object[]{reply.getPostId(), reply.getParentId(), reply.getReplier().getUsername(),
             reply.getContent(), TimeTransform.dateTotimeStamp(reply.getTime()), reply.getType(), reply.getFloor()};
         }
         execute(sql, param);
     }
 
     /**
-     * 父贴发帖人昵称
+     * 根据id获得主题帖的最新回复
      * @param id
      * @return
      */
-    private String getParentNickName(long id) {
-        String name = null;
+    public Reply getLastReply(long id) {
         try {
-            String sql = "SELECT replier_name FROM reply WHERE id = ?";
+            String sql = "SELECT * FROM reply WHERE post_id = ? order by floor desc limit 1";
             ResultSet rs = executeQuery(sql, new Object[]{id});
             if (rs.next()) {
-                String username = rs.getString(1);
-                sql = "SELECT nickname FROM user WHERE username = ?";
-                rs = executeQuery(sql, new Object[]{username});
-                if (rs.next()) {
-                    name = rs.getString(1);
-                }
+                return getReply(rs);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return name;
+        return null;
     }
 }

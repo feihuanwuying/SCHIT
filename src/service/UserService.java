@@ -96,7 +96,7 @@ public class UserService {
             return false;  //密码长度
         }
         int nickLength = user.getNickname().length();
-        if (nickLength < 4 || nickLength > 30) {
+        if (nickLength < 2 || nickLength > 30) {
             return false;  //昵称程度
         }
         int emailLength = user.getEmail().length();

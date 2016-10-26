@@ -62,18 +62,23 @@ public class PostDao extends Dao {
         try {
             post = new Post();
             post.setId(rs.getLong("id"));
-            post.setPosterName(rs.getString("poster_name"));
             post.setTitle(rs.getString("title"));
             post.setContent(rs.getString("content"));
+            if (post.getContent() == null) {
+                post.setContent("");
+            }
             post.setType(rs.getInt("type"));
             post.setTime(TimeTransform.timeStampToDate(rs.getTimestamp("time")));
             ReplyDao replyDao = new ReplyDao();
             post.setReplyCount(replyDao.getReplyCount(post.getId()));
-            post.setReplyTime(TimeTransform.timeStampToDate(rs.getTimestamp("reply_time")));
-            post.setReplyName(rs.getString("reply_name"));
             UserDao userDao = new UserDao();
-            post.setReplyNickName(userDao.getUser(post.getReplyName()).getNickname());
-            post.setPosterNickName(userDao.getUser(post.getPosterName()).getNickname());
+            post.setPoster(userDao.getUser(rs.getString("poster_name")));
+            post.setLastReply(replyDao.getLastReply(post.getId()));
+            if (post.getLastReply() == null) {  //无人回复
+                post.setLastReplyTime(post.getTime());
+            } else {
+                post.setLastReplyTime(TimeTransform.timeStampToDate(rs.getTimestamp("reply_time")));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -113,5 +118,16 @@ public class PostDao extends Dao {
         return postList;
     }
 
+
+    /**
+     * 更新数据库中的一条数据
+     * @param post
+     */
+    public void updatePost(Post post) {
+        String sql = "UPDATE post SET title = ?, content = ?, reply_time = ? WHERE id = ?";
+        Object[] params = new Object[]{post.getTitle(), post.getContent(),
+        TimeTransform.dateTotimeStamp(post.getLastReplyTime()), post.getId()};
+        executeUpdate(sql, params);
+    }
 
 }

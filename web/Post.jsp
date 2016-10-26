@@ -35,7 +35,7 @@
 <body>
     <%@include file="Head.jsp"%>
     帖子标题：${post.title} <br>
-    帖子作者：${post.posterNickName} <br>
+    帖子作者：${post.poster.nickname} <br>
     帖子内容：${post.content} <br>
     帖子时间：${post.time} <br>
     <s:if test="#session.username != null">
@@ -47,26 +47,21 @@
     <br><br>
 
     <s:iterator value="replyList" status="st">
-        <s:property value="floor"></s:property>楼
-        <s:property value="replierNickName"></s:property>
+        ${floor}楼 ${lastReply.replier.nickname}
         <s:if test="%{parentId != -1}">
             <br>
-            <strong>回复<s:property value="parentReply.floor"></s:property>楼：</strong><s:property value="parentReply.replierNickName"></s:property>：
-            <s:property value="parentReply.content"></s:property>
+            <strong>回复${parentReply.floor}楼：</strong>${parentReply.replier.nickname}：
+            ${parentReply.content}
         </s:if>
-        <br>
-        <s:property value="content"></s:property>
-        <br>
-        回复于：<s:property value="time"></s:property>
+        <br>${content}<br>
+        回复于：${time}
         <s:if test="#session.username != null">
-            <button onclick="replyToFloor(<s:property value='id'></s:property>)">回复</button>
+            <button onclick="replyToFloor(${id})">回复</button>
         </s:if>
         <s:else>
             <button onclick="window.location.href='login.action'">回复</button>
         </s:else>
-        <br>
-        <br>
-        <br>
+        <br><br><br>
     </s:iterator>
 
     <a href="showPost.action?pid=${pid}&pageNumber=${1}">首页</a>
@@ -79,7 +74,7 @@
             <textarea id="area" rows="10" cols="50" name="content"></textarea>
             <input type="hidden" name="postId" value="${post.id}">
             <input type="hidden" name="parentId" id="parentId" value="${-1}">
-            <input type="hidden" name="replierName" value="${session.username}">
+            <input type="hidden" name="replier.username" value="${session.username}">
             <input type="hidden" name="type" value="${post.type}">
             <button type="submit" onclick="return checkLength(this.form)">提交</button>
         </form>
