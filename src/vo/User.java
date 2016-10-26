@@ -5,10 +5,10 @@ package vo;
  * Created by ZouKaifa on 2016/10/10.
  */
 public class User {
-    private String username;  //用户名
-    private String password;  //密码
-    private String nickname;  //昵称
-    private String email;  //邮件
+    private String username = "";  //用户名
+    private String password = "";  //密码
+    private String nickname = "";  //昵称
+    private String email = "";  //邮件
     private int power;  //权限，1为管理员，2为普通用户
 
     public String getUsername() {

@@ -207,4 +207,48 @@ public class ForumService {
         return true;
     }
 
+    /**
+     * 校验Post数据
+     * @param post
+     * @return
+     */
+    private boolean checkPost(Post post) {
+        UserService userService = new UserService();
+        String username = post.getPoster().getUsername();
+        if (! userService.exist(username)
+                || !username.equals((String) ActionContext.
+                getContext().getSession().get("username"))) {
+            return false;  //用户
+        }
+        String title = post.getTitle();
+        if (title.length() < 4 || title.length() > 50) {
+            return false;  //标题长度
+        }
+        String content = post.getContent();
+        if (content.length() > 4000) {
+            return false;  //内容长度
+        }
+        int type = post.getType();
+        if (type < 5 || type > 8) {
+            return false;  //分区
+        }
+        return true;
+    }
+
+    /**
+     * 增加一条post
+     * @param post
+     * @return
+     */
+    public boolean addPost(Post post) {
+        if (! checkPost(post)) {
+            return false;
+        }
+        post.setTime(new Date());
+        post.setLastReplyTime(post.getTime());
+        PostDao postDao = new PostDao();
+        postDao.addPost(post);
+        postDao.close();
+        return true;
+    }
 }

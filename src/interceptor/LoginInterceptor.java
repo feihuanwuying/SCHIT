@@ -21,16 +21,16 @@ public class LoginInterceptor extends AbstractInterceptor {
 
     public void setUrl(String url) {
         this.url = url;
+        ActionContext.getContext().getSession().put("pre", url);
     }
 
     @Override
     public String intercept(ActionInvocation actionInvocation) throws Exception {
         Map<String, Object> session = ActionContext.getContext().getSession();
         if (!session.containsKey("username")
-                || new UserService().exist((String)session.get("username"))) {
+                || !new UserService().exist((String)session.get("username"))) {
             setUrl(ServletActionContext.getRequest().getHeader("referer"));
             return Action.LOGIN;
-        } else {
         }
         return actionInvocation.invoke();
     }

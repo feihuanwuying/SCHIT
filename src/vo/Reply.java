@@ -10,8 +10,8 @@ public class Reply {
     private long id;
     private long postId;  //帖子id
     private long parentId;  //父贴id，为-1则表示无父贴（直接回复）
-    private User replier;  //回帖人
-    private String content;  //回帖内容
+    private User replier = new User();  //回帖人
+    private String content = "";  //回帖内容
     private Date time;  //回帖时间
     private int type;  //回帖所处分区类型
     private long floor;  //层数

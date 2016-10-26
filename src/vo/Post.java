@@ -8,10 +8,10 @@ import java.util.Date;
  */
 public class Post {
     private long id;
-    private User poster;  //发帖人
-    private String title;  //题目
-    private String content;  //内容
-    private int type;  //帖子形式（如聊天灌水）
+    private User poster = new User();  //发帖人
+    private String title = "";  //题目
+    private String content = "";  //内容
+    private int type = 0;  //帖子形式（如聊天灌水）
     private Date time;  //发帖时间
     private Reply lastReply;  //最后回复
     private long replyCount;  //回复量

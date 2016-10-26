@@ -95,13 +95,13 @@ public class UserService {
                 || user.getPassword().length() > 20) {
             return false;  //密码长度
         }
-        int nickLength = user.getNickname().length();
-        if (nickLength < 2 || nickLength > 30) {
+        String nick = user.getNickname();
+        if (nick.length() < 2 || nick.length() > 30) {
             return false;  //昵称程度
         }
-        int emailLength = user.getEmail().length();
+        String email = user.getEmail();
         if (!user.getEmail().matches("^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w+)+)$")
-                || emailLength < 50) {
+                || email.length() < 50) {
             return false;  //邮箱长度
         }
         return true;

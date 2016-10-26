@@ -1,8 +1,11 @@
 package action;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 import service.UserService;
+
+import java.util.Map;
 
 /**
  * 登录

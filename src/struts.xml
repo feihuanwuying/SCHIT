@@ -19,6 +19,9 @@
         </action>
         <action name="logout" class="action.LogoutAction">
             <result type="redirect">${url}</result>
+            <result name="login">/Login.jsp</result>
+            <interceptor-ref name="loginInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
         <action name="showForum" class="action.ShowForumAction">
             <result>/Forum.jsp</result>
@@ -31,6 +34,15 @@
         </action>
         <action name="addReply" class="action.AddReplyAction">
             <result type="redirect">${url}</result>
+            <result name="login">/Login.jsp</result>
+            <interceptor-ref name="loginInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+        </action>
+        <action name="addPost" class="action.AddPostAction">
+            <result type="redirect">${url}</result>
+            <result name="login">/Login.jsp</result>
+            <interceptor-ref name="loginInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
         <action name="index">
             <result>/Index.jsp</result>

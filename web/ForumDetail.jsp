@@ -41,5 +41,18 @@
     <a href="showForumDetail.action?type=${type}&pageNumber=${pageNumber-1}">上一页</a>
     <a href="showForumDetail.action?type=${type}&pageNumber=${pageNumber+1}">下一页</a>
     <a href="showForumDetail.action?type=${type}&pageNumber=${pageCount}">末页</a>
+    <br><br>
+    <s:if test="#session.username != null">
+        <form action="addPost.action" method="post">
+            标题：<input type="text" name="title" minlength="4" maxlength="50"><br><br>
+            内容：<textarea id="area" rows="10" cols="50" name="content" maxlength="4000"></textarea>
+            <input type="hidden" name="type" value="${type}">
+            <input type="hidden" name="poster.username" value="${session.username}">
+            <button type="submit">提交</button>
+        </form>
+    </s:if>
+    <s:else>
+        <strong><h2>登录开启回复功能！</h2></strong>
+    </s:else>
 </body>
 </html>

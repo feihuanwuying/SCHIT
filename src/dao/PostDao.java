@@ -6,6 +6,7 @@ import vo.Reply;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -128,6 +129,19 @@ public class PostDao extends Dao {
         Object[] params = new Object[]{post.getTitle(), post.getContent(),
         TimeTransform.dateTotimeStamp(post.getLastReplyTime()), post.getId()};
         executeUpdate(sql, params);
+    }
+
+    /**
+     * 增加一个帖子
+     * @param post
+     */
+    public void addPost(Post post) {
+        String sql = "INSERT INTO post (id, poster_name, title, content, type, time, reply_time) values (?, ?, ?, ?, ?, ?, ?)";
+        Object[] params = {post.getId(), post.getPoster().getUsername(),
+        post.getTitle(), post.getContent(), post.getType(),
+                TimeTransform.dateTotimeStamp(post.getTime()),
+        TimeTransform.dateTotimeStamp(post.getLastReplyTime())};
+        execute(sql, params);
     }
 
 }
