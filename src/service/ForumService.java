@@ -1,6 +1,7 @@
 package service;
 
 import com.opensymphony.xwork2.ActionContext;
+import com.sun.org.apache.regexp.internal.RE;
 import dao.PostDao;
 import dao.ReplyDao;
 import dao.UserDao;
@@ -15,11 +16,15 @@ import java.util.*;
  * Created by ZouKaifa on 2016/10/24.
  */
 public class ForumService {
-    private int DISCCUSION = 5;  //聊天
-    private int LEARN = 6;  //学习
-    private int MAKE_FRIEND = 7;  //交友
-    private int QUERY = 8;  //求助
-    protected int pageSize = 5;  //一页的帖子数
+    private final int ACTIVITY = 1;  //讲座与活动
+    private final int RECRUIT = 2;  //招聘
+    private final int BUSINESS = 3;  //交易
+    private final int PARTTIME = 4;  //兼职
+    private final int DISCCUSION = 5;  //聊天
+    private final int LEARN = 6;  //学习
+    private final int MAKE_FRIEND = 7;  //交友
+    private final int QUERY = 8;  //求助
+    protected final int pageSize = 5;  //一页的帖子数
     protected long pageNumber;  //页码
     protected long pageCount;  //总页数
 
@@ -32,6 +37,10 @@ public class ForumService {
         Map<Integer, Long[]> map = new HashMap<>(4);
         PostDao postDao = new PostDao();
         ReplyDao replyDao = new ReplyDao();
+        map.put(ACTIVITY, new Long[]{postDao.getPostCount(ACTIVITY), replyDao.getReplyCount(ACTIVITY)});
+        map.put(RECRUIT, new Long[]{postDao.getPostCount(RECRUIT), replyDao.getReplyCount(RECRUIT)});
+        map.put(BUSINESS, new Long[]{postDao.getPostCount(BUSINESS), replyDao.getReplyCount(BUSINESS)});
+        map.put(PARTTIME, new Long[]{postDao.getPostCount(PARTTIME), replyDao.getReplyCount(PARTTIME)});
         map.put(DISCCUSION, new Long[]{postDao.getPostCount(DISCCUSION), replyDao.getReplyCount(DISCCUSION)});
         map.put(LEARN, new Long[]{postDao.getPostCount(LEARN), replyDao.getReplyCount(LEARN)});
         map.put(MAKE_FRIEND, new Long[]{postDao.getPostCount(MAKE_FRIEND), replyDao.getReplyCount(MAKE_FRIEND)});
@@ -100,6 +109,14 @@ public class ForumService {
      */
     public String getLabel(int type) {
         switch (type) {
+            case 1:
+                return "讲座活动";
+            case 2:
+                return "招聘信息";
+            case 3:
+                return "物品交易";
+            case 4:
+                return "家教兼职";
             case 5:
                 return "聊天灌水";
             case 6:
@@ -229,7 +246,7 @@ public class ForumService {
             return false;  //内容长度
         }
         int type = post.getType();
-        if (type < 5 || type > 8) {
+        if (type < 1 || type > 8) {
             return false;  //分区
         }
         return true;
