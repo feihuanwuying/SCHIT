@@ -61,6 +61,9 @@
         <s:else>
             <button onclick="window.location.href='login.action'">回复</button>
         </s:else>
+        <s:if test="#session.power == 1">
+            <button onclick="window.location.href='deleteReply.action?id=${id}'">删除</button>
+        </s:if>
         <br><br><br>
     </s:iterator>
 

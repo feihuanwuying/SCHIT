@@ -166,4 +166,13 @@ public class ReplyDao extends Dao {
         }
         return null;
     }
+
+    /**
+     * 根据id删除回复
+     * @param id
+     */
+    public void deleteReply(long id) {
+        String sql = "DELETE FROM reply WHERE id = ?";
+        execute(sql, new Object[]{id});
+    }
 }

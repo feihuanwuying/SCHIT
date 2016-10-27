@@ -27,6 +27,7 @@ public class UserService {
         if (user != null) {
             ActionContext.getContext().getSession().put("username", username);
             ActionContext.getContext().getSession().put("nickname", user.getNickname());
+            ActionContext.getContext().getSession().put("power", user.getPower());
             return true;
         }
         return false;
@@ -47,6 +48,7 @@ public class UserService {
             userDao.close();
             ActionContext.getContext().getSession().put("username", user.getUsername());
             ActionContext.getContext().getSession().put("nickname", user.getNickname());
+            ActionContext.getContext().getSession().put("power", user.getPower());
             return true;
         }
         userDao.close();
@@ -62,6 +64,7 @@ public class UserService {
         if (session.containsKey("username")) {
             session.remove("username");
             session.remove("nickname");
+            session.remove("power");
             return true;
         }
         return false;
@@ -105,5 +108,20 @@ public class UserService {
             return false;  //邮箱长度
         }
         return true;
+    }
+
+    /**
+     * 根据用户名获得用户
+     * @param username
+     * @return
+     */
+    public User getUser(String username) {
+        if (exist(username)) {
+            UserDao userDao = new UserDao();
+            User user = userDao.getUser(username);
+            userDao.close();
+            return user;
+        }
+        return null;
     }
 }

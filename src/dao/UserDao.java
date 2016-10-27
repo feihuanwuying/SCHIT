@@ -1,5 +1,6 @@
 package dao;
 
+import vo.Reply;
 import vo.User;
 
 import java.sql.ResultSet;
@@ -86,4 +87,6 @@ public class UserDao extends Dao{
         Object[] params = {user.getUsername(), user.getPassword(), user.getNickname(), user.getEmail()};
         execute(sql, params);
     }
+
+
 }

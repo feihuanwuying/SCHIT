@@ -268,4 +268,46 @@ public class ForumService {
         postDao.close();
         return true;
     }
+
+    /**
+     * 根据id删除回复
+     * @param id
+     * @return
+     */
+    public boolean deleteReply(long id) {
+        ReplyDao replyDao = new ReplyDao();
+        Reply reply = replyDao.getReply(id);
+        if (reply == null) {
+            return false;
+        }
+        PostDao postDao = new PostDao();
+        Post post = postDao.getPost(reply.getPostId());  //帖子
+        replyDao.deleteReply(id);
+        Reply newReply = replyDao.getLastReply(post.getId());  //新的最新回复
+        if (newReply == null) {
+            post.setLastReplyTime(post.getTime());
+        } else {
+            post.setLastReplyTime(newReply.getTime());
+        }
+        postDao.updatePost(post);
+        replyDao.close();
+        postDao.close();
+        return true;
+    }
+
+    /**
+     * 根据id删除帖子
+     * @param id
+     * @return
+     */
+    public boolean deletePost(long id) {
+        PostDao postDao = new PostDao();
+        Post post = postDao.getPost(id);
+        if (post == null) {
+            return false;
+        }
+        postDao.deletePost(id);
+        postDao.close();
+        return true;
+    }
 }

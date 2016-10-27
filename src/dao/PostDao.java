@@ -75,11 +75,7 @@ public class PostDao extends Dao {
             UserDao userDao = new UserDao();
             post.setPoster(userDao.getUser(rs.getString("poster_name")));
             post.setLastReply(replyDao.getLastReply(post.getId()));
-            if (post.getLastReply() == null) {  //无人回复
-                post.setLastReplyTime(post.getTime());
-            } else {
-                post.setLastReplyTime(TimeTransform.timeStampToDate(rs.getTimestamp("reply_time")));
-            }
+            post.setLastReplyTime(TimeTransform.timeStampToDate(rs.getTimestamp("reply_time")));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -144,4 +140,12 @@ public class PostDao extends Dao {
         execute(sql, params);
     }
 
+    /**
+     * 根据id删除帖子
+     * @param id
+     */
+    public void deletePost(long id) {
+        String sql = "DELETE FROM post WHERE id = ?";
+        execute(sql, new Object[]{id});
+    }
 }

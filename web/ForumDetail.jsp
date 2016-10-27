@@ -18,6 +18,7 @@
             <td>作者</td>
             <td>回复量</td>
             <td>最后发表</td>
+            <td></td>
         </tr>
         <s:iterator value="postList">
             <tr>
@@ -32,6 +33,11 @@
                         ${lastReply.replier.nickname}
                     </s:else>
                     <br>${lastReplyTime}
+                </td>
+                <td>
+                    <s:if test="#session.power == 1">
+                        <button onclick="window.location.href='deletePost.action?id=${id}'">删除</button>
+                    </s:if>
                 </td>
             </tr>
         </s:iterator>

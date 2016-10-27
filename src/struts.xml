@@ -8,6 +8,7 @@
     <package name="default" extends="struts-default">
         <interceptors>
             <interceptor name="loginInterceptor" class="interceptor.LoginInterceptor"></interceptor>
+            <interceptor name="powerInterceptor" class="interceptor.PowerInterceptor"></interceptor>
         </interceptors>
         <action name="login" class="action.LoginAction">
             <result type="redirect">${url}</result>
@@ -42,6 +43,18 @@
             <result type="redirect">${url}</result>
             <result name="login">/Login.jsp</result>
             <interceptor-ref name="loginInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+        </action>
+        <action name="deleteReply" class="action.DeleteReplyAction">
+            <result type="redirect">${url}</result>
+            <result name="login">/Login.jsp</result>
+            <interceptor-ref name="powerInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+        </action>
+        <action name="deletePost" class="action.DeletePostAction">
+            <result type="redirect">${url}</result>
+            <result name="login">/Login.jsp</result>
+            <interceptor-ref name="powerInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
         <action name="index">
