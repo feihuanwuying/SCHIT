@@ -8,14 +8,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<%
-    boolean login;
-    if (request.getSession().getAttribute("username") != null) {
-        out.print("欢迎回来，"+request.getSession().getAttribute("nickname")+"！");
-        out.print("<button type=\"button\" onclick=\"window.location.href='logout.action'\">注销</button>");
-    } else {
-        out.print("<button type=\"button\" onclick=\"window.location.href='login.action'\">登录</button>");
-        out.print("<button type=\"button\" onclick=\"window.location.href='register.action'\">注册</button>");
-    }
-%>
+<s:if test="#session.username != null">
+    欢迎回来，${sessionScope.nickname}！
+    <button type="button" onclick="window.location.href='logout.action'">注销</button>
+</s:if>
+<s:else>
+    <button type="button" onclick="window.location.href='login.action'">登录</button>
+    <button type="button" onclick="window.location.href='register.action'">注册</button>
+</s:else>
+<button type="button" onclick="window.location.href='index.action'">主页</button>
+<br>

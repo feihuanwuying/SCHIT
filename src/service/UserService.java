@@ -6,6 +6,7 @@ import com.sun.javafx.collections.MappingChange;
 import dao.UserDao;
 import vo.User;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 
@@ -22,9 +23,11 @@ public class UserService {
     public boolean login(String username, String password) {
         UserDao userDao = new UserDao();
         User user = userDao.getUser(username, password);
+        userDao.close();
         if (user != null) {
             ActionContext.getContext().getSession().put("username", username);
             ActionContext.getContext().getSession().put("nickname", user.getNickname());
+            ActionContext.getContext().getSession().put("power", user.getPower());
             return true;
         }
         return false;
@@ -38,11 +41,17 @@ public class UserService {
     public boolean register(User user) {
         UserDao userDao = new UserDao();
         if (userDao.getUser(user.getUsername()) == null) {
+            if (!checkData(user)) {
+                return false;
+            }
             userDao.addUser(user);
+            userDao.close();
             ActionContext.getContext().getSession().put("username", user.getUsername());
             ActionContext.getContext().getSession().put("nickname", user.getNickname());
+            ActionContext.getContext().getSession().put("power", user.getPower());
             return true;
         }
+        userDao.close();
         return false;
     }
 
@@ -54,8 +63,65 @@ public class UserService {
         Map<String, Object> session = ActionContext.getContext().getSession();
         if (session.containsKey("username")) {
             session.remove("username");
+            session.remove("nickname");
+            session.remove("power");
             return true;
         }
         return false;
+    }
+
+    /**
+     * 查看用户名是否存在
+     * @param username
+     * @return
+     */
+    public boolean exist(String username) {
+        UserDao userDao = new UserDao();
+        User user = userDao.getUser(username);
+        userDao.close();
+        return user != null;
+    }
+
+    /**
+     * 检测数据合法性
+     * @param user
+     * @return
+     */
+    private boolean checkData(User user) {
+        if (!user.getUsername().matches("[a-zA-Z0-9]*")
+                || user.getUsername().length() < 8
+                || user.getUsername().length() > 20) {
+            return false;  //用户名长度
+        }
+        if (!user.getPassword().matches("[a-zA-Z0-9]*")
+                || user.getPassword().length() < 8
+                || user.getPassword().length() > 20) {
+            return false;  //密码长度
+        }
+        String nick = user.getNickname();
+        if (nick.length() < 2 || nick.length() > 30) {
+            return false;  //昵称程度
+        }
+        String email = user.getEmail();
+        if (!user.getEmail().matches("^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w+)+)$")
+                || email.length() < 50) {
+            return false;  //邮箱长度
+        }
+        return true;
+    }
+
+    /**
+     * 根据用户名获得用户
+     * @param username
+     * @return
+     */
+    public User getUser(String username) {
+        if (exist(username)) {
+            UserDao userDao = new UserDao();
+            User user = userDao.getUser(username);
+            userDao.close();
+            return user;
+        }
+        return null;
     }
 }

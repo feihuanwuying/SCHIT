@@ -17,13 +17,13 @@
     </s:if>
     <form action="register" method="POST">
         <tr>
-            用户名<input type="text" name="username" required maxlength="20">
+            用户名<input type="text" name="username" required minlength="8" maxlength="20" pattern="[a-zA-Z0-9]*">
         </tr>
         <tr>
-            密码<input type="password" name="password" required maxlength="20">
+            密码<input type="password" name="password" required minlength="8" maxlength="20" pattern="[a-zA-Z0-9]*">
         </tr>
         <tr>
-            昵称<input type="text" name="nickname" required maxlength="30">
+            昵称<input type="text" name="nickname" required minlength="2" maxlength="30">
         </tr>
         <tr>
             邮箱<input type="email" name="email" required maxlength="50">

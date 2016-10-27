@@ -47,8 +47,10 @@ public class RegisterAction extends ActionSupport implements ModelDriven<User>{
     @Override
     public String execute() throws Exception {
         UserService userService = new UserService();
-        if (user.getUsername() == null) {
-            setUrl(ServletActionContext.getRequest().getHeader("referer"));
+        if (user.getUsername() == null) {  //未提交
+            if (getUrl() == null) {
+                setUrl(ServletActionContext.getRequest().getHeader("referer"));
+            }
             setErrCode(0);
         } else if (userService.register(getUser())) {
             setErrCode(2);

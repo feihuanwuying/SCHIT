@@ -1,5 +1,6 @@
 package dao;
 
+import vo.Reply;
 import vo.User;
 
 import java.sql.ResultSet;
@@ -18,37 +19,31 @@ public class UserDao extends Dao{
      * @return 若该用户存在，则返回对应的User对象，否则返回null
      */
     public User getUser(String username) {
+        User user = null;
         try {
-            setCon();
             String sql = "SELECT * FROM user WHERE (username = ?)";
             ResultSet rs = executeQuery(sql, new Object[]{username});
             if (rs.next()) {
-                User user = getUser(rs);
-                con.close();
-                return user;
+                user = getUser(rs);
             }
-            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return user;
     }
 
     public User getUser(String username, String password) {
+        User user = null;
         try {
-            setCon();
             String sql = "SELECT * FROM user WHERE (username = ?) AND (password = ?)";
             ResultSet rs = executeQuery(sql, new Object[]{username, password});
             if (rs.next()) {
-                User user = getUser(rs);
-                con.close();
-                return user;
+                user = getUser(rs);
             }
-            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return user;
     }
 
     /**
@@ -60,10 +55,11 @@ public class UserDao extends Dao{
     private User getUser(ResultSet rs) {
         try {
             User user = new User();
-            user.setUsername(rs.getString(1));
-            user.setPassword(rs.getString(2));
-            user.setNickname(rs.getString(3));
-            user.setEmail(rs.getString(4));
+            user.setUsername(rs.getString("username"));
+            user.setPassword(rs.getString("password"));
+            user.setNickname(rs.getString("nickname"));
+            user.setEmail(rs.getString("email"));
+            user.setPower(rs.getInt("power"));
             return user;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -76,15 +72,9 @@ public class UserDao extends Dao{
      * @param user user数据
      */
     public void updateUser(User user) {
-        setCon();
         String sql = "UPDATE user SET password = ?, nickname = ?, email = ? WHERE username = ?";
         Object[] params = {user.getPassword(), user.getNickname(), user.getEmail(), user.getUsername()};
         executeUpdate(sql, params);
-        try {
-            con.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -92,15 +82,11 @@ public class UserDao extends Dao{
      * @param user 要添加的数据
      */
     public void addUser(User user) {
-        setCon();
         String sql = "INSERT INTO user (username, password, nickname, email)" +
                 "values(?, ?, ?, ?)";
         Object[] params = {user.getUsername(), user.getPassword(), user.getNickname(), user.getEmail()};
         execute(sql, params);
-        try {
-            con.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
+
+
 }

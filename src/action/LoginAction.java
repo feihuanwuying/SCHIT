@@ -1,8 +1,11 @@
 package action;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 import service.UserService;
+
+import java.util.Map;
 
 /**
  * 登录
@@ -50,7 +53,9 @@ public class LoginAction extends ActionSupport {
     public String execute() throws Exception {
         UserService userService = new UserService();
         if (username == null && password == null) {
-            setUrl(ServletActionContext.getRequest().getHeader("referer"));
+            if (url == null) {
+                setUrl(ServletActionContext.getRequest().getHeader("referer"));
+            }
             setErrCode(0);
         } else if (userService.login(username, password)) {
             setErrCode(2);

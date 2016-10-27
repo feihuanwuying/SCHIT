@@ -7,7 +7,12 @@ import java.sql.*;
  * Created by ZouKaifa on 2016/10/10.
  */
 public class Dao {
-    protected Connection con;  //数据库连接对象
+    protected static Connection con;  //数据库连接对象
+
+    public Dao() {
+        setCon();
+    }
+
     /**
      * 设置数据库连接
      */
@@ -88,5 +93,16 @@ public class Dao {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 关闭数据库连接
+     */
+    public void close() {
+        try {
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
