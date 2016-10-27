@@ -21,18 +21,17 @@
         </tr>
         <s:iterator value="postList">
             <tr>
-                <td><a href="showPost.action?pid=${id}" target="_blank"><s:property value="title"></s:property></a></td>
-                <td><s:property value="poster.nickname"></s:property>
-                    <br><s:property value="time"></s:property>
+                <td><a href="showPost.action?pid=${id}" target="_blank">${title}</a></td>
+                <td>${poster.nickname}<br>${time}
                 </td>
-                <td><s:property value="replyCount"></s:property> </td>
+                <td>${replyCount}</td>
                 <td><s:if test="%{lastReply == null}">
                         ${poster.nickname}
                     </s:if>
                     <s:else>
                         ${lastReply.replier.nickname}
                     </s:else>
-                    <br><s:property value="lastReplyTime"></s:property>
+                    <br>${lastReplyTime}
                 </td>
             </tr>
         </s:iterator>
@@ -52,7 +51,7 @@
         </form>
     </s:if>
     <s:else>
-        <strong><h2>登录开启回复功能！</h2></strong>
+        <strong><h2>登录开启发帖功能！</h2></strong>
     </s:else>
 </body>
 </html>

@@ -87,5 +87,6 @@ public class Reply {
 
     public void setReplier(User replier) {
         this.replier = replier;
+        this.replier.setPassword("");
     }
 }

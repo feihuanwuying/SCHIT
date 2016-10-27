@@ -71,6 +71,7 @@ public class Post {
 
     public void setPoster(User poster) {
         this.poster = poster;
+        this.poster.setPassword("");
     }
 
     public Reply getLastReply() {
