@@ -20,7 +20,7 @@
     </form>
     <s:form action="login" method="post">
         <s:textfield name="username" value="%{username}" label="用户名"></s:textfield>
-        <s:password name="password" value="%{username}" label="密码"></s:password>
+        <s:password name="password" value="%{password}" label="密码"></s:password>
         <s:hidden name="url" value="%{url}"></s:hidden>
         <s:submit value="登录"></s:submit>
         <tr><td colspan="2"><button type="button" onclick="document.getElementById('reg').submit();">注册</button></td></tr>
