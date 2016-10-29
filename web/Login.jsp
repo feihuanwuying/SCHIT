@@ -23,7 +23,7 @@
     </div>
 
 
-    <form action="register.action" method="post" pid="reg">
+    <form action="register.action" method="post" id="reg">
         <input type="hidden" name="url" value="${url}">
     </form>
 
