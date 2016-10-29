@@ -13,6 +13,5 @@
 </head>
 <body>
     <%@include file="Head.jsp"%>
-    <a href="showForum.action">论坛</a>
 </body>
 </html>
