@@ -21,6 +21,12 @@ public class UserService {
      * @return 成功则返回true，否则false
      */
     public boolean login(String username, String password) {
+        if (username == null) {
+            username = "";
+        }
+        if (password == null) {
+            password = "";
+        }
         UserDao userDao = new UserDao();
         User user = userDao.getUser(username, password);
         userDao.close();
