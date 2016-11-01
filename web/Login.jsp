@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-sm-offset-3 col-sm-3">
             <s:if test="%{errCode == 1}">
-                <p class="bg-warning">添加失败，已存在相同的ISBN！</p>
+                <p class="bg-warning">添加失败，已存在相同的用户名！</p>
             </s:if>
         </div>
     </div>
