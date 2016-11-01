@@ -1,8 +1,10 @@
 package service;
 
+import com.opensymphony.xwork2.ActionContext;
 import dao.FriendDao;
 import dao.UserDao;
 import vo.Friend;
+import vo.User;
 
 import java.util.List;
 
@@ -11,19 +13,16 @@ import java.util.List;
  */
 public class FriendService extends BasicService {
     /**
-     * 判断两个人是否是朋友
+     * 获得一个好友对象
      * @param username
      * @param friendName
      * @return
      */
-    public boolean isFriend(String username, String friendName) {
+    public Friend getFriend(String username, String friendName) {
         FriendDao friendDao = new FriendDao();
-        if (friendDao.getFriend(username, friendName) != null) {
-            friendDao.close();
-            return true;
-        }
+        Friend friend = friendDao.getFriend(username, friendName);
         friendDao.close();
-        return false;
+        return friend;
     }
 
     /**
@@ -38,5 +37,89 @@ public class FriendService extends BasicService {
         return friendList;
     }
 
+    /**
+     * 单向添加好友
+     * @param username
+     * @param friend_name
+     * @param remark
+     * @return
+     */
+    public boolean addFriend(String username, String friend_name, String remark) {
+        boolean success = true;
+        UserDao userDao = new UserDao();
+        FriendDao friendDao = new FriendDao();
+        User user = userDao.getUser(username);
+        User friend = userDao.getUser(friend_name);
+        if (user == null || friend == null) {  //存在
+            success = false;
+        } else if (friendDao.getFriend(username, friend_name) != null
+                || remark.length() > 30) {  //不是好友
+            success = false;
+        } else if (!username.equals((String) ActionContext.getContext().getSession().get("username"))) {  //是当前用户
+            success = false;
+        } else {
+            Friend friend1 = new Friend();
+            friend1.setFriend(friend);
+            friend1.setRemark(remark);
+            friendDao.addFriend(username, friend1);
+        }
+        userDao.close();
+        friendDao.close();
+        return success;
+    }
+
+    /**
+     * 删除好友，双向
+     * @param username
+     * @param friendName
+     * @return
+     */
+    public boolean deleteFriend(String username, String friendName) {
+        boolean success = true;
+        UserDao userDao = new UserDao();
+        FriendDao friendDao = new FriendDao();
+        if (userDao.getUser(username) == null  //存在
+            || userDao.getUser(friendName) == null) {
+            success = false;
+        } else if (friendDao.getFriend(username, friendName) == null) {  //是好友
+            success = false;
+        } else if (!username.equals((String) ActionContext.getContext().getSession().get("username"))) {  //当前用户
+            success = false;
+        } else {
+            Friend friend = new Friend();
+            friend.setFriend(userDao.getUser(friendName));
+            friendDao.deleteFriend(username, friend);
+        }
+        userDao.close();
+        friendDao.close();
+        return success;
+    }
+
+    /**
+     * 更新备注
+     * @param username
+     * @param friendName
+     * @param remark
+     * @return
+     */
+    public boolean updateRemark(String username, String friendName, String remark) {
+        boolean success = true;
+        UserDao userDao = new UserDao();
+        FriendDao friendDao = new FriendDao();
+        if (userDao.getUser(username) == null
+                || userDao.getUser(friendName) == null) {
+            success = false;  //存在
+        } else if (friendDao.getFriend(username, friendName) == null
+                || remark.length() > 30) {
+            success = false;  //是好友
+        } else if (!username.equals((String)ActionContext.getContext().getSession().get("username"))) {
+            success = false;  //是当前用户
+        } else {
+            friendDao.updateRemark(username, friendName, remark);
+        }
+        userDao.close();
+        friendDao.close();
+        return success;
+    }
 
 }

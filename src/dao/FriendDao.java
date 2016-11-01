@@ -60,7 +60,7 @@ public class FriendDao extends Dao {
         List<Friend> list = new ArrayList<>();
         try {
             String sql = "SELECT * FROM friend WHERE username = ?";
-            ResultSet rs = executeQuery(sql, new Object[]{username, username});
+            ResultSet rs = executeQuery(sql, new Object[]{username});
             while (rs.next()) {
                 list.add(getFreind(rs));
             }
@@ -94,5 +94,16 @@ public class FriendDao extends Dao {
         //双向删除
         execute(sql, new Object[]{username, friend.getFriend().getUsername()});
         execute(sql, new Object[]{friend.getFriend().getUsername(), username});
+    }
+
+    /**
+     * 更改备注
+     * @param username
+     * @param friendName
+     * @param remark
+     */
+    public void updateRemark(String username, String friendName, String remark) {
+        String sql = "UPDATE friend SET remark = ? WHERE (username = ?) AND (friendName = ?)";
+        executeUpdate(sql, new Object[]{remark, username, friendName});
     }
 }
