@@ -56,11 +56,11 @@ public class FriendDao extends Dao {
      * @param username
      * @return
      */
-    public List<Friend> getFriendList(String username) {
+    public List<Friend> getFriendList(String username, long pageNumber, int pageSize) {
         List<Friend> list = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM friend WHERE username = ?";
-            ResultSet rs = executeQuery(sql, new Object[]{username});
+            String sql = "SELECT * FROM friend WHERE username = ? LIMIT ?, ?";
+            ResultSet rs = executeQuery(sql, new Object[]{username, (pageNumber-1)*pageSize, pageSize});
             while (rs.next()) {
                 list.add(getFreind(rs));
             }
@@ -68,6 +68,25 @@ public class FriendDao extends Dao {
             e.printStackTrace();
         }
         return list;
+    }
+
+    /**
+     * 获得某用户好友总数
+     * @param username
+     * @return
+     */
+    public long getFriendCount(String username) {
+        long count = 0;
+        try {
+            String sql = "SELECT count(*) FROM friend WHERE username = ?";
+            ResultSet rs = executeQuery(sql, new Object[]{username});
+            if (rs.next()) {
+                count = rs.getLong(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 
     /**

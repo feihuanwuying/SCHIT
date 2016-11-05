@@ -57,6 +57,12 @@
             <interceptor-ref name="powerInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
+        <action name="friendList" class="action.ShowFriendListAction">
+            <result>/Friends.jsp</result>
+            <result name="login">/Login.jsp</result>
+            <interceptor-ref name="loginInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+        </action>
         <action name="index">
             <result>/Index.jsp</result>
         </action>

@@ -32,9 +32,32 @@ public class FriendService extends BasicService {
      */
     public List<Friend> getFriendList(String username) {
         FriendDao friendDao = new FriendDao();
-        List<Friend> friendList = friendDao.getFriendList(username);
+        List<Friend> friendList = friendDao.getFriendList(username, pageNumber, pageSize);
         friendDao.close();
         return friendList;
+    }
+
+    /**
+     * 获得好友列表的页数
+     * @param username
+     * @return
+     */
+    public long getFriendPageCount(String username) {
+        long friendCount = getFriendCount(username);
+        pageCount = friendCount % pageSize == 0? (friendCount/pageSize) : friendCount/pageSize+1;
+        return pageCount;
+    }
+
+    /**
+     * 获得某用户名的好友数
+     * @param username
+     * @return
+     */
+    public long getFriendCount(String username) {
+        FriendDao friendDao = new FriendDao();
+        long count = friendDao.getFriendCount(username);
+        friendDao.close();
+        return count;
     }
 
     /**
@@ -53,7 +76,7 @@ public class FriendService extends BasicService {
         if (user == null || friend == null) {  //存在
             success = false;
         } else if (friendDao.getFriend(username, friend_name) != null
-                || remark.length() > 30) {  //不是好友
+                || remark.length() > 30 || username.equals(friend_name)) {  //不是好友
             success = false;
         } else if (!username.equals((String) ActionContext.getContext().getSession().get("username"))) {  //是当前用户
             success = false;
@@ -81,7 +104,8 @@ public class FriendService extends BasicService {
         if (userDao.getUser(username) == null  //存在
             || userDao.getUser(friendName) == null) {
             success = false;
-        } else if (friendDao.getFriend(username, friendName) == null) {  //是好友
+        } else if (friendDao.getFriend(username, friendName) == null
+                || username.equals(friendName)) {  //是好友
             success = false;
         } else if (!username.equals((String) ActionContext.getContext().getSession().get("username"))) {  //当前用户
             success = false;
@@ -110,7 +134,7 @@ public class FriendService extends BasicService {
                 || userDao.getUser(friendName) == null) {
             success = false;  //存在
         } else if (friendDao.getFriend(username, friendName) == null
-                || remark.length() > 30) {
+                || remark.length() > 30 || username.equals(friendName)) {
             success = false;  //是好友
         } else if (!username.equals((String)ActionContext.getContext().getSession().get("username"))) {
             success = false;  //是当前用户
