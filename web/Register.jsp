@@ -10,9 +10,12 @@
 <html>
 <head>
     <%@include file="Bootstrap.jsp"%>
+
+    <link rel="stylesheet" type="text/css" href="css/register_style.css">
     <title>注册</title>
 </head>
 <body>
+    <%@include file="Head.jsp"%>
     <div class="row">
         <div class="col-sm-offset-3 col-sm-3">
             <s:if test="%{errCode == 1}">

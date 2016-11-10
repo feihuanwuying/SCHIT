@@ -9,43 +9,47 @@
 <html>
 <head>
     <title>${title}</title>
+    <link rel="stylesheet" type="text/css" href="css/detail_style.css">
 </head>
 <body>
     <%@include file="Head.jsp"%>
     <table>
-        <tr>
-            <td>主题</td>
-            <td>作者</td>
-            <td>回复量</td>
-            <td>最后发表</td>
-            <td></td>
-        </tr>
+        <div class="row">
+            <div class="col-sm-4">主题</div>
+            <div class="col-sm-3">作者</div>
+            <div class="col-sm-1">回复量</div>
+            <div class="col-sm-3">最后发表</div>
+        </div>
         <s:iterator value="postList">
-            <tr>
-                <td><a href="showPost.action?pid=${id}" target="_blank">${title}</a></td>
-                <td>${poster.nickname}<br>${time}
-                </td>
-                <td>${replyCount}</td>
-                <td><s:if test="%{lastReply == null}">
+            <div class="row" id="detail_body">
+                <div class="col-sm-4"><a href="showPost.action?pid=${id}" target="_blank">${title}</a></div>
+                <div class="col-sm-3">
+                    <img src="http://ww2.sinaimg.cn/thumb150/006nE56Ygw1f7dsyyyqk7j30g40g9aaz.jpg"/>
+                    ${poster.nickname}<br>${time}
+                </div>
+                <div class="col-sm-1">${replyCount}</div>
+                <div class="col-sm-3">
+                    <img src="http://pic.962.net/up/2016-8/14701279968599348.jpg"/>
+                    <s:if test="%{lastReply == null}">
                         ${poster.nickname}
                     </s:if>
                     <s:else>
                         ${lastReply.replier.nickname}
                     </s:else>
                     <br>${lastReplyTime}
-                </td>
-                <td>
+                </div>
+                <div class="col-sm-1">
                     <s:if test="#session.power == 1">
                         <button onclick="window.location.href='deletePost.action?id=${id}'">删除</button>
                     </s:if>
-                </td>
-            </tr>
+                </div>
+            </div>
         </s:iterator>
     </table>
-    <a href="showForumDetail.action?type=${type}&pageNumber=${1}">首页</a>
-    <a href="showForumDetail.action?type=${type}&pageNumber=${pageNumber-1}">上一页</a>
-    <a href="showForumDetail.action?type=${type}&pageNumber=${pageNumber+1}">下一页</a>
-    <a href="showForumDetail.action?type=${type}&pageNumber=${pageCount}">末页</a>
+    <a class="btn btn-primary" href="showForumDetail.action?type=${type}&pageNumber=${1}">首页</a>
+    <a class="btn btn-primary" href="showForumDetail.action?type=${type}&pageNumber=${pageNumber-1}">上一页</a>
+    <a class="btn btn-primary" href="showForumDetail.action?type=${type}&pageNumber=${pageNumber+1}">下一页</a>
+    <a class="btn btn-primary" href="showForumDetail.action?type=${type}&pageNumber=${pageCount}">末页</a>
     <br><br>
     <s:if test="#session.username != null">
         <form action="addPost.action" method="post">

@@ -1,0 +1,75 @@
+html,body {
+    min-height: 100%;
+}
+.jumbotron {
+    background-image:url('http://attach.bbs.miui.com/forum/201311/24/215445jhkmukdk1p3urpur.jpg');
+    background-size:cover;
+    /*加上这个可以让这一块位置在中间而不是边上*/
+    display:flex;
+    height:400px;
+    text-shadow:0.25px 0.25px 0.25px #000000;
+    margin-top:50px;
+}
+.jumbotron h2 {
+    font-family:SimHei,SansSerif;
+    font-weight:700;
+    font-size:50px;
+    margin:0;
+    color:#ffffff;
+}
+.jumbotron h4 {
+    color:#ffffff;
+}
+.jumbotron.text div {
+    text-align:center;
+}
+#titleword {
+    color:#ff0000;
+    font-weight: bold;
+    margin-bottom:50px;
+}
+.btn.btn-primary {
+    margin-right:20px;
+    border-radius:2px;
+    border:1px solid black;
+    color:#8a2be2;
+    text-shadow:none;
+    background-color:#afd9ee;
+}
+.btn.btn-primary:hover {
+    color:#ffffff;
+    background-color: #fbd1d5;
+}
+section .row {
+    margin-top:50px;
+    margin-buttom:50px;
+}
+div .col-sm-3 img{
+    width:100px;
+    height:100px;
+    float:left;
+}
+#r1_c1 {
+    border:1px solid #96c2f1;background:#eff7ff;
+}
+#r1_c2 {
+    border:1px solid #9bdf70;background:#f0fbeb;
+}
+#r1_c3 {
+    border:1px solid #bbe1f1;background:#eefaff;
+}
+#r1_c4 {
+    border:1px solid #cceff5;background:#fafcfd;
+}
+#r2_c1 {
+    border:1px solid #ffcc00;background:#fffff7;
+}
+#r2_c2 {
+    border:1px solid #cee3e9;background:#f1f7f9;
+}
+#r2_c3 {
+    border:1px solid #a9c9e2;background:#e8f5fe;
+}
+#r2_c4 {
+    border:1px solid #e3e197;background:#ffffdd;
+}

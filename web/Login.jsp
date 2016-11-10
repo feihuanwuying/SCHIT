@@ -10,14 +10,17 @@
 <html>
 <head>
     <%@include file="Bootstrap.jsp"%>
+    <link rel="stylesheet" type="text/css" href="css/login_style.css">
     <title>登录</title>
 </head>
 <body>
-
+    <div class="row text-center">
+        <h1>用户登录</h1>
+    </div>
     <div class="row">
         <div class="col-sm-offset-3 col-sm-3">
             <s:if test="%{errCode == 1}">
-                <p class="bg-warning">添加失败，已存在相同的用户名！</p>
+                <p class="bg-warning">用户名或密码错误！</p>
             </s:if>
         </div>
     </div>

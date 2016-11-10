@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>${post.title}</title>
+    <link rel="stylesheet" type="text/css" href="css/post_style.css">
 </head>
 <script type="text/javascript">
     function reply() {
@@ -33,45 +34,90 @@
     }
 </script>
 <body>
-    <%@include file="Head.jsp"%>
-    帖子标题：${post.title} <br>
-    帖子作者：${post.poster.nickname} <br>
-    帖子内容：${post.content} <br>
-    帖子时间：${post.time} <br>
-    <s:if test="#session.username != null">
-        <button onclick="reply()">回复</button>
-    </s:if>
-    <s:else>
-        <button onclick="window.location.href='login.action'">回复</button>
-    </s:else>
-    <br><br>
-
-    <s:iterator value="replyList" status="st">
-        ${floor}楼 ${lastReply.replier.nickname}
-        <s:if test="%{parentId != -1}">
-            <br>
-            <strong>回复${parentReply.floor}楼：</strong>${parentReply.replier.nickname}：
-            ${parentReply.content}
-        </s:if>
-        <br>${content}<br>
-        回复于：${time}
+<%@include file="Head.jsp"%>
+    <div class="row">
+        <div class="col-sm-6" id="detail_title">帖子标题：${post.title} </div>
+    </div>
+    <div class="row" id="detail_up">
+        <div class="col-sm-1">楼主</div>
+        <div class="col-sm-2">
+            <img src="http://pic2.52pk.com/files/160907/7247438_130524_1_lit.jpg"/>
+            ${post.poster.nickname}
+        </div>
+        <div class="col-sm-7">${post.content}</div>
+        <div class="col-sm-1">发帖时间：${post.time}</div>
         <s:if test="#session.username != null">
-            <button onclick="replyToFloor(${id})">回复</button>
+            <button onclick="reply()">回复</button>
         </s:if>
         <s:else>
             <button onclick="window.location.href='login.action'">回复</button>
         </s:else>
-        <s:if test="#session.power == 1">
-            <button onclick="window.location.href='deleteReply.action?id=${id}'">删除</button>
+        <br><br>
+    </div>
+    <s:iterator value="replyList" status="st">
+        <%--如果是回帖，不算在正常楼层中，而且有一个缩进--%>
+        <s:if test="%{parentId != -1}">
+            <div class="row" >
+                <div class="col-sm-2"></div>
+                <div class="col-sm-2" id="reply_body">
+                    <img src="http://images.17173.com/2016/news/2016/04/29/gxy0429dd03s.jpg"/>
+                    ${lastReply.replier.nickname}
+                </div>
+                <div class="col-sm-4" id="reply_body">
+                    <strong>回复${parentReply.floor}楼：</strong>${parentReply.replier.nickname}：
+                        ${parentReply.content}
+                    <br>${content}<br>
+                </div>
+                <div class="col-sm-1" id="reply_body">
+                    回复于：${time}
+                </div>
+                <s:if test="#session.username != null">
+                    <button onclick="replyToFloor(${id})">回复</button>
+                </s:if>
+                <s:else>
+                    <button onclick="window.location.href='login.action'">回复</button>
+                </s:else>
+                <s:if test="#session.power == 1">
+                    <button onclick="window.location.href='deleteReply.action?id=${id}'">删除</button>
+                </s:if>
+            </div>
         </s:if>
-        <br><br><br>
-    </s:iterator>
 
-    <a href="showPost.action?pid=${pid}&pageNumber=${1}">首页</a>
-    <a href="showPost.action?pid=${pid}&pageNumber=${pageNumber-1}">上一页</a>
-    <a href="showPost.action?pid=${pid}&pageNumber=${pageNumber+1}">下一页</a>
-    <a href="showPost.action?pid=${pid}&pageNumber=${pageCount}">末页</a>
-    <br><br>
+        <s:else>
+            <div class="row" id="detail_body">
+                <div class="col-sm-1">
+                    ${floor}楼
+                </div>
+                <div class="col-sm-2">
+                    <img src="http://pic.962.net/up/2016-5/201605200847278414228.jpg"/>
+                    ${lastReply.replier.nickname}
+                </div>
+                <div class="col-sm-7" id="detail-body">
+                    <br>${content}<br>
+                </div>
+                <div class="col-sm-1" id="detail-body">
+                    回复于：${time}
+                </div>
+                <s:if test="#session.username != null">
+                    <button onclick="replyToFloor(${id})">回复</button>
+                </s:if>
+                <s:else>
+                    <button onclick="window.location.href='login.action'">回复</button>
+                </s:else>
+                <s:if test="#session.power == 1">
+                    <button onclick="window.location.href='deleteReply.action?id=${id}'">删除</button>
+                </s:if>
+            </div>
+        </s:else>
+    </s:iterator>
+    <nav>
+        <ul class="pager">
+            <li><a href="showPost.action?pid=${pid}&pageNumber=${1}">首页</a></li>
+            <li><a href="showPost.action?pid=${pid}&pageNumber=${pageNumber-1}">上一页</a></li>
+            <li><a href="showPost.action?pid=${pid}&pageNumber=${pageNumber+1}">下一页</a></li>
+            <li><a href="showPost.action?pid=${pid}&pageNumber=${pageCount}">末页</a></li>
+        </ul>
+    </nav>
     <s:if test="#session.username != null">
         <form action="addReply.action" method="post">
             <textarea id="area" rows="10" cols="50" name="content"></textarea>
