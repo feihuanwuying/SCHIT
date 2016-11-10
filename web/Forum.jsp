@@ -1,4 +1,5 @@
-<%--
+<%@ page import="vo.Post" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: ZouKaifa
   Date: 2016/10/24
@@ -6,6 +7,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%!
+    String[] types = {"", "讲座活动区", "聊天灌水区", "物品交易区", "家教兼职区",
+    "聊天灌水区", "学习交流区", "交友征婚区", "咨询求助区"};
+%>
 <html>
 <head>
     <title>论坛区</title>
@@ -23,22 +28,20 @@
             <div class="row text-center">
                 <div class="text">
                     <h3 id="titleword">最新发帖</h3>
-                    <h4>时间大片子 发帖 聊天灌水区：5055寝室出现不明白色液体池</h4>
-                    <h4>胥岩是杰宝 回帖 讲座活动区：如何让孩子热爱学习</h4>
-                    <h4>单身周擎阳 发帖 交友征婚区：求一个愿意转性的GAY</h4>
-                    <h4>天任开天眼 发帖 学习交流区：今天状态很好啊</h4>
-                    <a class="btn btn-primary" href="#">查看全部</a>
+                    <%
+                        List<Post> list = (List<Post>) request.getAttribute("latestPostList");
+                        for (int i = 0; i < list.size(); i++) {
+                            out.print("<h4>" +list.get(i).getPoster().getNickname()+
+                                    "在 " + types[list.get(i).getType()] +
+                                    " 发帖：" + list.get(i).getTitle() +
+                                    "</h4>");
+                        }
+                    %>
                 </div>
             </div>
         </div>
         <div class="container">
-            <div class="row text-center">
-                <h3 id="titleword">每日推荐</h3>
-                <h4>新型人工机器人将减少世界单身汉数量</h4>
-                <h4>知名作家幻飘雪不慎掉入猪圈</h4>
-                <h4>周校长将放宽2014届学生保研政策至100%</h4>
-                <a class="btn btn-primary" href="#">查看全部</a>
-            </div>
+
         </div>
     </section>
     <section class="container">

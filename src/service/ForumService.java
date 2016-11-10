@@ -288,4 +288,16 @@ public class ForumService extends BasicService {
         postDao.close();
         return true;
     }
+
+
+    /**
+     * 获得最新的5个帖子
+     * @return
+     */
+    public List<Post> getLatestPostList() {
+        PostDao postDao = new PostDao();
+        List<Post> postList = postDao.getLatestPostList();
+        postDao.close();
+        return postList;
+    }
 }
