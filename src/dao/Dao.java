@@ -1,5 +1,12 @@
 package dao;
 
+import com.opensymphony.xwork2.ActionContext;
+import org.apache.struts2.ServletActionContext;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.sql.*;
 
 /**
@@ -16,10 +23,14 @@ public class Dao {
     /**
      * 设置数据库连接
      */
-    protected void setCon() {
+    private void setCon() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con =  DriverManager.getConnection("jdbc:mysql://localhost:3306/SCHIT", "root", "960331");
+            BufferedReader br = new BufferedReader(new InputStreamReader(
+                    new FileInputStream(ServletActionContext.getServletContext().getRealPath(File.separator)+"/static/context"),
+                    "utf8")
+            );
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/SCHIT", br.readLine(), br.readLine());
         } catch (Exception e) {
             e.printStackTrace();
         }
