@@ -191,7 +191,7 @@ public class ForumService extends BasicService {
         if (length < 4 || length > 4000) {  //长度验证
             return false;
         }
-        reply.setFloor(post.getReplyCount()+2);
+        reply.setFloor(post.getLastReply().getFloor()+1);
         reply.setTime(new Date());
         post.setLastReplyTime(reply.getTime());
         replyDao.addReply(reply);
