@@ -1,0 +1,23 @@
+.col-sm-12 {
+    background-image:url("http://heilongjiang.sinaimg.cn/2013/0407/U7398P1274DT20130407150831.jpg") ;
+    background-size:100% 100%;
+    background-repeat:no-repeat;
+    height:30%;
+    margin:0 auto;
+
+}
+#center_1 {
+    margin-top:-5%;
+}
+.jumbotron TABLE {
+    background-image:url("http://image7.360doc.com/DownloadImg/2010/01/2405/2217239_2.jpg");
+}
+#center_2 .col-sm-3{
+    border:1px solid black;
+}
+#today_title {
+    margin-top:10px;
+    margin-bottom:10px;
+    color:#ff0000;
+    text-shadow:0.25px 0.25px 0.25px #000000;
+}
