@@ -191,7 +191,7 @@ public class ForumService extends BasicService {
         if (length < 4 || length > 4000) {  //长度验证
             return false;
         }
-        reply.setFloor(post.getReplyCount()+2);
+        reply.setFloor(post.getLastReply().getFloor()+1);
         reply.setTime(new Date());
         post.setLastReplyTime(reply.getTime());
         replyDao.addReply(reply);
@@ -287,5 +287,17 @@ public class ForumService extends BasicService {
         postDao.deletePost(id);
         postDao.close();
         return true;
+    }
+
+
+    /**
+     * 获得最新的5个帖子
+     * @return
+     */
+    public List<Post> getLatestPostList() {
+        PostDao postDao = new PostDao();
+        List<Post> postList = postDao.getLatestPostList();
+        postDao.close();
+        return postList;
     }
 }

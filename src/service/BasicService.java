@@ -18,7 +18,7 @@ public class BasicService {
         if (pageNumber <= 0) {
             this.pageNumber = 1;
         } else if (pageNumber > pageCount){
-            this.pageNumber = pageCount;
+            this.pageNumber = pageCount == 0 ? 1: pageCount;
         } else {
             this.pageNumber = pageNumber;
         }
