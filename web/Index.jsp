@@ -15,7 +15,7 @@
 <body>
     <%@include file="Head.jsp"%>
     <section class="container">
-        <div class="row">
+        <div class="row" id="first">
             <div class="col-sm-12">
                 <CENTER id="center_1">
                     <FONT face=隶书 color=red size=25><MARQUEE direction=up behavior=alternate width=60 height=120>工</MARQUEE></FONT>
