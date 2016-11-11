@@ -41,9 +41,11 @@
                                     "</a></h4>");
                         }
                     %>
+                    <%--a class="btn btn-primary" href="#">查看全部</a--%>
                 </div>
             </div>
         </div>
+
         <div class="container">
 
         </div>
