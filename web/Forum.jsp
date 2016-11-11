@@ -27,11 +27,11 @@
                     <h4>胥岩是杰宝 回帖 讲座活动区：如何让孩子热爱学习</h4>
                     <h4>单身周擎阳 发帖 交友征婚区：求一个愿意转性的GAY</h4>
                     <h4>天任开天眼 发帖 学习交流区：今天状态很好啊</h4>
-                    <a class="btn btn-primary" href="#">查看全部</a>
+                    <%--a class="btn btn-primary" href="#">查看全部</a--%>
                 </div>
             </div>
         </div>
-        <div class="container">
+        <%--div class="container">
             <div class="row text-center">
                 <h3 id="titleword">每日推荐</h3>
                 <h4>新型人工机器人将减少世界单身汉数量</h4>
@@ -39,7 +39,7 @@
                 <h4>周校长将放宽2014届学生保研政策至100%</h4>
                 <a class="btn btn-primary" href="#">查看全部</a>
             </div>
-        </div>
+        </div--%>
     </section>
     <section class="container">
     <div class="row">
