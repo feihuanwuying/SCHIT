@@ -5,6 +5,7 @@ import vo.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 /**
  * 与数据库交互，获得user表的信息
@@ -60,6 +61,19 @@ public class UserDao extends Dao{
             user.setNickname(rs.getString("nickname"));
             user.setEmail(rs.getString("email"));
             user.setPower(rs.getInt("power"));
+            String head = rs.getString("head");
+            user.setHead(rs.wasNull()?"":head);
+            Date birthday = rs.getDate("birthday");
+            user.setBirthday(rs.wasNull()?null:birthday);
+            String realName = rs.getString("real_name");
+            user.setRealName(rs.wasNull()?"":realName);
+            user.setSex(rs.getInt("sex"));
+            String qq = rs.getString("qq");
+            user.setQq(rs.wasNull()?"":qq);
+            String tel = rs.getString("tel");
+            user.setTel(rs.wasNull()?"":tel);
+            String selfIntro = rs.getString("self_introduction");
+            user.setSelfIntro(rs.wasNull()?"":selfIntro);
             return user;
         } catch (SQLException e) {
             e.printStackTrace();
