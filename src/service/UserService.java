@@ -109,10 +109,11 @@ public class UserService {
             return false;  //昵称程度
         }
         String email = user.getEmail();
-        if (!user.getEmail().matches("^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w+)+)$")
+        if (!email.matches("^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w+)+)$")
                 || email.length() < 50) {
             return false;  //邮箱长度
         }
+        //// TODO: 2016/11/11 其它数据校验 
         return true;
     }
 
