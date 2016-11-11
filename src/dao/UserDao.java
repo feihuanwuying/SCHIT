@@ -86,8 +86,25 @@ public class UserDao extends Dao{
      * @param user user数据
      */
     public void updateUser(User user) {
-        String sql = "UPDATE user SET password = ?, nickname = ?, email = ? WHERE username = ?";
-        Object[] params = {user.getPassword(), user.getNickname(), user.getEmail(), user.getUsername()};
+        Date birthday = user.getBirthday();
+        String sql = "UPDATE user SET password = ?, nickname = ?, email = ?, " +
+                "head = ?, real_name = ?, sex = ?, qq = ?, tel = ?, " +
+                "self_introduction = ?";
+        Object[] params = null;
+        if (birthday != null) {
+            sql += ", birthday = ? WHERE username = ?";
+            params = new Object[]{user.getPassword(), user.getNickname(),
+                    user.getEmail(), user.getHead(), user.getRealName(),
+                    user.getSex(), user.getQq(), user.getTel(),
+                    user.getSelfIntro(), new java.sql.Date(user.getBirthday().getTime()),
+                    user.getUsername()};
+        } else {
+            sql += "WHERE username = ?";
+            params = new Object[]{user.getPassword(), user.getNickname(),
+                    user.getEmail(), user.getHead(), user.getRealName(),
+                    user.getSex(), user.getQq(), user.getTel(),
+                    user.getSelfIntro(), user.getUsername()};
+        }
         executeUpdate(sql, params);
     }
 

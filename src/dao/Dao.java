@@ -97,6 +97,8 @@ public class Dao {
                     ps.setInt(i + 1, Integer.parseInt(String.valueOf(pa)));
                 } else if (pa.getClass() == Timestamp.class) {
                     ps.setTimestamp(i + 1, (Timestamp) pa);
+                } else if (pa.getClass() == Date.class) {
+                    ps.setDate(i + 1, (Date) pa);
                 }
             }
             return ps;
