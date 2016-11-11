@@ -154,7 +154,7 @@ public class PostDao extends Dao {
      * @return
      */
     public List<Post> getLatestPostList() {
-        String sql = "SELECT * FROM post limit 5";
+        String sql = "SELECT * FROM post order by time desc limit 5";
         ResultSet rs = executeQuery(sql);
         return getPostList(rs);
     }

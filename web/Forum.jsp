@@ -32,9 +32,13 @@
                         List<Post> list = (List<Post>) request.getAttribute("latestPostList");
                         for (int i = 0; i < list.size(); i++) {
                             out.print("<h4>" +list.get(i).getPoster().getNickname()+
-                                    "在 " + types[list.get(i).getType()] +
-                                    " 发帖：" + list.get(i).getTitle() +
-                                    "</h4>");
+                                    "在 <a href='showForumDetail.action?type="
+                                    + list.get(i).getType()+"'>"
+                                    + types[list.get(i).getType()] +
+                                    "</a> 发帖：<a href='showPost?pid=" +
+                                    list.get(i).getId()+"'>"+
+                                    list.get(i).getTitle() +
+                                    "</a></h4>");
                         }
                     %>
                 </div>
