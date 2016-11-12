@@ -46,7 +46,7 @@
             </div>
         </div>
 
-        <div class="container">
+        <div class="container" id="jum_img">
 
         </div>
     </section>

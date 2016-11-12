@@ -41,7 +41,7 @@
     <div class="row" id="detail_up">
         <div class="col-sm-1">楼主</div>
         <div class="col-sm-2">
-            <img src="http://pic2.52pk.com/files/160907/7247438_130524_1_lit.jpg"/>
+            <img id="img_user" src="http://pic2.52pk.com/files/160907/7247438_130524_1_lit.jpg"/>
             ${post.poster.nickname}
         </div>
         <div class="col-sm-7">${post.content}</div>
@@ -57,18 +57,20 @@
     <s:iterator value="replyList" status="st">
         <%--如果是回帖，不算在正常楼层中，而且有一个缩进--%>
         <s:if test="%{parentId != -1}">
-            <div class="row" >
-                <div class="col-sm-2"></div>
-                <div class="col-sm-2" id="reply_body">
-                    <img src="http://images.17173.com/2016/news/2016/04/29/gxy0429dd03s.jpg"/>
+            <div class="row" id="reply_body">
+                <div class="col-sm-1">
+                        ${floor}楼
+                </div>
+                <div class="col-sm-2" >
+                    <img id="img_user" src="http://images.17173.com/2016/news/2016/04/29/gxy0429dd03s.jpg"/>
                     ${lastReply.replier.nickname}
                 </div>
-                <div class="col-sm-4" id="reply_body">
+                <div class="col-sm-7">
                     <strong>回复${parentReply.floor}楼：</strong>${parentReply.replier.nickname}：
                         ${parentReply.content}
                     <br>${content}<br>
                 </div>
-                <div class="col-sm-1" id="reply_body">
+                <div class="col-sm-1">
                     回复于：${time}
                 </div>
                 <s:if test="#session.username != null">
@@ -89,7 +91,7 @@
                     ${floor}楼
                 </div>
                 <div class="col-sm-2">
-                    <img src="http://pic.962.net/up/2016-5/201605200847278414228.jpg"/>
+                    <img id="img_user" src="http://pic.962.net/up/2016-5/201605200847278414228.jpg"/>
                     ${lastReply.replier.nickname}
                 </div>
                 <div class="col-sm-7" id="detail-body">
