@@ -36,7 +36,7 @@
 <body>
 <%@include file="Head.jsp"%>
     <div class="row">
-        <div class="col-sm-6" id="detail_title">帖子标题：${post.title} </div>
+        <div class="col-sm-6" id="detail_title">标题：${post.title} </div>
     </div>
     <div class="row" id="detail_up">
         <div class="col-sm-1">楼主</div>
@@ -110,22 +110,38 @@
             </div>
         </s:else>
     </s:iterator>
-    <nav>
-        <ul class="pager">
-            <li><a href="showPost.action?pid=${pid}&pageNumber=${1}">首页</a></li>
-            <li><a href="showPost.action?pid=${pid}&pageNumber=${pageNumber-1}">上一页</a></li>
-            <li><a href="showPost.action?pid=${pid}&pageNumber=${pageNumber+1}">下一页</a></li>
-            <li><a href="showPost.action?pid=${pid}&pageNumber=${pageCount}">末页</a></li>
-        </ul>
-    </nav>
+    <s:if test="%{pageCount > 1}">
+        <nav>
+            <ul class="pager">
+                <li><a href="showPost.action?pid=${pid}&pageNumber=${1}">首页</a></li>
+                <li><a href="showPost.action?pid=${pid}&pageNumber=${pageNumber-1}">上一页</a></li>
+                <li>${pageNumber}/${pageCount}</li>
+                <li><a href="showPost.action?pid=${pid}&pageNumber=${pageNumber+1}">下一页</a></li>
+                <li><a href="showPost.action?pid=${pid}&pageNumber=${pageCount}">末页</a></li>
+            </ul>
+        </nav>
+    </s:if>
+    <br><br><br>
     <s:if test="#session.username != null">
-        <form action="addReply.action" method="post">
-            <textarea id="area" rows="10" cols="50" name="content"></textarea>
+        <form action="addReply.action" method="post" class="form-horizontal" role="form">
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-6">
+                    <textarea id="area" rows="10" cols="50"
+                              name="content" maxlength="4000"
+                              placeholder="请输入回复内容，4~4000字符"
+                              class="form-control"
+                    ></textarea>
+                </div>
+            </div>
             <input type="hidden" name="postId" value="${post.id}">
             <input type="hidden" name="parentId" id="parentId" value="${-1}">
             <input type="hidden" name="replier.username" value="${session.username}">
             <input type="hidden" name="type" value="${post.type}">
-            <button type="submit" onclick="return checkLength(this.form)">提交</button>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-1">
+                    <button type="submit" class="btn btn-default" onclick="return checkLength(this.form)">回复</button>
+                </div>
+            </div>
         </form>
     </s:if>
     <s:else>

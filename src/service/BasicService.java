@@ -5,7 +5,7 @@ package service;
  * Created by ZouKaifa on 2016/10/29.
  */
 public class BasicService {
-    protected final int pageSize = 5;  //一页的帖子数
+    protected final int pageSize = 10;  //一页的帖子数
     protected long pageNumber;  //页码
     protected long pageCount;  //总页数
 
