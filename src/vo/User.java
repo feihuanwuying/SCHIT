@@ -19,6 +19,7 @@ public class User {
     private String qq = "";  //qq号
     private String tel = "";  //11位手机号
     private String selfIntro = "";  //自我介绍
+    private int id = 0;
 
     public String getUsername() {
         return username;
@@ -114,5 +115,13 @@ public class User {
 
     public void setSelfIntro(String selfIntro) {
         this.selfIntro = selfIntro;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

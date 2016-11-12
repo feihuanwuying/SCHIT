@@ -74,17 +74,10 @@
             <result>/Index.jsp</result>
         </action>
 
-        <action name="testImg" class="action.TestImgAction">
-            <result name="success">/testImg.jsp</result>
-            <result name="input">/testImg.jsp</result>
-            <interceptor-ref name="fileUpload">
-                <param name="allowedTypes">
-                    image/jpg, image/x-png, image/gif, image/bmp
-                </param>
-                <param name="maximumSize">
-                    1048576
-                </param>
-            </interceptor-ref>
+        <action name="showHome" class="action.ShowHomeAction">
+            <result>/Home.jsp</result>
+            <result name="login">/Login.jsp</result>
+            <interceptor-ref name="loginInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
 

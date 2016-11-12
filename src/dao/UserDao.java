@@ -56,6 +56,7 @@ public class UserDao extends Dao{
     private User getUser(ResultSet rs) {
         try {
             User user = new User();
+            user.setId(rs.getInt("id"));
             user.setUsername(rs.getString("username"));
             user.setPassword(rs.getString("password"));
             user.setNickname(rs.getString("nickname"));
@@ -119,5 +120,24 @@ public class UserDao extends Dao{
         execute(sql, params);
     }
 
+
+    /**
+     * 根据id获得用户
+     * @param id
+     * @return
+     */
+    public User getUser(int id) {
+        User user = null;
+        try {
+            String sql = "SELECT * FROM user WHERE id = ?";
+            ResultSet rs = executeQuery(sql, new Object[]{id});
+            if (rs.next()) {
+                user = getUser(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
 
 }
