@@ -1,5 +1,5 @@
 <%@ page import="java.util.Date" %>
-<%@ page import="java.util.Calendar" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: ZouKaifa
   Date: 2016/11/12
@@ -61,7 +61,7 @@
                 <div class="panel-heading">留言板</div>
                 <div class="panel-body">
                     <div class="row" align="center">
-                        <textarea rows="10" cols="50"></textarea>
+                        <textarea style="width:90%"></textarea>
                     </div>
                 </div>
             </div>
