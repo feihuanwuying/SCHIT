@@ -1,0 +1,17 @@
+#first {
+    background-image:url(darkblue.png);
+    background-size:100% 100%;
+    background-repeat:no-repeat;
+    margin:0 auto;
+    background-position:center center;
+}
+#first h1 {
+    font-family:华文行楷;
+    font-size:300%;
+    color:#eeeeff;
+}
+#first img {
+    float:left;
+    width:10%;
+    height:15%;
+}
