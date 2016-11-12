@@ -8,7 +8,24 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/head_style.css">
+</head>
 <%@include file="Bootstrap.jsp"%>
+<div class="row" id="first">
+    <div class="col-sm-8">
+        <img src="photo/hitfly.gif"/>
+        <h1>工大圈子</h1>
+    </div>
+    <div class="col-sm-4">
+        <MARQUEE scrollAmount=2 direction=up height=60>
+            <FONT face=华文彩云 color=#da70d6 size=6>
+                <B>朋友，欢迎您的到来</B>
+            </FONT>
+        </MARQUEE>
+        <P>&nbsp;</P>
+    </div>
+</div>
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -42,4 +59,5 @@
             </ul>
         </div>
     </div>
+
 </nav>
