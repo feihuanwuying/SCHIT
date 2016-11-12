@@ -34,6 +34,7 @@ public class UserService {
             ActionContext.getContext().getSession().put("username", username);
             ActionContext.getContext().getSession().put("nickname", user.getNickname());
             ActionContext.getContext().getSession().put("power", user.getPower());
+            ActionContext.getContext().getSession().put("id", user.getId());
             return true;
         }
         return false;
@@ -51,10 +52,12 @@ public class UserService {
                 return false;
             }
             userDao.addUser(user);
+            user = userDao.getUser(user.getUsername());
             userDao.close();
             ActionContext.getContext().getSession().put("username", user.getUsername());
             ActionContext.getContext().getSession().put("nickname", user.getNickname());
             ActionContext.getContext().getSession().put("power", user.getPower());
+            ActionContext.getContext().getSession().put("id", user.getId());
             return true;
         }
         userDao.close();
@@ -71,6 +74,7 @@ public class UserService {
             session.remove("username");
             session.remove("nickname");
             session.remove("power");
+            session.remove("id");
             return true;
         }
         return false;
@@ -130,5 +134,20 @@ public class UserService {
             return user;
         }
         return null;
+    }
+
+    /**
+     * 根据id获得user
+     * @param id
+     * @return
+     */
+    public User getUser(int id) {
+        UserDao userDao = new UserDao();
+        User user = userDao.getUser(id);
+        if (user != null) {
+            user.setPassword("");
+        }
+        userDao.close();
+        return user;
     }
 }

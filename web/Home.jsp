@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.Date" %>
+<%@ page import="java.util.Calendar" %><%--
   Created by IntelliJ IDEA.
   User: ZouKaifa
   Date: 2016/11/12
@@ -14,11 +15,11 @@
     <%@include file="Head.jsp"%>
     <div class="row-fluid">
         <div class="col-sm-12" align="center">
-            <h2>user.nickname的个人空间</h2>
+            <h2>${user.nickname}的个人空间</h2>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-3 col-sm-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">头像</div>
                 <div class="panel-body">
@@ -43,15 +44,15 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="panel panel-default">
                 <div class="panel-heading">个人资料</div>
                 <div class="panel-body">
                     <div class="row" align="center">
-                        昵称：user.nickname
+                        昵称：${user.nickname}
                     </div>
                     <div class="row" align="center">
-                        年龄：13
+                        年龄：<%=new Date().getYear()-((Date)request.getAttribute("user.birthday")).getYear()%>
                     </div>
                     <br><br><br><br><br>
                 </div>
@@ -60,7 +61,7 @@
                 <div class="panel-heading">留言板</div>
                 <div class="panel-body">
                     <div class="row" align="center">
-                        <textarea rows="10" cols="80"></textarea>
+                        <textarea rows="10" cols="50"></textarea>
                     </div>
                 </div>
             </div>

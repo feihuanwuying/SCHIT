@@ -8,7 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%!
-    String[] types = {"", "讲座活动区", "聊天灌水区", "物品交易区", "家教兼职区",
+    String[] types = {"", "讲座活动区", "招聘信息区", "物品交易区", "家教兼职区",
     "聊天灌水区", "学习交流区", "交友征婚区", "咨询求助区"};
 %>
 <html>
