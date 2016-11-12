@@ -1,7 +1,15 @@
 img {
     float:left;
-    width:66px;
+
+    max-height:500px;
+    max-width: 500px;
+    overflow:hidden;
+}
+#img_user {
+    float:left;
     height:66px;
+    width:66px;
+
 }
 #detail_body {
     background-color:#eeeeee;

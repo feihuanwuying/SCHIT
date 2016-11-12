@@ -1,6 +1,13 @@
 html,body {
     min-height: 100%;
 }
+img {
+    max-height:400px;
+    max-width:400px;
+}
+#jum_img {
+    margin-top:-25px;
+}
 .jumbotron {
     background-image:url('http://attach.bbs.miui.com/forum/201311/24/215445jhkmukdk1p3urpur.jpg');
     background-size:cover;
@@ -8,9 +15,10 @@ html,body {
     display:flex;
     height:400px;
     text-shadow:0.25px 0.25px 0.25px #000000;
-    margin-top:50px;
+    margin-top:20px;
 }
 .jumbotron h2 {
+    vertical-align:top;
     font-family:SimHei,SansSerif;
     font-weight:700;
     font-size:50px;
