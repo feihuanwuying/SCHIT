@@ -191,6 +191,7 @@ public class ForumService extends BasicService {
         if (length < 4 || length > 4000) {  //长度验证
             return false;
         }
+        reply.setContent(reply.getContent().replace("\n", "<br>"));
         if (post.getLastReply() == null) {
             reply.setFloor(2);
         } else {
@@ -227,6 +228,7 @@ public class ForumService extends BasicService {
         if (content.length() > 4000) {
             return false;  //内容长度
         }
+        post.setContent(content.replace("\n", "<br>"));
         int type = post.getType();
         if (type < 1 || type > 8) {
             return false;  //分区
