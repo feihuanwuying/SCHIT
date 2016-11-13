@@ -26,7 +26,7 @@
 </head>
 <body>
     <%@include file="Head.jsp"%>
-    <div class="row-fluid">
+    <div class="row">
         <div class="col-sm-12" align="center">
             <h2>${user.nickname}的个人空间</h2>
         </div>
