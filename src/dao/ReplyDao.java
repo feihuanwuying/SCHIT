@@ -175,4 +175,18 @@ public class ReplyDao extends Dao {
         String sql = "DELETE FROM reply WHERE id = ?";
         execute(sql, new Object[]{id});
     }
+
+    public long getUserReplyCount(int userId) {
+        long count = 0;
+        try {
+            String sql = "SELECT * FROM reply WHERE replier_id = ?";
+            ResultSet rs = executeQuery(sql, userId);
+            if (rs.next()) {
+                count = rs.getLong(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
 }

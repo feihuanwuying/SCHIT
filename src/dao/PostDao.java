@@ -158,4 +158,20 @@ public class PostDao extends Dao {
         ResultSet rs = executeQuery(sql);
         return getPostList(rs);
     }
+
+    public long getUserPostCount(int userId) {
+        long count = 0;
+        try {
+            String sql = "SELECT count(*) FROM post WHERE poster_id = ?";
+            ResultSet rs = executeQuery(sql, userId);
+            if (rs.next()) {
+                count = rs.getLong(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+
 }

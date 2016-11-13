@@ -3,6 +3,7 @@ package action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import service.ForumService;
 import service.FriendService;
 import service.UserService;
 import vo.Friend;
@@ -20,6 +21,8 @@ public class ShowHomeAction extends ActionSupport{
     private long visitCount = 0;
     private List<Visit> visitList;
     private List<Friend> friendList;
+    private long postCount = 0;
+    private long replyCount = 0;
 
 
     public User getUser() {
@@ -62,10 +65,27 @@ public class ShowHomeAction extends ActionSupport{
         this.friendList = friendList;
     }
 
+    public long getPostCount() {
+        return postCount;
+    }
+
+    public void setPostCount(long postCount) {
+        this.postCount = postCount;
+    }
+
+    public long getReplyCount() {
+        return replyCount;
+    }
+
+    public void setReplyCount(long replyCount) {
+        this.replyCount = replyCount;
+    }
+
     @Override
     public String execute() throws Exception {
         UserService userService = new UserService();
         FriendService friendService = new FriendService();
+        ForumService forumService = new ForumService();
         user = userService.getUser(id);
         if (user == null) {
             return ERROR;
@@ -73,6 +93,11 @@ public class ShowHomeAction extends ActionSupport{
         userService.visitHome(id);
         visitCount = userService.getVisitCount(id);
         visitList = userService.getVisitList(id);
+        friendService.getFriendPageCount(id);
+        friendService.getPageNumber(0);
+        friendList = friendService.getFriendList(id);
+        postCount = forumService.getUserPostCount(id);
+        replyCount = forumService.getUserReplyCount(id);
         return SUCCESS;
     }
 }

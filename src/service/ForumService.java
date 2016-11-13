@@ -306,4 +306,18 @@ public class ForumService extends BasicService {
         postDao.close();
         return postList;
     }
+
+    public long getUserPostCount(int userId) {
+        PostDao postDao = new PostDao();
+        long count = postDao.getUserPostCount(userId);
+        postDao.close();
+        return count;
+    }
+
+    public long getUserReplyCount(int userId) {
+        ReplyDao replyDao = new ReplyDao();
+        long count = replyDao.getUserReplyCount(userId);
+        replyDao.close();
+        return count;
+    }
 }
