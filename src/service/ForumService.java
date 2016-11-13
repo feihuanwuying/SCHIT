@@ -181,9 +181,9 @@ public class ForumService extends BasicService {
         }
         UserService userService = new UserService();
         if (reply.getReplier() == null ||
-                !reply.getReplier().getUsername().equals((String)
-                        ActionContext.getContext().getSession().get("username"))
-                || !userService.exist(reply.getReplier().getUsername())) {
+                reply.getReplier().getId() != (int)
+                        ActionContext.getContext().getSession().get("id")
+                || userService.getUser(reply.getReplier().getId()) == null) {
             return false;  //用户名不对
         }
         UserDao userDao = new UserDao();
@@ -214,10 +214,10 @@ public class ForumService extends BasicService {
      */
     private boolean checkPost(Post post) {
         UserService userService = new UserService();
-        String username = post.getPoster().getUsername();
-        if (! userService.exist(username)
-                || !username.equals((String) ActionContext.
-                getContext().getSession().get("username"))) {
+        int userId = post.getPoster().getId();
+        if (userService.getUser(userId) == null
+                || userId != (int) ActionContext.
+                getContext().getSession().get("id")) {
             return false;  //用户
         }
         String title = post.getTitle();

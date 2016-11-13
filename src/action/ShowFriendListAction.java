@@ -3,6 +3,7 @@ package action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import service.FriendService;
+import service.UserService;
 import vo.Friend;
 import vo.User;
 
@@ -17,6 +18,7 @@ public class ShowFriendListAction extends ActionSupport {
     private long pageNumber;
     private long pageCount;
     private int pageSize;
+    private int id;
 
     public List<Friend> getFriendList() {
         return friendList;
@@ -58,14 +60,25 @@ public class ShowFriendListAction extends ActionSupport {
         this.friendCount = friendCount;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String execute() throws Exception {
         FriendService friendService = new FriendService();
-        String username = (String)ActionContext.getContext().getSession().get("username");
-        friendCount = friendService.getFriendCount(username);
-        pageCount = friendService.getFriendPageCount(username);
+        UserService userService = new UserService();
+        if (userService.getUser(id) == null) {
+            return ERROR;
+        }
+        friendCount = friendService.getFriendCount(id);
+        pageCount = friendService.getFriendPageCount(id);
         pageNumber = friendService.getPageNumber(pageNumber);
-        setFriendList(friendService.getFriendList(username));
+        setFriendList(friendService.getFriendList(id));
         pageSize = friendService.getPageSize();
         return SUCCESS;
     }

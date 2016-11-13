@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class VisitDao extends Dao {
     private Visit getVisit(ResultSet rs) {
-        Visit visit = null;
+        Visit visit = new Visit();
         try {
             UserDao userDao = new UserDao();
             visit.setUser(userDao.getUser(rs.getInt("user_id")));
@@ -70,6 +70,20 @@ public class VisitDao extends Dao {
         Object[] params = {TimeTransform.dateTotimeStamp(visit.getTime()),
                 visit.getUser().getId(), visit.getVisitor().getId()};
         executeUpdate(sql, params);
+    }
+
+    public long getVisitCount(int userId) {
+        long count = 0;
+        try {
+            String sql = "SELECT count(*) FROM visit WHERE user_id = ?";
+            ResultSet rs = executeQuery(sql, userId);
+            if (rs.next()) {
+                count = rs.getLong(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 
 }

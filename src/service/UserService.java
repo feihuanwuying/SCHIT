@@ -10,6 +10,7 @@ import vo.Visit;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 
@@ -178,6 +179,28 @@ public class UserService {
         } else {
             visitDao.updateVisit(visit);
         }
+        userDao.close();
+        visitDao.close();
         return true;
     }
+
+    public long getVisitCount(int userId) {
+        UserDao userDao = new UserDao();
+        if (userDao.getUser(userId) == null) {
+            userDao.close();
+            return -1;
+        }
+        VisitDao visitDao = new VisitDao();
+        long count = visitDao.getVisitCount(userId);
+        visitDao.close();
+        return count;
+    }
+
+    public List<Visit> getVisitList(int userId) {
+        VisitDao visitDao = new VisitDao();
+        List<Visit> visitList = visitDao.getVisitList(userId);
+        visitDao.close();
+        return visitList;
+    }
+
 }

@@ -18,9 +18,9 @@ public class FriendService extends BasicService {
      * @param friendName
      * @return
      */
-    public Friend getFriend(String username, String friendName) {
+    public Friend getFriend(int userId, int friendId) {
         FriendDao friendDao = new FriendDao();
-        Friend friend = friendDao.getFriend(username, friendName);
+        Friend friend = friendDao.getFriend(userId, friendId);
         friendDao.close();
         return friend;
     }
@@ -30,9 +30,9 @@ public class FriendService extends BasicService {
      * @param username
      * @return
      */
-    public List<Friend> getFriendList(String username) {
+    public List<Friend> getFriendList(int userId) {
         FriendDao friendDao = new FriendDao();
-        List<Friend> friendList = friendDao.getFriendList(username, pageNumber, pageSize);
+        List<Friend> friendList = friendDao.getFriendList(userId, pageNumber, pageSize);
         friendDao.close();
         return friendList;
     }
@@ -42,8 +42,8 @@ public class FriendService extends BasicService {
      * @param username
      * @return
      */
-    public long getFriendPageCount(String username) {
-        long friendCount = getFriendCount(username);
+    public long getFriendPageCount(int userId) {
+        long friendCount = getFriendCount(userId);
         pageCount = friendCount % pageSize == 0? (friendCount/pageSize) : friendCount/pageSize+1;
         return pageCount;
     }
@@ -53,9 +53,9 @@ public class FriendService extends BasicService {
      * @param username
      * @return
      */
-    public long getFriendCount(String username) {
+    public long getFriendCount(int userId) {
         FriendDao friendDao = new FriendDao();
-        long count = friendDao.getFriendCount(username);
+        long count = friendDao.getFriendCount(userId);
         friendDao.close();
         return count;
     }
@@ -67,24 +67,24 @@ public class FriendService extends BasicService {
      * @param remark
      * @return
      */
-    public boolean addFriend(String username, String friend_name, String remark) {
+    public boolean addFriend(int userId, int friendId, String remark) {
         boolean success = true;
         UserDao userDao = new UserDao();
         FriendDao friendDao = new FriendDao();
-        User user = userDao.getUser(username);
-        User friend = userDao.getUser(friend_name);
+        User user = userDao.getUser(userId);
+        User friend = userDao.getUser(friendId);
         if (user == null || friend == null) {  //存在
             success = false;
-        } else if (friendDao.getFriend(username, friend_name) != null
-                || remark.length() > 30 || username.equals(friend_name)) {  //不是好友
+        } else if (friendDao.getFriend(userId, friendId) != null
+                || remark.length() > 30 || userId == friendId) {  //不是好友
             success = false;
-        } else if (!username.equals((String) ActionContext.getContext().getSession().get("username"))) {  //是当前用户
+        } else if (userId != (int)ActionContext.getContext().getSession().get("id")) {  //是当前用户
             success = false;
         } else {
             Friend friend1 = new Friend();
             friend1.setFriend(friend);
             friend1.setRemark(remark);
-            friendDao.addFriend(username, friend1);
+            friendDao.addFriend(userId, friend1);
         }
         userDao.close();
         friendDao.close();
@@ -97,22 +97,22 @@ public class FriendService extends BasicService {
      * @param friendName
      * @return
      */
-    public boolean deleteFriend(String username, String friendName) {
+    public boolean deleteFriend(int userId, int friendId) {
         boolean success = true;
         UserDao userDao = new UserDao();
         FriendDao friendDao = new FriendDao();
-        if (userDao.getUser(username) == null  //存在
-            || userDao.getUser(friendName) == null) {
+        if (userDao.getUser(userId) == null  //存在
+            || userDao.getUser(friendId) == null) {
             success = false;
-        } else if (friendDao.getFriend(username, friendName) == null
-                || username.equals(friendName)) {  //是好友
+        } else if (friendDao.getFriend(userId, friendId) == null
+                || userId == friendId) {  //是好友
             success = false;
-        } else if (!username.equals((String) ActionContext.getContext().getSession().get("username"))) {  //当前用户
+        } else if (userId != (int) ActionContext.getContext().getSession().get("id")) {  //当前用户
             success = false;
         } else {
             Friend friend = new Friend();
-            friend.setFriend(userDao.getUser(friendName));
-            friendDao.deleteFriend(username, friend);
+            friend.setFriend(userDao.getUser(friendId));
+            friendDao.deleteFriend(userId, friend);
         }
         userDao.close();
         friendDao.close();
@@ -126,20 +126,20 @@ public class FriendService extends BasicService {
      * @param remark
      * @return
      */
-    public boolean updateRemark(String username, String friendName, String remark) {
+    public boolean updateRemark(int userId, int friendId, String remark) {
         boolean success = true;
         UserDao userDao = new UserDao();
         FriendDao friendDao = new FriendDao();
-        if (userDao.getUser(username) == null
-                || userDao.getUser(friendName) == null) {
+        if (userDao.getUser(userId) == null
+                || userDao.getUser(friendId) == null) {
             success = false;  //存在
-        } else if (friendDao.getFriend(username, friendName) == null
-                || remark.length() > 30 || username.equals(friendName)) {
+        } else if (friendDao.getFriend(userId, friendId) == null
+                || remark.length() > 30 || userId == friendId) {
             success = false;  //是好友
-        } else if (!username.equals((String)ActionContext.getContext().getSession().get("username"))) {
+        } else if (userId != (int)ActionContext.getContext().getSession().get("id")) {
             success = false;  //是当前用户
         } else {
-            friendDao.updateRemark(username, friendName, remark);
+            friendDao.updateRemark(userId, friendId, remark);
         }
         userDao.close();
         friendDao.close();

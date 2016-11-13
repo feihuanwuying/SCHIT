@@ -32,7 +32,7 @@
                 <div class="panel-heading">统计信息</div>
                 <div class="panel-body">
                     <div class="row" align="center">
-                        共有3人访问过
+                        共有${visitCount}人访问过
                     </div>
                     <div class="row" align="center">
                         发帖数：4
@@ -48,11 +48,14 @@
             <div class="panel panel-default">
                 <div class="panel-heading">个人资料</div>
                 <div class="panel-body">
-                    <div class="row" align="center">
-                        昵称：${user.nickname}
-                    </div>
-                    <div class="row" align="center">
-                        年龄：<%=new Date().getYear()-((Date)request.getAttribute("user.birthday")).getYear()%>
+                    <div class="row">
+                        昵称：${user.nickname} &nbsp;
+                        <s:if test="%{user.birthday == null}">
+                            年龄：未知
+                        </s:if>
+                        <s:else>
+                            年龄：<%=new Date().getYear()-((Date)request.getAttribute("user.birthday")).getYear()%>
+                        </s:else>
                     </div>
                     <br><br><br><br><br>
                 </div>
@@ -82,9 +85,16 @@
             <div class="panel panel-default">
                 <div class="panel-heading">最近访客</div>
                 <div class="panel-body">
-                    这里放一堆访问过的小头像
+                    <s:if test="%{visitList.size() == 0}">
+                        最近还没有访客哦！
+                    </s:if>
+                    <s:else>
+                        <s:iterator value="visitList">
+                            ${visitor.nickname} 最后访问：${time}
+                            <br>
+                        </s:iterator>
+                    </s:else>
                 </div>
-                <br><br><br><br>
             </div>
         </div>
     </div>

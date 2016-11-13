@@ -82,7 +82,7 @@
                 </div>
             </div>
             <input type="hidden" name="type" value="${type}">
-            <input type="hidden" name="poster.username" value="${session.username}">
+            <input type="hidden" name="poster.id" value="${session.id}">
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-2">
                     <button type="submit" class="btn btn-default">发表新帖子</button>

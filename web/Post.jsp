@@ -137,7 +137,7 @@
             </div>
             <input type="hidden" name="postId" value="${post.id}">
             <input type="hidden" name="parentId" id="parentId" value="${-1}">
-            <input type="hidden" name="replier.username" value="${session.username}">
+            <input type="hidden" name="replier.id" value="${session.id}">
             <input type="hidden" name="type" value="${post.type}">
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-1">
