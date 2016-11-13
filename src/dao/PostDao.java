@@ -148,4 +148,14 @@ public class PostDao extends Dao {
         String sql = "DELETE FROM post WHERE id = ?";
         execute(sql, new Object[]{id});
     }
+
+    /**
+     * 最新的5个帖子
+     * @return
+     */
+    public List<Post> getLatestPostList() {
+        String sql = "SELECT * FROM post order by time desc limit 5";
+        ResultSet rs = executeQuery(sql);
+        return getPostList(rs);
+    }
 }

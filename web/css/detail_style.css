@@ -1,0 +1,25 @@
+.btn.btn-primary {
+    margin-right:20px;
+    border-radius:2px;
+    border:1px solid black;
+    color:#8a2be2;
+    text-shadow:none;
+    background-color:#afd9ee;
+}
+.btn.btn-primary:hover {
+    color:#ffffff;
+    background-color: #fbd1d5;
+}
+#detail_body {
+    background-color:#E0EEEE;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+#detail_body>div {
+    font-weight:bold;
+}
+.row div img {
+    width:66px;
+    height:66px;
+    float:left;
+}

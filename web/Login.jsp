@@ -9,22 +9,61 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <%@include file="Bootstrap.jsp"%>
+    <link rel="stylesheet" type="text/css" href="css/login_style.css">
     <title>登录</title>
 </head>
 <body>
-    <s:if test="%{errCode == 1}">
-        用户名不存在或密码错误!
-    </s:if>
-    <form action="register.action" method="post" pid="reg">
+    <div class="row text-center">
+        <h1>用户登录</h1>
+    </div>
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-3">
+            <s:if test="%{errCode == 1}">
+                <p class="bg-warning">用户名或密码错误！</p>
+            </s:if>
+        </div>
+    </div>
+
+
+    <form action="register.action" method="post" id="reg">
         <input type="hidden" name="url" value="${url}">
     </form>
-    <s:form action="login" method="post">
-        <s:textfield name="username" value="%{username}" label="用户名"></s:textfield>
-        <s:password name="password" value="%{username}" label="密码"></s:password>
-        <s:hidden name="url" value="%{url}"></s:hidden>
-        <s:submit value="登录"></s:submit>
-        <tr><td colspan="2"><button type="button" onclick="document.getElementById('reg').submit();">注册</button></td></tr>
-    </s:form>
+
+
+    <form class="form-horizontal" role="form" action="login" method="post">
+
+
+        <div class="form-group">
+            <label for="inputUsername" class="col-sm-offset-2 col-sm-2
+                    control-label" >用户名</label>
+            <div class="col-sm-4">
+                <input type="text" name="username" id="inputUsername"
+                       class="form-control" placeholder="请输入用户名"
+                    value="${username}" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputPassword" class="col-sm-offset-2 col-sm-2
+                    control-label" >密码</label>
+            <div class="col-sm-4">
+                <input type="password" name="password" id="inputPassword"
+                       class="form-control" placeholder="请输入密码"
+                       value="${username}" required>
+            </div>
+        </div>
+        <input type="hidden" name="url" value="${url}"></input>
+
+        <div class="form-group">
+            <div class="col-sm-offset-5 col-sm-1">
+                <button type="submit" class="btn btn-default">登陆</button>
+            </div>
+            <div class="col-sm-1">
+                <button type="button" class="btn btn-default" onclick="document.getElementById('reg').submit();">注册</button>
+            </div>
+        </div>
+    </form>
 
 </body>
 </html>

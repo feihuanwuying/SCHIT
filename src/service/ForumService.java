@@ -15,7 +15,7 @@ import java.util.*;
  * 论坛相关服务
  * Created by ZouKaifa on 2016/10/24.
  */
-public class ForumService {
+public class ForumService extends BasicService {
     private final int ACTIVITY = 1;  //讲座与活动
     private final int RECRUIT = 2;  //招聘
     private final int BUSINESS = 3;  //交易
@@ -24,9 +24,6 @@ public class ForumService {
     private final int LEARN = 6;  //学习
     private final int MAKE_FRIEND = 7;  //交友
     private final int QUERY = 8;  //求助
-    protected final int pageSize = 5;  //一页的帖子数
-    protected long pageNumber;  //页码
-    protected long pageCount;  //总页数
 
 
     /**
@@ -86,21 +83,6 @@ public class ForumService {
         return pageCount;
     }
 
-    /**
-     * 对页码进行容错
-     * @param pageNumber
-     * @return
-     */
-    public long getPageNumber(long pageNumber) {
-        if (pageNumber <= 0) {
-            this.pageNumber = 1;
-        } else if (pageNumber > pageCount){
-            this.pageNumber = pageCount;
-        } else {
-            this.pageNumber = pageNumber;
-        }
-        return this.pageNumber;
-    }
 
     /**
      * 获得这一分区的标签
@@ -177,10 +159,6 @@ public class ForumService {
         return pageCount;
     }
 
-    public int getPageSize() {
-        return pageSize;
-    }
-
     /**
      * 添加一条回复
      * @param reply
@@ -213,7 +191,12 @@ public class ForumService {
         if (length < 4 || length > 4000) {  //长度验证
             return false;
         }
-        reply.setFloor(post.getReplyCount()+2);
+        reply.setContent(reply.getContent().replace("\n", "<br>"));
+        if (post.getLastReply() == null) {
+            reply.setFloor(2);
+        } else {
+            reply.setFloor(post.getLastReply().getFloor() + 1);
+        }
         reply.setTime(new Date());
         post.setLastReplyTime(reply.getTime());
         replyDao.addReply(reply);
@@ -245,6 +228,7 @@ public class ForumService {
         if (content.length() > 4000) {
             return false;  //内容长度
         }
+        post.setContent(content.replace("\n", "<br>"));
         int type = post.getType();
         if (type < 1 || type > 8) {
             return false;  //分区
@@ -309,5 +293,17 @@ public class ForumService {
         postDao.deletePost(id);
         postDao.close();
         return true;
+    }
+
+
+    /**
+     * 获得最新的5个帖子
+     * @return
+     */
+    public List<Post> getLatestPostList() {
+        PostDao postDao = new PostDao();
+        List<Post> postList = postDao.getLatestPostList();
+        postDao.close();
+        return postList;
     }
 }

@@ -9,14 +9,21 @@
         <interceptors>
             <interceptor name="loginInterceptor" class="interceptor.LoginInterceptor"></interceptor>
             <interceptor name="powerInterceptor" class="interceptor.PowerInterceptor"></interceptor>
+            <interceptor name="hasLoginInterceptor" class="interceptor.HasLoginInterceptor"></interceptor>
         </interceptors>
         <action name="login" class="action.LoginAction">
             <result type="redirect">${url}</result>
             <result name="login">/Login.jsp</result>
+            <result name="error">/Index.jsp</result>
+            <interceptor-ref name="hasLoginInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
         <action name="register" class="action.RegisterAction">
             <result type="redirect">${url}</result>
             <result name="input">/Register.jsp</result>
+            <result name="error">/Index.jsp</result>
+            <interceptor-ref name="hasLoginInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
         <action name="logout" class="action.LogoutAction">
             <result type="redirect">${url}</result>
@@ -57,9 +64,23 @@
             <interceptor-ref name="powerInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
+        <action name="friendList" class="action.ShowFriendListAction">
+            <result>/Friends.jsp</result>
+            <result name="login">/Login.jsp</result>
+            <interceptor-ref name="loginInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+        </action>
         <action name="index">
             <result>/Index.jsp</result>
         </action>
+
+        <action name="showHome" class="action.ShowHomeAction">
+            <result>/Home.jsp</result>
+            <result name="login">/Login.jsp</result>
+            <interceptor-ref name="loginInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+        </action>
+
         <action name="*">
             <result type="redirect">index.action</result>
         </action>

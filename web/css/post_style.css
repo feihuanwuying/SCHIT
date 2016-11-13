@@ -1,0 +1,36 @@
+img {
+    float:left;
+
+    max-height:500px;
+    max-width: 500px;
+    overflow:hidden;
+}
+#img_user {
+    float:left;
+    height:66px;
+    width:66px;
+
+}
+#detail_body {
+    background-color:#eeeeee;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+#reply_body {
+    background-color:#e0ffff;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+#detail_title {
+    font-size:30px;
+    font-family:SimHei, SansSerif,cursive;
+    color:#3071a9;
+}
+#detail_up {
+    margin-bottom:20px;
+    background-color:#f0e68c;
+}
+#detail_up .col-sm-1 {
+    color:#8a2be2;
+    font-weight: bold;
+}

@@ -1,0 +1,29 @@
+.form-group input{
+    width:70%;
+    margin: 0 auto;
+    -webkit-border-radius:.3em;
+    -moz-border-radius: .3em;
+    border: 1px solid #999;
+}
+h1 {
+    font-weight:bold;
+}
+.btn.btn-default{
+    margin:40px auto 0 auto;
+}
+
+.btn.btn-default input{
+    margin:0;
+    -webkit-border-radius:.3em;
+    -moz-border-radius: .3em;
+    border:#1263be solid 1px;
+    background:#1b85fd;
+    color:#FFF;
+    font-size:17px;
+    font-weight:bolder;
+    letter-spacing:1em;
+}
+
+.btn.btn-default input:hover{
+    background:#1263be;
+}

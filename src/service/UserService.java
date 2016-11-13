@@ -4,9 +4,12 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.sun.javafx.collections.MappingChange;
 import dao.UserDao;
+import dao.VisitDao;
 import vo.User;
+import vo.Visit;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.Map;
 
 
@@ -21,6 +24,12 @@ public class UserService {
      * @return 成功则返回true，否则false
      */
     public boolean login(String username, String password) {
+        if (username == null) {
+            username = "";
+        }
+        if (password == null) {
+            password = "";
+        }
         UserDao userDao = new UserDao();
         User user = userDao.getUser(username, password);
         userDao.close();
@@ -28,6 +37,7 @@ public class UserService {
             ActionContext.getContext().getSession().put("username", username);
             ActionContext.getContext().getSession().put("nickname", user.getNickname());
             ActionContext.getContext().getSession().put("power", user.getPower());
+            ActionContext.getContext().getSession().put("id", user.getId());
             return true;
         }
         return false;
@@ -45,10 +55,12 @@ public class UserService {
                 return false;
             }
             userDao.addUser(user);
+            user = userDao.getUser(user.getUsername());
             userDao.close();
             ActionContext.getContext().getSession().put("username", user.getUsername());
             ActionContext.getContext().getSession().put("nickname", user.getNickname());
             ActionContext.getContext().getSession().put("power", user.getPower());
+            ActionContext.getContext().getSession().put("id", user.getId());
             return true;
         }
         userDao.close();
@@ -65,6 +77,7 @@ public class UserService {
             session.remove("username");
             session.remove("nickname");
             session.remove("power");
+            session.remove("id");
             return true;
         }
         return false;
@@ -103,10 +116,11 @@ public class UserService {
             return false;  //昵称程度
         }
         String email = user.getEmail();
-        if (!user.getEmail().matches("^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w+)+)$")
+        if (!email.matches("^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w+)+)$")
                 || email.length() < 50) {
             return false;  //邮箱长度
         }
+        //// TODO: 2016/11/11 其它数据校验 
         return true;
     }
 
@@ -123,5 +137,47 @@ public class UserService {
             return user;
         }
         return null;
+    }
+
+    /**
+     * 根据id获得user
+     * @param id
+     * @return
+     */
+    public User getUser(int id) {
+        UserDao userDao = new UserDao();
+        User user = userDao.getUser(id);
+        if (user != null) {
+            user.setPassword("");
+        }
+        userDao.close();
+        return user;
+    }
+
+    /**
+     * 访问过一次
+     * @param userId
+     * @return
+     */
+    public boolean visitHome(int userId) {
+        UserDao userDao = new UserDao();
+        int visitorId = (int)ActionContext.getContext().getSession().get("id");
+        User user = userDao.getUser(userId);
+        User visitor = userDao.getUser(visitorId);
+        if (user == null || visitor == null || userId == visitorId) {
+            userDao.close();
+            return false;
+        }
+        VisitDao visitDao = new VisitDao();
+        Visit visit = new Visit();
+        visit.setTime(new Date());
+        visit.setUser(user);
+        visit.setVisitor(visitor);
+        if (visitDao.getVisit(userId, visitorId) == null) {
+            visitDao.addVisit(visit);
+        } else {
+            visitDao.updateVisit(visit);
+        }
+        return true;
     }
 }
