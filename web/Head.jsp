@@ -14,7 +14,7 @@
 <%@include file="Bootstrap.jsp"%>
 <div class="row" id="first">
     <div class="col-sm-8">
-        <img src="photo/hitfly.gif"/>
+        <!--<img src="photo/hitfly.gif"/>-->
         <h1>工大圈子</h1>
     </div>
     <div class="col-sm-4">
@@ -36,7 +36,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.action">工大圈子</a>
+            <a class="navbar-brand" href="index.action">首页</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

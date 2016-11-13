@@ -41,16 +41,16 @@
     <div class="row" id="detail_up">
         <div class="col-sm-1">楼主</div>
         <div class="col-sm-2">
-            <img id="img_user" src="http://pic2.52pk.com/files/160907/7247438_130524_1_lit.jpg"/>
+            <img id="img_user" src="http://uc.pcbeta.com//data/avatar/004/81/07/37_avatar_middle.jpg"/>
             ${post.poster.nickname}
         </div>
         <div class="col-sm-7">${post.content}</div>
         <div class="col-sm-1">发帖时间：${post.time}</div>
         <s:if test="#session.username != null">
-            <button onclick="reply()">回复</button>
+            <button class="btn btn-default" onclick="reply()">回复</button>
         </s:if>
         <s:else>
-            <button onclick="window.location.href='login.action'">回复</button>
+            <button class="btn btn-default" onclick="window.location.href='login.action'">回复</button>
         </s:else>
         <br><br>
     </div>
@@ -62,7 +62,7 @@
                         ${floor}楼
                 </div>
                 <div class="col-sm-2" >
-                    <img id="img_user" src="http://images.17173.com/2016/news/2016/04/29/gxy0429dd03s.jpg"/>
+                    <img id="img_user" src="http://uc.pcbeta.com//data/avatar/004/81/07/37_avatar_middle.jpg"/>
                     ${lastReply.replier.nickname}
                 </div>
                 <div class="col-sm-7">
@@ -74,13 +74,13 @@
                     回复于：${time}
                 </div>
                 <s:if test="#session.username != null">
-                    <button onclick="replyToFloor(${id})">回复</button>
+                    <button class="btn btn-default" onclick="replyToFloor(${id})">回复</button>
                 </s:if>
                 <s:else>
-                    <button onclick="window.location.href='login.action'">回复</button>
+                    <button class="btn btn-default" onclick="window.location.href='login.action'">回复</button>
                 </s:else>
                 <s:if test="#session.power == 1">
-                    <button onclick="window.location.href='deleteReply.action?id=${id}'">删除</button>
+                    <button class="btn btn-default" onclick="window.location.href='deleteReply.action?id=${id}'">删除</button>
                 </s:if>
             </div>
         </s:if>
@@ -91,7 +91,7 @@
                     ${floor}楼
                 </div>
                 <div class="col-sm-2">
-                    <img id="img_user" src="http://pic.962.net/up/2016-5/201605200847278414228.jpg"/>
+                    <img id="img_user" src="http://uc.pcbeta.com//data/avatar/004/81/07/37_avatar_middle.jpg"/>
                     ${lastReply.replier.nickname}
                 </div>
                 <div class="col-sm-7" id="detail-body">
@@ -101,13 +101,13 @@
                     回复于：${time}
                 </div>
                 <s:if test="#session.username != null">
-                    <button onclick="replyToFloor(${id})">回复</button>
+                    <button class="btn btn-default" onclick="replyToFloor(${id})">回复</button>
                 </s:if>
                 <s:else>
-                    <button onclick="window.location.href='login.action'">回复</button>
+                    <button class="btn btn-default" onclick="window.location.href='login.action'">回复</button>
                 </s:else>
                 <s:if test="#session.power == 1">
-                    <button onclick="window.location.href='deleteReply.action?id=${id}'">删除</button>
+                    <button class="btn btn-default" onclick="window.location.href='deleteReply.action?id=${id}'">删除</button>
                 </s:if>
             </div>
         </s:else>
