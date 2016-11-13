@@ -9,7 +9,7 @@ img {
     margin-top:-25px;
 }
 .jumbotron {
-    background-image:url('http://attach.bbs.miui.com/forum/201311/24/215445jhkmukdk1p3urpur.jpg');
+
     background-size:cover;
     /*加上这个可以让这一块位置在中间而不是边上*/
     display:flex;

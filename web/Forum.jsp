@@ -18,6 +18,7 @@
 </head>
 <body>
     <%@include file="Head.jsp"%>
+    <!--
     <section class="jumbotron">
         <div class="container">
             <div class="row text-center">
@@ -50,6 +51,7 @@
 
         </div>
     </section>
+    -->
     <section class="container">
     <div class="row">
         <div class="col-sm-3" id="r1_c1">
