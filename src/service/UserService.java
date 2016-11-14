@@ -118,7 +118,7 @@ public class UserService {
         }
         String email = user.getEmail();
         if (!email.matches("^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w+)+)$")
-                || email.length() < 50) {
+                || email.length() > 50) {
             return false;  //邮箱长度
         }
         //// TODO: 2016/11/11 其它数据校验 
