@@ -27,7 +27,7 @@
         </action>
         <action name="logout" class="action.LogoutAction">
             <result type="redirect">${url}</result>
-            <result name="login">/Login.jsp</result>
+            <result name="login" type="redirect">login.action</result>
             <interceptor-ref name="loginInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
@@ -42,31 +42,31 @@
         </action>
         <action name="addReply" class="action.AddReplyAction">
             <result type="redirect">${url}</result>
-            <result name="login">/Login.jsp</result>
+            <result name="login" type="redirect">login.action</result>
             <interceptor-ref name="loginInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
         <action name="addPost" class="action.AddPostAction">
             <result type="redirect">${url}</result>
-            <result name="login">/Login.jsp</result>
+            <result name="login" type="redirect">login.action</result>
             <interceptor-ref name="loginInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
         <action name="deleteReply" class="action.DeleteReplyAction">
             <result type="redirect">${url}</result>
-            <result name="login">/Login.jsp</result>
+            <result name="login" type="redirect">login.action</result>
             <interceptor-ref name="powerInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
         <action name="deletePost" class="action.DeletePostAction">
             <result type="redirect">${url}</result>
-            <result name="login">/Login.jsp</result>
+            <result name="login" type="redirect">login.action</result>
             <interceptor-ref name="powerInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
         <action name="friendList" class="action.ShowFriendListAction">
             <result>/Friends.jsp</result>
-            <result name="login">/Login.jsp</result>
+            <result name="login" type="redirect">login.action</result>
             <interceptor-ref name="loginInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>

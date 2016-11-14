@@ -11,6 +11,14 @@
     <title>${title}</title>
     <link rel="stylesheet" type="text/css" href="css/detail_style.css">
 </head>
+<script type="text/javascript">
+    function deletePost(pid) {
+        var answer = confirm("确定要删除吗？");
+        if (answer == true) {
+            window.location.href = 'deletePost.action?id='+pid;
+        }
+    }
+</script>
 <body>
     <%@include file="Head.jsp"%>
     <table>
@@ -28,23 +36,39 @@
             <div class="row" id="detail_body">
                 <div class="col-sm-4"><a href="showPost.action?pid=${id}" target="_blank">${title}</a></div>
                 <div class="col-sm-3">
-                    <img src="photo/head.jpg"/>
+                    <s:if test="%{poster.head == ''}">
+                        <img src="photo/head.jpg">
+                    </s:if>
+                    <s:else>
+                        <img src="photo/${poster.username.hashCode()}${poster.head}">
+                    </s:else>
                     ${poster.nickname}<br>${time}
                 </div>
                 <div class="col-sm-1">${replyCount}</div>
                 <div class="col-sm-3">
-                    <img src="photo/head.jpg"/>
                     <s:if test="%{lastReply == null}">
+                        <s:if test="%{poster.head == ''}">
+                            <img src="photo/head.jpg">
+                        </s:if>
+                        <s:else>
+                            <img src="photo/${poster.username.hashCode()}${poster.head}">
+                        </s:else>
                         ${poster.nickname}
                     </s:if>
                     <s:else>
+                        <s:if test="%{lastReply.replier.head == ''}">
+                            <img src="photo/head.jpg">
+                        </s:if>
+                        <s:else>
+                            <img src="photo/${lastReply.replier.username.hashCode()}${lastReply.replier.head}">
+                        </s:else>
                         ${lastReply.replier.nickname}
                     </s:else>
                     <br>${lastReplyTime}
                 </div>
                 <div class="col-sm-1">
                     <s:if test="#session.power == 1">
-                        <button class="btn btn-default" onclick="window.location.href='deletePost.action?id=${id}'">删除</button>
+                        <button class="btn btn-default" onclick="deletePost(${id})">删除</button>
                     </s:if>
                 </div>
             </div>

@@ -14,11 +14,13 @@
 <%@include file="Bootstrap.jsp"%>
 <div id="first">
     <li>
-        <img src="photo/hitfly.gif">
-        <h1>工大圈子</h1>
+        <!--<img src="photo/hitfly.gif">-->
+        <h1>&nbsp;工大圈子</h1>
+        <!--
         <FONT face=华文彩云 color=#da70d6 size=6>
             <B>朋友，欢迎您的到来</B>
         </FONT>
+        -->
 
     </li>
 </div>
