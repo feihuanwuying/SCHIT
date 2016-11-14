@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>${post.title}</title>
-    <!--<link rel="stylesheet" type="text/css" href="css/post_style.css">-->
+    <link rel="stylesheet" type="text/css" href="css/post_style.css">
 </head>
 <script type="text/javascript">
     function reply() {
@@ -40,9 +40,10 @@
         <tr>
             <td bgcolor="#add8e6" class="col-sm-2">
             </td>
-            <td valign="top">
+            <td valign="top" id="title" class="col-sm-8">
                 <h2>${post.title}</h2>
             </td>
+            <button class="btn btn-default" onclick="reply()">只看楼主</button>
         </tr>
         <tr>
             <td bgcolor="#add8e6" class="col-sm-2" align="center">
@@ -78,7 +79,7 @@
                 </td>
                 <td valign="top">
                     <div class="col-sm-8">
-                        回复于：${time}<br><br>
+                        回复${parentReply.floor}楼于：${time}<br><br>
                         <s:if test="%{parentId != -1}">
                             回复：
                             <div style="background: lightgray">

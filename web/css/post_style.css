@@ -1,14 +1,6 @@
 img {
-    float:left;
-
-    max-height:500px;
-    max-width: 500px;
-    overflow:hidden;
 }
 #img_user {
-    float:left;
-    height:66px;
-    width:66px;
 
 }
 #detail_body {
@@ -33,4 +25,8 @@ img {
 #detail_up .col-sm-1 {
     color:#8a2be2;
     font-weight: bold;
+}
+#title{
+    font-family: Microsoft Yahei,STHeiti,Arial,SimSun;
+    font-weight:bold;
 }
