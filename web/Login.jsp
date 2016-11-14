@@ -42,7 +42,7 @@
     <div class="panel panel-default col-sm-offset-4 col-sm-4" style="top: 20%">
         <div class="panel-body">
             <div class="row text-center">
-                <h1 style="color: dodgerblue">工大圈子</h1>
+                <h1 style="color: dodgerblue;font-family:华文行楷;font-weight:bold">工大圈子</h1>
             </div>
             <div class="row">
                 <div class="col-sm-offset-3 col-sm-3" align="center">

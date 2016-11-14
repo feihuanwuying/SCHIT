@@ -130,31 +130,47 @@
 
         <div class="row" id="center_2">
             <div class="col-sm-3" id="center_2_1">
-                <h1>今日哈工大</h1>
-                <a href="http://today.hit.edu.cn/news/2016/11-13/4304727111RL0.htm" target="_blank"><h4>【讲座预告】蓝鸟论坛第23 期 ——海外校友帮你规划职业生涯</h4></a>
-                <a href="http://today.hit.edu.cn/news/2016/11-13/8473627111RL0.htm" target="_blank"><h4>化工与化学学院邀请劳伦兹伯克利国家实验室</h4></a>
-                <a href="http://today.hit.edu.cn/news/2016/11-13/3332844111RL0.htm" target="_blank"><h4>【IROBOT】 S-课堂：新闻撰写培训</h4></a>
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3>今日哈工大</h3></div>
+                    <div class="panel-body">
+                        <a href="http://today.hit.edu.cn/news/2016/11-13/4304727111RL0.htm" target="_blank"><h5>【讲座预告】蓝鸟论坛第23 期 ——海外校友帮你规划职业生涯</h5></a>
+                        <a href="http://today.hit.edu.cn/news/2016/11-13/8473627111RL0.htm" target="_blank"><h5>化工与化学学院邀请劳伦兹伯克利国家实验室</h5></a>
+                        <a href="http://today.hit.edu.cn/news/2016/11-13/3332844111RL0.htm" target="_blank"><h5>【IROBOT】 S-课堂：新闻撰写培训</h5></a>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-3" id="center_2_2">
-                <h1>学校新闻</h1>
-                <a href="http://news.hit.edu.cn/8d/da/c1511a167386/page.htm"><h4>哈工大信息化校园项目现场评估会召开</h4></a>
-                <a href="http://news.hit.edu.cn/8d/3e/c1511a167230/page.htm"><h4>情系哈工大 携手再出发 哈工大日本校友会重组成立</h4></a>
-                <a href="http://news.hit.edu.cn/8c/f3/c1511a167155/page.htm"><h4>哈工大韩国来华留学生校友联谊会成立</h4></a>
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3>学校新闻</h3></div>
+                    <div class="panel-body">
+                        <a href="http://news.hit.edu.cn/8d/da/c1511a167386/page.htm"><h5>哈工大信息化校园项目现场评估会召开</h5></a>
+                        <a href="http://news.hit.edu.cn/8d/3e/c1511a167230/page.htm"><h5>情系哈工大 携手再出发 哈工大日本校友会重组成立</h5></a>
+                        <a href="http://news.hit.edu.cn/8c/f3/c1511a167155/page.htm"><h5>哈工大韩国来华留学生校友联谊会成立</h5></a>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-3" id="center_2_3">
-                <h1>学校活动信息</h1>
-                <a href="http://today.hit.edu.cn/news/2016/11-10/594824111RL0.htm"><h4>第七届校园单词PK赛即将启幕</h4></a>
-                <a href="http://today.hit.edu.cn/news/2016/11-11/1523630111RL1.htm"><h4>【舌战群儒，才辩无双】市政学院辩论队选拔赛即将开始</h4></a>
-                <a href="http://today.hit.edu.cn/news/2016/11-09/7992624111RL0.htm"><h4>电气大讲堂预告：大学物理期中考前辅导</h4></a>
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3>学校活动信息</h3></div>
+                    <div class="panel-body">
+                        <a href="http://today.hit.edu.cn/news/2016/11-10/594824111RL0.htm"><h5>第七届校园单词PK赛即将启幕</h5></a>
+                        <a href="http://today.hit.edu.cn/news/2016/11-11/1523630111RL1.htm"><h5>【舌战群儒，才辩无双】市政学院辩论队选拔赛即将开始</h5></a>
+                        <a href="http://today.hit.edu.cn/news/2016/11-09/7992624111RL0.htm"><h5>电气大讲堂预告：大学物理期中考前辅导</h5></a>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-3" id="center_2_4">
-                <h1>友情链接</h1>
-                <ul>
-                    <li><a href="http://www.hit.edu.cn">哈工大主页</a></li>
-                    <li><a href="http://jwc.hit.edu.cn">哈工大教务处</a></li>
-                    <li><a href="http://map.hit.edu.cn">哈工大三维地图</a></li>
-                    <li><a href="http://cms.hit.edu.cn">哈工大乐学网</a></li>
-                </ul>
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h3>友情链接</h3></div>
+                    <div class="panel-body">
+                        <ul>
+                            <li><a href="http://www.hit.edu.cn">哈工大主页</a></li>
+                            <li><a href="http://jwc.hit.edu.cn">哈工大教务处</a></li>
+                            <li><a href="http://map.hit.edu.cn">哈工大三维地图</a></li>
+                            <li><a href="http://cms.hit.edu.cn">哈工大乐学网</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
