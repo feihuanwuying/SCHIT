@@ -92,19 +92,19 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
-                    <img  id="role_image1" src="http://www.hit.edu.cn/_upload/article/images/6e/3b/5b31b6c74a6e9dd91c1656ca2fc2/42387248-8127-4046-80ff-3a9301bdf498.jpg" alt="...">
+                    <img  id="role_image1" src="photo/today_news/snow.jpg" alt="...">
                     <div class="carousel-caption">
                         <h3>【视觉志】好雪片片不落别处——哈工大雪景图</h3>
                     </div>
                 </div>
                 <div class="item">
-                    <img  id="role_image2" src="http://www.hit.edu.cn/_upload/article/images/c8/7b/8edd4ede40b7a5d29711869ba058/cb457c93-4f5f-4e2f-aea6-9e50f97505c2.jpg" alt="...">
+                    <img  id="role_image2" src="photo/today_news/rocket.jpg" alt="...">
                     <div class="carousel-caption">
                         <h3>“长征五号”完美首飞 我校设计团队为火箭装扮“靓妆”</h3>
                     </div>
                 </div>
                 <div class="item">
-                    <img id="role_image3" src="http://www.hit.edu.cn/_upload/article/images/b4/b7/423679fd41128fa440197507e567/0298e278-9f49-42c8-bccc-2b785d1f2d6b.jpg" alt="...">
+                    <img id="role_image3" src="photo/today_news/doctor.jpg" alt="...">
                     <div class="carousel-caption">
                         <h3>179人喜获博士学位</h3>
                     </div>

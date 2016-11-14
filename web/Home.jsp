@@ -48,7 +48,7 @@
                 </div>
                 <div class="panel-body">
                     <div align="center">
-                        <img src="http://uc.pcbeta.com//data/avatar/004/81/07/37_avatar_middle.jpg">
+                        <img src="photo/head.jpg">
                     </div>
                 </div>
             </div>

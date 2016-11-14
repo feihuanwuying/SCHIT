@@ -47,7 +47,7 @@
         <tr>
             <td bgcolor="#add8e6" class="col-sm-2" align="center">
                 <strong>${post.poster.nickname}</strong><br>
-                <img id="img_user" src="http://uc.pcbeta.com//data/avatar/004/81/07/37_avatar_middle.jpg"/>
+                <img id="img_user" src="photo/head.jpg"/>
                 <br><br>
             </td>
             <td valign="top">
@@ -73,7 +73,7 @@
             <tr>
                 <td bgcolor="#add8e6" class="col-sm-2" align="center">
                     <strong>${replier.nickname}</strong><br>
-                    <img id="img_user" src="http://uc.pcbeta.com//data/avatar/004/81/07/37_avatar_middle.jpg"/>
+                    <img id="img_user" src="photo/head.jpg"/>
                     <br><br>
                 </td>
                 <td valign="top">

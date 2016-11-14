@@ -15,21 +15,25 @@
     <%@include file="Head.jsp"%>
     <table>
         <div class="row">
-            <div class="col-sm-4">主题</div>
-            <div class="col-sm-3">作者</div>
-            <div class="col-sm-1">回复量</div>
-            <div class="col-sm-3">最后发表</div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-sm-4"><h4>主题</h4></div>
+                    <div class="col-sm-3"><h4>作者</h4></div>
+                    <div class="col-sm-1"><h4>回复量</h4></div>
+                    <div class="col-sm-3"><h4>最后发表</h4></div>
+                </div>
+            </div>
         </div>
         <s:iterator value="postList">
             <div class="row" id="detail_body">
                 <div class="col-sm-4"><a href="showPost.action?pid=${id}" target="_blank">${title}</a></div>
                 <div class="col-sm-3">
-                    <img src="http://uc.pcbeta.com//data/avatar/004/81/07/37_avatar_middle.jpg"/>
+                    <img src="photo/head.jpg"/>
                     ${poster.nickname}<br>${time}
                 </div>
                 <div class="col-sm-1">${replyCount}</div>
                 <div class="col-sm-3">
-                    <img src="http://uc.pcbeta.com//data/avatar/004/81/07/37_avatar_middle.jpg"/>
+                    <img src="photo/head.jpg"/>
                     <s:if test="%{lastReply == null}">
                         ${poster.nickname}
                     </s:if>
