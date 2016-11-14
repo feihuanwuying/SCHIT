@@ -179,7 +179,7 @@ public class ReplyDao extends Dao {
     public long getUserReplyCount(int userId) {
         long count = 0;
         try {
-            String sql = "SELECT * FROM reply WHERE replier_id = ?";
+            String sql = "SELECT count(*) FROM reply WHERE replier_id = ?";
             ResultSet rs = executeQuery(sql, userId);
             if (rs.next()) {
                 count = rs.getLong(1);

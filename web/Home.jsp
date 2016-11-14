@@ -48,7 +48,12 @@
                 </div>
                 <div class="panel-body">
                     <div align="center">
-                        <img src="photo/head.jpg">
+                        <s:if test="%{user.head == ''}">
+                            <img src="photo/head.jpg">
+                        </s:if>
+                        <s:else>
+                            <img src="photo/${user.username.hashCode()}${user.head}">
+                        </s:else>
                     </div>
                 </div>
             </div>

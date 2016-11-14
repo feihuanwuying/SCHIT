@@ -32,6 +32,12 @@
         }
         return true;
     }
+    function deleteReply(pid) {
+        var answer = confirm("确定要删除吗？");
+        if (answer == true) {
+            window.location.href = 'deleteReply.action?id='+pid;
+        }
+    }
 </script>
 <body>
 <%@include file="Head.jsp"%>
@@ -47,7 +53,12 @@
         <tr>
             <td bgcolor="#add8e6" class="col-sm-2" align="center">
                 <strong>${post.poster.nickname}</strong><br>
-                <img id="img_user" src="photo/head.jpg"/>
+                <s:if test="%{post.poster.head == ''}">
+                    <img id="img_user" src="photo/head.jpg">
+                </s:if>
+                <s:else>
+                    <img id="img_user" src="photo/${post.poster.username.hashCode()}${post.poster.head}">
+                </s:else>
                 <br><br>
             </td>
             <td valign="top">
@@ -73,7 +84,12 @@
             <tr>
                 <td bgcolor="#add8e6" class="col-sm-2" align="center">
                     <strong>${replier.nickname}</strong><br>
-                    <img id="img_user" src="photo/head.jpg"/>
+                    <s:if test="%{replier.head == ''}">
+                        <img id="img_user" src="photo/head.jpg">
+                    </s:if>
+                    <s:else>
+                        <img id="img_user" src="photo/${replier.username.hashCode()}${replier.head}">
+                    </s:else>
                     <br><br>
                 </td>
                 <td valign="top">
@@ -94,13 +110,13 @@
                     </div>
                     <div class="col-sm-1">
                         <s:if test="#session.username != null">
-                            <button class="btn btn-default" onclick="reply()">回复</button>
+                            <button class="btn btn-default" onclick="replyToFloor(${id})">回复</button>
                         </s:if>
                         <s:else>
                             <button class="btn btn-default" onclick="window.location.href='login.action'">回复</button>
                         </s:else>
                         <s:if test="#session.power == 1">
-                            <button class="btn btn-default" onclick="window.location.href='deleteReply.action?id=${id}'">删除</button>
+                            <button class="btn btn-default" onclick="deleteReply(${id})">删除</button>
                         </s:if>
                     </div>
                 </td>
