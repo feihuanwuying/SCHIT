@@ -92,31 +92,27 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
-                    <img  id="role_image1" src="photo/118.bmp" alt="...">
+                    <img  id="role_image1" src="http://www.hit.edu.cn/_upload/article/images/6e/3b/5b31b6c74a6e9dd91c1656ca2fc2/42387248-8127-4046-80ff-3a9301bdf498.jpg" alt="...">
                     <div class="carousel-caption">
-                        <h3>李舜生</h3>
-                        <p>总有一天，我将撕碎这虚假的星空</p>
+                        <h3>【视觉志】好雪片片不落别处——哈工大雪景图</h3>
                     </div>
                 </div>
                 <div class="item">
-                    <img  id="role_image2" src="photo/143.bmp" alt="...">
+                    <img  id="role_image2" src="http://www.hit.edu.cn/_upload/article/images/c8/7b/8edd4ede40b7a5d29711869ba058/cb457c93-4f5f-4e2f-aea6-9e50f97505c2.jpg" alt="...">
                     <div class="carousel-caption">
-                        <h3>Homura</h3>
-                        <p>我保证，我绝对会拯救你！不管重来几次，我都一定会守护你的！</p>
+                        <h3>“长征五号”完美首飞 我校设计团队为火箭装扮“靓妆”</h3>
                     </div>
                 </div>
                 <div class="item">
-                    <img id="role_image3" src="photo/156.bmp" alt="...">
+                    <img id="role_image3" src="http://www.hit.edu.cn/_upload/article/images/b4/b7/423679fd41128fa440197507e567/0298e278-9f49-42c8-bccc-2b785d1f2d6b.jpg" alt="...">
                     <div class="carousel-caption">
-                        <h3>Archer</h3>
-                        <p>So as I pray...Unlimited Blade Works!!!</p>
+                        <h3>179人喜获博士学位</h3>
                     </div>
                 </div>
                 <div class="item">
-                    <img id="role_image4" src="photo/nero.jpeg" alt="...">
+                    <img id="role_image4" src="http://www.hit.edu.cn/_upload/article/images/a5/77/0555a5bb48f89b084d0e102c1cf4/318d3f67-3d09-4546-88f9-f9ad9d55a63d.jpg" alt="...">
                     <div class="carousel-caption">
-                        <h3>尼禄·克劳狄乌斯</h3>
-                        <p>Aestus Domus Aurea!!!</p>
+                        <h3>俱怀逸兴壮思飞 ——哈工大与中国航天60年</h3>
                     </div>
                 </div>
             </div>
@@ -133,29 +129,28 @@
         </div>
 
         <div class="row" id="center_2">
-            <div class="col-sm-offset-1 col-sm-4" id="center_2_1">
-                <h1>今日HIT</h1>
-                <h4>周校长宣布14届学生全体保研</h4>
-                <h4>教务处网站被HACK，所有人学分绩变成100</h4>
-                <h4>学生游行希望老师取消点名制</h4>
+            <div class="col-sm-3" id="center_2_1">
+                <h1>今日哈工大</h1>
+                <a href="http://today.hit.edu.cn/news/2016/11-13/4304727111RL0.htm" target="_blank"><h4>【讲座预告】蓝鸟论坛第23 期 ——海外校友帮你规划职业生涯</h4></a>
+                <a href="http://today.hit.edu.cn/news/2016/11-13/8473627111RL0.htm" target="_blank"><h4>化工与化学学院邀请劳伦兹伯克利国家实验室</h4></a>
+                <a href="http://today.hit.edu.cn/news/2016/11-13/3332844111RL0.htm" target="_blank"><h4>【IROBOT】 S-课堂：新闻撰写培训</h4></a>
             </div>
-            <div class="col-sm-offset-1 col-sm-4" id="center_2_2">
+            <div class="col-sm-3" id="center_2_2">
                 <h1>学校新闻</h1>
-                <ul>
-                    <li><a href="http://jwc.hit.edu.cn/8c/4c/c4349a166988/page.htm">2017文化素质</a></li>
-                    <li><a href="http://jwc.hit.edu.cn/8b/b0/c4349a166832/page.htm">2017创新选课</a></li>
-                    <li><a href="http://jwc.hit.edu.cn/8b/23/c4349a166691/page.htm">2017春季选课</a></li>
-                </ul>
+                <a href="http://news.hit.edu.cn/8d/da/c1511a167386/page.htm"><h4>哈工大信息化校园项目现场评估会召开</h4></a>
+                <a href="http://news.hit.edu.cn/8d/3e/c1511a167230/page.htm"><h4>情系哈工大 携手再出发 哈工大日本校友会重组成立</h4></a>
+                <a href="http://news.hit.edu.cn/8c/f3/c1511a167155/page.htm"><h4>哈工大韩国来华留学生校友联谊会成立</h4></a>
             </div>
-            <div class="col-sm-offset-1 col-sm-4" id="center_2_3">
+            <div class="col-sm-3" id="center_2_3">
                 <h1>学校活动信息</h1>
-                <h4>单身狗俱乐部成立，有爆料称内部污浊不堪</h4>
-                <h4>工大正心楼蹦极活动将于期末考试后举行</h4>
-                <h4>计算机软件学院全体学生联合开展对教务处网站攻击活动</h4>
+                <a href="http://today.hit.edu.cn/news/2016/11-10/594824111RL0.htm"><h4>第七届校园单词PK赛即将启幕</h4></a>
+                <a href="http://today.hit.edu.cn/news/2016/11-11/1523630111RL1.htm"><h4>【舌战群儒，才辩无双】市政学院辩论队选拔赛即将开始</h4></a>
+                <a href="http://today.hit.edu.cn/news/2016/11-09/7992624111RL0.htm"><h4>电气大讲堂预告：大学物理期中考前辅导</h4></a>
             </div>
-            <div class="col-sm-offset-1 col-sm-4" id="center_2_4">
+            <div class="col-sm-3" id="center_2_4">
                 <h1>友情链接</h1>
                 <ul>
+                    <li><a href="http://www.hit.edu.cn">哈工大主页</a></li>
                     <li><a href="http://jwc.hit.edu.cn">哈工大教务处</a></li>
                     <li><a href="http://map.hit.edu.cn">哈工大三维地图</a></li>
                     <li><a href="http://cms.hit.edu.cn">哈工大乐学网</a></li>

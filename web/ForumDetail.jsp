@@ -24,12 +24,12 @@
             <div class="row" id="detail_body">
                 <div class="col-sm-4"><a href="showPost.action?pid=${id}" target="_blank">${title}</a></div>
                 <div class="col-sm-3">
-                    <img src="http://ww2.sinaimg.cn/thumb150/006nE56Ygw1f7dsyyyqk7j30g40g9aaz.jpg"/>
+                    <img src="http://uc.pcbeta.com//data/avatar/004/81/07/37_avatar_middle.jpg"/>
                     ${poster.nickname}<br>${time}
                 </div>
                 <div class="col-sm-1">${replyCount}</div>
                 <div class="col-sm-3">
-                    <img src="http://pic.962.net/up/2016-8/14701279968599348.jpg"/>
+                    <img src="http://uc.pcbeta.com//data/avatar/004/81/07/37_avatar_middle.jpg"/>
                     <s:if test="%{lastReply == null}">
                         ${poster.nickname}
                     </s:if>
@@ -82,7 +82,7 @@
                 </div>
             </div>
             <input type="hidden" name="type" value="${type}">
-            <input type="hidden" name="poster.username" value="${session.username}">
+            <input type="hidden" name="poster.id" value="${session.id}">
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-2">
                     <button type="submit" class="btn btn-default">发表新帖子</button>

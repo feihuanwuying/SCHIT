@@ -24,7 +24,7 @@
 </div>
 <%--div class="row" id="first">
     <div class="col-sm-8">
-        <img src="photo/hitfly.gif"/>
+        <!--<img src="photo/hitfly.gif"/>-->
         <h1>工大圈子</h1>
     </div>
     <div class="col-sm-4">
@@ -35,6 +35,7 @@
         </MARQUEE>
         <P>&nbsp;</P>
     </div>
+<<<<<<< HEAD
 </div--%>
 
 <nav class="navbar navbar-default" role="navigation">
@@ -47,7 +48,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.action">工大圈子</a>
+            <a class="navbar-brand" href="index.action">首页</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -64,7 +65,7 @@
                 <s:else>
                     <!-- 该按钮通往个人主页 -->
                     <li><a href="showHome.action?id=${session.id}">${session.nickname}</a></li>
-                    <li><a href="friendList.action">好友</a></li>
+                    <li><a href="friendList.action?id=${session.id}">好友</a></li>
                     <li><a href="logout.action">注销</a></li>
                 </s:else>
             </ul>

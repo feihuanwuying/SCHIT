@@ -4,9 +4,13 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.sun.javafx.collections.MappingChange;
 import dao.UserDao;
+import dao.VisitDao;
 import vo.User;
+import vo.Visit;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 
@@ -150,4 +154,53 @@ public class UserService {
         userDao.close();
         return user;
     }
+
+    /**
+     * 访问过一次
+     * @param userId
+     * @return
+     */
+    public boolean visitHome(int userId) {
+        UserDao userDao = new UserDao();
+        int visitorId = (int)ActionContext.getContext().getSession().get("id");
+        User user = userDao.getUser(userId);
+        User visitor = userDao.getUser(visitorId);
+        if (user == null || visitor == null || userId == visitorId) {
+            userDao.close();
+            return false;
+        }
+        VisitDao visitDao = new VisitDao();
+        Visit visit = new Visit();
+        visit.setTime(new Date());
+        visit.setUser(user);
+        visit.setVisitor(visitor);
+        if (visitDao.getVisit(userId, visitorId) == null) {
+            visitDao.addVisit(visit);
+        } else {
+            visitDao.updateVisit(visit);
+        }
+        userDao.close();
+        visitDao.close();
+        return true;
+    }
+
+    public long getVisitCount(int userId) {
+        UserDao userDao = new UserDao();
+        if (userDao.getUser(userId) == null) {
+            userDao.close();
+            return -1;
+        }
+        VisitDao visitDao = new VisitDao();
+        long count = visitDao.getVisitCount(userId);
+        visitDao.close();
+        return count;
+    }
+
+    public List<Visit> getVisitList(int userId) {
+        VisitDao visitDao = new VisitDao();
+        List<Visit> visitList = visitDao.getVisitList(userId);
+        visitDao.close();
+        return visitList;
+    }
+
 }

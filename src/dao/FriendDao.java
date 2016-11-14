@@ -22,7 +22,7 @@ public class FriendDao extends Dao {
         Friend friend = null;
         try {
             friend = new Friend();
-            friend.setFriend(userDao.getUser(rs.getString("friend_name")));
+            friend.setFriend(userDao.getUser(rs.getInt("friend_id")));
             friend.getFriend().setPassword("");
             friend.setRemark(rs.getString("remark"));
         } catch (SQLException e) {
@@ -36,11 +36,11 @@ public class FriendDao extends Dao {
      * @param friendName
      * @return
      */
-    public Friend getFriend(String username, String friendName) {
+    public Friend getFriend(int userId, int friendId) {
         Friend friend = null;
         try {
-            String sql = "SELECT * FROM friend WHERE (username = ?) and (friend_name = ?)";
-            ResultSet rs = executeQuery(sql, new Object[]{username, friendName});
+            String sql = "SELECT * FROM friend WHERE (user_id = ?) and (friend_id = ?)";
+            ResultSet rs = executeQuery(sql, userId, friendId);
             if (rs.next()) {
                 friend = getFreind(rs);
             }
@@ -56,11 +56,11 @@ public class FriendDao extends Dao {
      * @param username
      * @return
      */
-    public List<Friend> getFriendList(String username, long pageNumber, int pageSize) {
+    public List<Friend> getFriendList(int userId, long pageNumber, int pageSize) {
         List<Friend> list = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM friend WHERE username = ? LIMIT ?, ?";
-            ResultSet rs = executeQuery(sql, new Object[]{username, (pageNumber-1)*pageSize, pageSize});
+            String sql = "SELECT * FROM friend WHERE user_id = ? LIMIT ?, ?";
+            ResultSet rs = executeQuery(sql, userId, (pageNumber-1)*pageSize, pageSize);
             while (rs.next()) {
                 list.add(getFreind(rs));
             }
@@ -75,11 +75,11 @@ public class FriendDao extends Dao {
      * @param username
      * @return
      */
-    public long getFriendCount(String username) {
+    public long getFriendCount(int userId) {
         long count = 0;
         try {
-            String sql = "SELECT count(*) FROM friend WHERE username = ?";
-            ResultSet rs = executeQuery(sql, new Object[]{username});
+            String sql = "SELECT count(*) FROM friend WHERE user_id = ?";
+            ResultSet rs = executeQuery(sql, userId);
             if (rs.next()) {
                 count = rs.getLong(1);
             }
@@ -94,10 +94,10 @@ public class FriendDao extends Dao {
      * @param username
      * @param friend
      */
-    public void addFriend(String username, Friend friend) {
-        String sql = "INSERT INTO friend (username, friend_name, remark)" +
+    public void addFriend(int userId, Friend friend) {
+        String sql = "INSERT INTO friend (user_id, friend_id, remark)" +
                 "values (?, ?, ?)";
-        Object[] params = {username, friend.getFriend().getUsername(),
+        Object[] params = {userId, friend.getFriend().getId(),
                 friend.getRemark()};
         execute(sql, params);
     }
@@ -107,12 +107,12 @@ public class FriendDao extends Dao {
      * @param username
      * @param friend
      */
-    public void deleteFriend(String username, Friend friend) {
-        String sql = "DELETE FROM friend WHERE (username = ?)" +
-                "and (friend_name = ?)";
+    public void deleteFriend(int userId, Friend friend) {
+        String sql = "DELETE FROM friend WHERE (user_id = ?)" +
+                "and (friend_id = ?)";
         //双向删除
-        execute(sql, new Object[]{username, friend.getFriend().getUsername()});
-        execute(sql, new Object[]{friend.getFriend().getUsername(), username});
+        execute(sql, userId, friend.getFriend().getId());
+        execute(sql, friend.getFriend().getId(), userId);
     }
 
     /**
@@ -121,8 +121,8 @@ public class FriendDao extends Dao {
      * @param friendName
      * @param remark
      */
-    public void updateRemark(String username, String friendName, String remark) {
-        String sql = "UPDATE friend SET remark = ? WHERE (username = ?) AND (friendName = ?)";
-        executeUpdate(sql, new Object[]{remark, username, friendName});
+    public void updateRemark(int userId, int friendId, String remark) {
+        String sql = "UPDATE friend SET remark = ? WHERE (user_id = ?) AND (friend_id = ?)";
+        executeUpdate(sql, remark, userId, friendId);
     }
 }
