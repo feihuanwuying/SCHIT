@@ -17,7 +17,7 @@ public class Inform {
     private int informType = 0;  //通知类型
     private int informId = 0;  //通知的id，即对应其它表的id
     private Friend friend;  //好友或参与事件的另一用户
-    private String friendMessage;  //好友私信或申请信息
+    private String friendMessage = "";  //好友私信或申请信息
     private Date time;  //事件发生的时间
     private int treatment;  //处理方式（好友请求等）
 

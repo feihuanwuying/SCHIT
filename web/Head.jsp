@@ -57,6 +57,8 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="showForum.action">论坛</a></li>
+                <li><a href="">今日哈工大</a></li>
+                <li><a href="">教务信息</a> </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
