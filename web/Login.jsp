@@ -7,13 +7,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <%@include file="Bootstrap.jsp"%>
+    <link rel="stylesheet" type="text/css" href="css/login_style.css">
+    <title>登录</title>
+</head>
 <script type="text/javascript">
-    onload = function () {
-        var v = ${errCode};
-        if (v == 3 || v == 4) {
-            change(2);
-        }
-    }
     function change(status) {
         if (status == 2) {
             $("#login").css('color', "lightgray");
@@ -31,13 +31,13 @@
             $("#loginArea").css("display", "");
         }
     }
+    onload = function () {
+        var v = ${errCode};
+        if (v == 3 || v == 4) {
+            change(2);
+        }
+    }
 </script>
-<html>
-<head>
-    <%@include file="Bootstrap.jsp"%>
-    <link rel="stylesheet" type="text/css" href="css/login_style.css">
-    <title>登录</title>
-</head>
 <body>
     <div class="panel panel-default col-sm-offset-4 col-sm-4" style="top: 20%">
         <div class="panel-body">

@@ -76,7 +76,7 @@
 
         <action name="showHome" class="action.ShowHomeAction">
             <result>/Home.jsp</result>
-            <result name="login">/Login.jsp</result>
+            <result name="login" type="redirect">login.action</result>
             <interceptor-ref name="loginInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
