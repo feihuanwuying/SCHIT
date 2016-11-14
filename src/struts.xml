@@ -20,7 +20,7 @@
         </action>
         <action name="register" class="action.RegisterAction">
             <result type="redirect">${url}</result>
-            <result name="input">/Register.jsp</result>
+            <result name="input">/Login.jsp</result>
             <result name="error">/Index.jsp</result>
             <interceptor-ref name="hasLoginInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>

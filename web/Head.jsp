@@ -48,7 +48,6 @@
             <ul class="nav navbar-nav navbar-right">
                 <s:if test="#session.username == null">
                     <li><a href="login.action">登录</a></li>
-                    <li><a href="register.action">注册</a></li>
                 </s:if>
                 <s:else>
                     <!-- 该按钮通往个人主页 -->

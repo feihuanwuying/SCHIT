@@ -13,7 +13,7 @@ import vo.User;
 public class RegisterAction extends ActionSupport implements ModelDriven<User>{
     private User user = new User();  //用户
     private String url;
-    private int errCode;  //0表示无动作，1表示错误，2成功
+    private int errCode;  //4表示无动作，3表示错误，2成功
     
     @Override
     public User getModel() {
@@ -51,12 +51,12 @@ public class RegisterAction extends ActionSupport implements ModelDriven<User>{
             if (getUrl() == null) {
                 setUrl(ServletActionContext.getRequest().getHeader("referer"));
             }
-            setErrCode(0);
+            setErrCode(4);
         } else if (userService.register(getUser())) {
             setErrCode(2);
             return SUCCESS;
         } else {
-            setErrCode(1);
+            setErrCode(3);
         }
         return INPUT;
     }
