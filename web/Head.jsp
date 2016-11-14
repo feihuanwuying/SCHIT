@@ -12,7 +12,17 @@
     <link rel="stylesheet" type="text/css" href="css/head_style.css">
 </head>
 <%@include file="Bootstrap.jsp"%>
-<div class="row" id="first">
+<div id="first">
+    <li>
+        <img src="photo/hitfly.gif">
+        <h1>工大圈子</h1>
+        <FONT face=华文彩云 color=#da70d6 size=6>
+            <B>朋友，欢迎您的到来</B>
+        </FONT>
+
+    </li>
+</div>
+<%--div class="row" id="first">
     <div class="col-sm-8">
         <img src="photo/hitfly.gif"/>
         <h1>工大圈子</h1>
@@ -25,7 +35,7 @@
         </MARQUEE>
         <P>&nbsp;</P>
     </div>
-</div>
+</div--%>
 
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">

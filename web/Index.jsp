@@ -133,13 +133,13 @@
         </div>
 
         <div class="row" id="center_2">
-            <div class="col-sm-3" id="center_2_1">
+            <div class="col-sm-offset-1 col-sm-4" id="center_2_1">
                 <h1>今日HIT</h1>
                 <h4>周校长宣布14届学生全体保研</h4>
                 <h4>教务处网站被HACK，所有人学分绩变成100</h4>
                 <h4>学生游行希望老师取消点名制</h4>
             </div>
-            <div class="col-sm-3" id="center_2_2">
+            <div class="col-sm-offset-1 col-sm-4" id="center_2_2">
                 <h1>学校新闻</h1>
                 <ul>
                     <li><a href="http://jwc.hit.edu.cn/8c/4c/c4349a166988/page.htm">2017文化素质</a></li>
@@ -147,13 +147,13 @@
                     <li><a href="http://jwc.hit.edu.cn/8b/23/c4349a166691/page.htm">2017春季选课</a></li>
                 </ul>
             </div>
-            <div class="col-sm-3" id="center_2_3">
+            <div class="col-sm-offset-1 col-sm-4" id="center_2_3">
                 <h1>学校活动信息</h1>
                 <h4>单身狗俱乐部成立，有爆料称内部污浊不堪</h4>
                 <h4>工大正心楼蹦极活动将于期末考试后举行</h4>
                 <h4>计算机软件学院全体学生联合开展对教务处网站攻击活动</h4>
             </div>
-            <div class="col-sm-3" id="center_2_4">
+            <div class="col-sm-offset-1 col-sm-4" id="center_2_4">
                 <h1>友情链接</h1>
                 <ul>
                     <li><a href="http://jwc.hit.edu.cn">哈工大教务处</a></li>
