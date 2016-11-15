@@ -47,9 +47,9 @@ public class InformDao extends Dao {
         return informList;
     }
 
-    public List<Inform> getInformList(int informType, int pageNumber, int pageSize) {
-        String sql = "SELECT * FROM inform WHERE inform_type = ? ORDER BY time DESC LIMIT ?, ?";
-        ResultSet rs = executeQuery(sql, informType, (pageNumber-1)*pageSize, pageSize);
+    public List<Inform> getInformList(int informType, int userId, long pageNumber, int pageSize) {
+        String sql = "SELECT * FROM inform WHERE (inform_type = ?) AND (user_id = ?) ORDER BY time DESC LIMIT ?, ?";
+        ResultSet rs = executeQuery(sql, informType, userId, (pageNumber-1)*pageSize, pageSize);
         return getInformList(rs);
     }
 
@@ -64,11 +64,11 @@ public class InformDao extends Dao {
                 inform.getTreatment());
     }
 
-    public long getInformCount(int informType) {
+    public long getInformCount(int informType, int userId) {
         long count = 0;
-        String sql = "SELECT count(*) FROM inform WHERE inform_type = ?";
+        String sql = "SELECT count(*) FROM inform WHERE (inform_type = ?) AND (user_id = ?)";
         try {
-            ResultSet rs = executeQuery(sql, informType);
+            ResultSet rs = executeQuery(sql, informType, userId);
             if (rs.next()) {
                 count = rs.getLong(1);
             }

@@ -12,6 +12,7 @@ public class Inform {
     public final static int ADD_SUCCESS = 3;  //好友请求通过
     public final static int POST_REPLY = 4;  //主题被回复
     public final static int REPLY_REPLY = 5;  //回复被回复
+    public final static int MESSAGE = 6;  //留言
     private int id;
     private User user;  //用户
     private int informType = 0;  //通知类型
@@ -19,7 +20,7 @@ public class Inform {
     private Friend friend;  //好友或参与事件的另一用户
     private String friendMessage = "";  //好友私信或申请信息
     private Date time;  //事件发生的时间
-    private int treatment;  //处理方式（好友请求等）
+    private int treatment;  //处理方式（0未查看）
 
     public int getId() {
         return id;
