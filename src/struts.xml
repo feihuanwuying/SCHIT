@@ -92,6 +92,12 @@
             <interceptor-ref name="loginInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
+        <action name="deleteFriend" class="action.DeleteFriendAction">
+            <result type="redirect">${url}</result>
+            <result name="login" type="redirect">login.action</result>
+            <interceptor-ref name="loginInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+        </action>
 
         <action name="*">
             <result type="redirect">index.action</result>
