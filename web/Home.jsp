@@ -133,7 +133,7 @@
                             <div class="col-sm-12">
                             <textarea id="area" name="message"
                                       placeholder="既然来了，说点什么再走吧"
-                                      minlength="4" maxlength="200"
+                                      minlength="2" maxlength="100"
                                       class="form-control"
                             ></textarea>
                             <input type="hidden" name="userId" value="${user.id}">
