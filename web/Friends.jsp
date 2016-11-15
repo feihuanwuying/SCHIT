@@ -31,11 +31,11 @@
     </table>
     <nav>
         <ul class="pager">
-            <li><a href="friendList.action?pageNumber=${1}">首页</a></li>
-            <li><a href="friendList.action?pageNumber=${pageNumber-1}">上一页</a></li>
+            <li><a href="friendList.action?pageNumber=${1}&id=${id}">首页</a></li>
+            <li><a href="friendList.action?pageNumber=${pageNumber-1}&id=${id}">上一页</a></li>
             <li>${pageNumber}/${pageCount}</li>
-            <li><a href="friendList.action?pageNumber=${pageNumber+1}">下一页</a></li>
-            <li><a href="friendList.action?pageNumber=${pageCount}">末页</a></li>
+            <li><a href="friendList.action?pageNumber=${pageNumber+1}&id=${id}">下一页</a></li>
+            <li><a href="friendList.action?pageNumber=${pageCount}&id=${id}">末页</a></li>
         </ul>
     </nav>
 </body>
