@@ -19,6 +19,17 @@
         area = document.getElementById("area")
         area.style.height = document.body.clientHeight*0.18;
     }
+    function checkLength(form) {
+        var content = form.message.value;
+        if (content.length < 2) {
+            alert("至少输入2个字符！");
+            return false;
+        } else if (content.length > 100) {
+            alert("不可以超过100字符！")
+            return false;
+        }
+        return true;
+    }
 </script>
 <html>
 <head>
@@ -130,7 +141,8 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-10">
-                                <button type="submit" class="btn btn-default">留言</button>
+                                <button type="submit" class="btn btn-default"
+                                onclick="return checkLength(this.form);">留言</button>
                             </div>
                         </div>
                     </form>

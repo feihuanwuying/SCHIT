@@ -92,25 +92,25 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
-                    <img  id="role_image1" src="photo/today_news/snow.jpg" alt="...">
+                    <a href="http://www.hit.edu.cn/_redirect?siteId=2&columnId=216&articleId=167434" target="_blank"><img  id="role_image1" src="photo/today_news/snow.jpg" alt="..."></a>
                     <div class="carousel-caption">
                         <h3>【视觉志】好雪片片不落别处——哈工大雪景图</h3>
                     </div>
                 </div>
                 <div class="item">
-                    <img  id="role_image2" src="photo/today_news/rocket.jpg" alt="...">
+                    <a href="http://www.hit.edu.cn/_redirect?siteId=2&columnId=216&articleId=167088" target="_blank"><img  id="role_image2" src="photo/today_news/rocket.jpg" alt="..."></a>
                     <div class="carousel-caption">
                         <h3>“长征五号”完美首飞 我校设计团队为火箭装扮“靓妆”</h3>
                     </div>
                 </div>
                 <div class="item">
-                    <img id="role_image3" src="photo/today_news/doctor.jpg" alt="...">
+                    <a href="http://news.hit.edu.cn/8b/a1/c1510a166817/page.htm" target="_blank"><img id="role_image3" src="photo/today_news/doctor.jpg" alt="..."></a>
                     <div class="carousel-caption">
                         <h3>179人喜获博士学位</h3>
                     </div>
                 </div>
                 <div class="item">
-                    <img id="role_image4" src="http://www.hit.edu.cn/_upload/article/images/a5/77/0555a5bb48f89b084d0e102c1cf4/318d3f67-3d09-4546-88f9-f9ad9d55a63d.jpg" alt="...">
+                    <a href="http://news.hit.edu.cn/87/cf/c1510a165839/page.htm" target="_blank"><img id="role_image4" src="http://www.hit.edu.cn/_upload/article/images/a5/77/0555a5bb48f89b084d0e102c1cf4/318d3f67-3d09-4546-88f9-f9ad9d55a63d.jpg" alt="..."></a>
                     <div class="carousel-caption">
                         <h3>俱怀逸兴壮思飞 ——哈工大与中国航天60年</h3>
                     </div>
