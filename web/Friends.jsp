@@ -23,7 +23,7 @@
         <s:iterator value="friendList">
             <tr class="col-sm-offset-3 col-sm-6">
                 <td class="col-sm-3" align="center">${remark}(${friend.nickname})</td>
-                <td class="col-sm-1" align="center"><a href="#">查看资料</a> </td>
+                <td class="col-sm-1" align="center"><a href="showHome.action?id=${friend.id}" target="_blank">查看资料</a> </td>
                 <td class="col-sm-1" align="center"><a href="" onclick="remark()">修改备注</a> </td>
                 <td class="col-sm-1" align="center"><a href="#">删除</a> </td>
             </tr>

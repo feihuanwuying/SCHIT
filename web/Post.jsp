@@ -81,7 +81,7 @@
             <td valign="top" id="title" class="col-sm-8">
                 <h2>${post.title}</h2>
             </td>
-            <button class="btn btn-default" onclick="reply()">只看楼主</button>
+            <button class="btn btn-default">只看楼主</button>
         </tr>
         <tr>
             <td bgcolor="#add8e6" class="col-sm-2" align="center">

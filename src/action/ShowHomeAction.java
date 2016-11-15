@@ -5,8 +5,10 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import service.ForumService;
 import service.FriendService;
+import service.InformService;
 import service.UserService;
 import vo.Friend;
+import vo.Inform;
 import vo.User;
 import vo.Visit;
 
@@ -23,6 +25,7 @@ public class ShowHomeAction extends ActionSupport{
     private List<Friend> friendList;
     private long postCount = 0;
     private long replyCount = 0;
+    private List<Inform> informList;
 
 
     public User getUser() {
@@ -81,11 +84,20 @@ public class ShowHomeAction extends ActionSupport{
         this.replyCount = replyCount;
     }
 
+    public List<Inform> getInformList() {
+        return informList;
+    }
+
+    public void setInformList(List<Inform> informList) {
+        this.informList = informList;
+    }
+
     @Override
     public String execute() throws Exception {
         UserService userService = new UserService();
         FriendService friendService = new FriendService();
         ForumService forumService = new ForumService();
+        InformService informService = new InformService();
         user = userService.getUser(id);
         if (user == null) {
             return ERROR;
@@ -98,6 +110,9 @@ public class ShowHomeAction extends ActionSupport{
         friendList = friendService.getFriendList(id);
         postCount = forumService.getUserPostCount(id);
         replyCount = forumService.getUserReplyCount(id);
+        informService.getInformCount(Inform.MESSAGE, id);
+        informService.getPageNumber(0);
+        informList = informService.getInformList(Inform.MESSAGE, id);
         return SUCCESS;
     }
 }

@@ -109,15 +109,23 @@
                     </div>
                 </div>
                 <div class="panel-body">
+                    <s:iterator value="informList" status="st">
+                        <div class="col-sm-12">
+                                <a href="showHome.action?id=${friend.friend.id}" target="_blank"> ${friend.friend.nickname}</a>
+                                ${time}：${friendMessage}
+                        </div>
+                        <br><br>
+                    </s:iterator>
                     <form class="form-horizontal" role="form"
-                          method="post">
+                          method="post" action="addMessage.action">
                         <div class="form-group">
                             <div class="col-sm-12">
-                                <textarea id="area"
-                                          placeholder="既然来了，说点什么再走吧"
-                                          minlength="4" maxlength="200"
-                                          class="form-control"
-                                ></textarea>
+                            <textarea id="area" name="message"
+                                      placeholder="既然来了，说点什么再走吧"
+                                      minlength="4" maxlength="200"
+                                      class="form-control"
+                            ></textarea>
+                            <input type="hidden" name="userId" value="${user.id}">
                             </div>
                         </div>
                         <div class="form-group">
@@ -150,7 +158,7 @@
                     <s:else>
                         <s:iterator value="friendList" status="st">
                             <s:if test="%{#st.index <= 4}">
-                                <a href="showHome.action?id=${friend.id}">
+                                <a href="showHome.action?id=${friend.id}" target="_blank">
                                     ${remark}（${friend.nickname}）<br>
                                 </a>
                             </s:if>
@@ -178,7 +186,7 @@
                     <s:else>
                         <s:iterator value="visitList" status="st">
                             <s:if test="%{#st.index <= 4}">
-                                <a href="showHome.action?id=${visitor.id}">
+                                <a href="showHome.action?id=${visitor.id}" target="_blank">
                                 ${visitor.nickname}</a>&nbsp;&nbsp;最后访问：${time}
                                 <br>
                             </s:if>
