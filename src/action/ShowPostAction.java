@@ -18,6 +18,7 @@ public class ShowPostAction extends ActionSupport {
     private long pageNumber;
     private long pageCount;
     private int pageSize;
+    private int only;  //只看楼主
 
     public Post getPost() {
         return post;
@@ -65,6 +66,14 @@ public class ShowPostAction extends ActionSupport {
 
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public int getOnly() {
+        return only;
+    }
+
+    public void setOnly(int only) {
+        this.only = only;
     }
 
     @Override

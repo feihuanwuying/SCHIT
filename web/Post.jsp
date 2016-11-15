@@ -49,7 +49,12 @@
             <td valign="top" id="title" class="col-sm-8">
                 <h2>${post.title}</h2>
             </td>
-            <button class="btn btn-default">只看楼主</button>
+            <s:if test="%{only == 0}">
+                <button class="btn btn-default" onclick="window.location.href='showPost.action?pid=${post.id}&only=1'">只看楼主</button>
+            </s:if>
+            <s:else>
+                <button class="btn btn-default" onclick="window.location.href='showPost.action?pid=${post.id}'">取消只看楼主</button>
+            </s:else>
         </tr>
         <tr>
             <td bgcolor="#add8e6" class="col-sm-2" align="center">
@@ -82,46 +87,48 @@
             </td>
         </tr>
         <s:iterator value="replyList" status="st">
-            <tr>
-                <td bgcolor="#add8e6" class="col-sm-2" align="center">
-                    <strong>${replier.nickname}</strong><br>
-                    <s:if test="%{replier.head == ''}">
-                        <img id="img_user" src="photo/head.jpg">
-                    </s:if>
-                    <s:else>
-                        <img id="img_user" src="photo/${replier.username.hashCode()}${replier.head}">
-                    </s:else>
-                    <br><br>
-                </td>
-                <td valign="top">
-                    <div class="col-sm-8">
-                        回复${parentReply.floor}楼于：${time}<br><br>
-                        <s:if test="%{parentId != -1}">
-                            回复：
-                            <div style="background: lightgray">
-                                ${parentReply.replier.nickname} 发表于 ${parentReply.time}
-                                <br>
-                                ${parentReply.content}<br>
-                            </div>
-                        </s:if>
-                            ${content}
-                    </div>
-                    <div class="col-sm-3" align="right">
-                        <br><br>${floor}楼
-                    </div>
-                    <div class="col-sm-1">
-                        <s:if test="#session.username != null">
-                            <button class="btn btn-default" onclick="replyToFloor(${id})">回复</button>
+            <s:if test="%{only==0||(only==1&&replier.username.equals(post.poster.username))}">
+                <tr>
+                    <td bgcolor="#add8e6" class="col-sm-2" align="center">
+                        <strong>${replier.nickname}</strong><br>
+                        <s:if test="%{replier.head == ''}">
+                            <img id="img_user" src="photo/head.jpg">
                         </s:if>
                         <s:else>
-                            <button class="btn btn-default" onclick="window.location.href='login.action'">回复</button>
+                            <img id="img_user" src="photo/${replier.username.hashCode()}${replier.head}">
                         </s:else>
-                        <s:if test="#session.power == 1">
-                            <button class="btn btn-default" onclick="deleteReply(${id})">删除</button>
-                        </s:if>
-                    </div>
-                </td>
-            </tr>
+                        <br><br>
+                    </td>
+                    <td valign="top">
+                        <div class="col-sm-8">
+                            回复${parentReply.floor}楼于：${time}<br><br>
+                            <s:if test="%{parentId != -1}">
+                                回复：
+                                <div style="background: lightgray">
+                                        ${parentReply.replier.nickname} 发表于 ${parentReply.time}
+                                    <br>
+                                        ${parentReply.content}<br>
+                                </div>
+                            </s:if>
+                                ${content}
+                        </div>
+                        <div class="col-sm-3" align="right">
+                            <br><br>${floor}楼
+                        </div>
+                        <div class="col-sm-1">
+                            <s:if test="#session.username != null">
+                                <button class="btn btn-default" onclick="replyToFloor(${id})">回复</button>
+                            </s:if>
+                            <s:else>
+                                <button class="btn btn-default" onclick="window.location.href='login.action'">回复</button>
+                            </s:else>
+                            <s:if test="#session.power == 1">
+                                <button class="btn btn-default" onclick="deleteReply(${id})">删除</button>
+                            </s:if>
+                        </div>
+                    </td>
+                </tr>
+            </s:if>
         </s:iterator>
     </table>
 </div>
