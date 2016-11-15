@@ -24,7 +24,7 @@
 </head>
 <body>
     <%@include file="Head.jsp"%>
-    <h3 align="center">您共有${friendCount}个好友</h3>
+    <h3 align="center">${user.username.equals(sessionScope.get("username"))?"您":"Ta"}共有${friendCount}个好友</h3>
     <table class="table">
         <s:iterator value="friendList">
             <tr class="col-sm-offset-3 col-sm-6">
@@ -35,14 +35,16 @@
             </tr>
         </s:iterator>
     </table>
-    <nav>
-        <ul class="pager">
-            <li><a href="friendList.action?pageNumber=${1}&id=${id}">首页</a></li>
-            <li><a href="friendList.action?pageNumber=${pageNumber-1}&id=${id}">上一页</a></li>
-            <li>${pageNumber}/${pageCount}</li>
-            <li><a href="friendList.action?pageNumber=${pageNumber+1}&id=${id}">下一页</a></li>
-            <li><a href="friendList.action?pageNumber=${pageCount}&id=${id}">末页</a></li>
-        </ul>
-    </nav>
+    <s:if test="%{friendCount > 8}">
+        <nav>
+            <ul class="pager">
+                <li><a href="friendList.action?pageNumber=${1}&id=${id}">首页</a></li>
+                <li><a href="friendList.action?pageNumber=${pageNumber-1}&id=${id}">上一页</a></li>
+                <li>${pageNumber}/${pageCount}</li>
+                <li><a href="friendList.action?pageNumber=${pageNumber+1}&id=${id}">下一页</a></li>
+                <li><a href="friendList.action?pageNumber=${pageCount}&id=${id}">末页</a></li>
+            </ul>
+        </nav>
+    </s:if>
 </body>
 </html>

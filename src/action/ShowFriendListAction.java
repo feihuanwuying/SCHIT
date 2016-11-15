@@ -19,6 +19,7 @@ public class ShowFriendListAction extends ActionSupport {
     private long pageCount;
     private int pageSize;
     private int id;
+    private User user;
 
     public List<Friend> getFriendList() {
         return friendList;
@@ -68,11 +69,20 @@ public class ShowFriendListAction extends ActionSupport {
         this.id = id;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String execute() throws Exception {
         FriendService friendService = new FriendService();
         UserService userService = new UserService();
-        if (userService.getUser(id) == null) {
+        user = userService.getUser(id);
+        if (user == null) {
             return ERROR;
         }
         friendCount = friendService.getFriendCount(id);
