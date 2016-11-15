@@ -320,4 +320,12 @@ public class ForumService extends BasicService {
         replyDao.close();
         return count;
     }
+
+    public List<Post> getUserPostList(int userId) {
+        PostDao postDao = new PostDao();
+        List<Post> postList = postDao.getUserPostList(userId);
+        postDao.close();
+        return postList;
+    }
+
 }

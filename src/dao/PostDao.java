@@ -4,6 +4,7 @@ import util.TimeTransform;
 import vo.Post;
 import vo.Reply;
 
+import java.security.interfaces.RSAKey;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -173,5 +174,10 @@ public class PostDao extends Dao {
         return count;
     }
 
+    public List<Post> getUserPostList(int userId) {
+        String sql = "SELECT * FROM post WHERE poster_id = ? ORDER BY time DESC limit 5";
+        ResultSet rs = executeQuery(sql, userId);
+        return getPostList(rs);
+    }
 
 }
