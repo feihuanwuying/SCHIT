@@ -7,10 +7,7 @@ import service.ForumService;
 import service.FriendService;
 import service.InformService;
 import service.UserService;
-import vo.Friend;
-import vo.Inform;
-import vo.User;
-import vo.Visit;
+import vo.*;
 
 import java.util.List;
 
@@ -26,6 +23,7 @@ public class ShowHomeAction extends ActionSupport{
     private long postCount = 0;
     private long replyCount = 0;
     private List<Inform> informList;
+    private List<Post> postList;
 
 
     public User getUser() {
@@ -92,6 +90,14 @@ public class ShowHomeAction extends ActionSupport{
         this.informList = informList;
     }
 
+    public List<Post> getPostList() {
+        return postList;
+    }
+
+    public void setPostList(List<Post> postList) {
+        this.postList = postList;
+    }
+
     @Override
     public String execute() throws Exception {
         UserService userService = new UserService();
@@ -113,6 +119,7 @@ public class ShowHomeAction extends ActionSupport{
         informService.getInformCount(Inform.MESSAGE, id);
         informService.getPageNumber(0);
         informList = informService.getInformList(Inform.MESSAGE, id);
+        postList = forumService.getUserPostList(id);
         return SUCCESS;
     }
 }

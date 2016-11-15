@@ -81,6 +81,32 @@
                     </div>
                 </div>
             </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-sm-6" align="left">
+                            主题
+                        </div>
+                        <div class="col-sm-6" align="right">
+                            <a href="#">查看全部</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <s:if test="%{postCount > 0}">
+                        <s:iterator value="postList" status="st">
+                            <s:if test="%{#st.index <= 2}">
+                                <div class="col-sm-12">
+                                        ${time}：<a href="showPost.action?pid=${id}" target="_blank">${title}</a>
+                                </div>
+                            </s:if>
+                        </s:iterator>
+                    </s:if>
+                    <s:else>
+                        还没有发表过主题哦！
+                    </s:else>
+                </div>
+            </div>
         </div>
         <div class="col-sm-4">
             <div class="panel panel-default">
@@ -133,7 +159,7 @@
                             <div class="col-sm-12">
                             <textarea id="area" name="message"
                                       placeholder="既然来了，说点什么再走吧"
-                                      minlength="4" maxlength="200"
+                                      minlength="2" maxlength="100"
                                       class="form-control"
                             ></textarea>
                             <input type="hidden" name="userId" value="${user.id}">
