@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>${title}</title>
-    <link rel="stylesheet" type="text/css" href="css/detail_style.css">
+    <link rel="stylesheet" type="text/css" href="../css/detail_style.css">
 </head>
 <script type="text/javascript">
     function deletePost(pid) {
@@ -20,7 +20,7 @@
     }
 </script>
 <body>
-    <%@include file="Head.jsp"%>
+    <%@include file="../Head.jsp"%>
     <table>
         <div class="row">
             <div class="panel panel-default">
@@ -37,7 +37,7 @@
                 <div class="col-sm-4"><a href="showPost.action?pid=${id}" target="_blank">${title}</a></div>
                 <div class="col-sm-3">
                     <s:if test="%{poster.head == ''}">
-                        <img src="photo/head.jpg">
+                        <img src="../photo/head.jpg">
                     </s:if>
                     <s:else>
                         <img src="photo/${poster.username.hashCode()}${poster.head}">
@@ -48,7 +48,7 @@
                 <div class="col-sm-3">
                     <s:if test="%{lastReply == null}">
                         <s:if test="%{poster.head == ''}">
-                            <img src="photo/head.jpg">
+                            <img src="../photo/head.jpg">
                         </s:if>
                         <s:else>
                             <img src="photo/${poster.username.hashCode()}${poster.head}">
@@ -57,7 +57,7 @@
                     </s:if>
                     <s:else>
                         <s:if test="%{lastReply.replier.head == ''}">
-                            <img src="photo/head.jpg">
+                            <img src="../photo/head.jpg">
                         </s:if>
                         <s:else>
                             <img src="photo/${lastReply.replier.username.hashCode()}${lastReply.replier.head}">

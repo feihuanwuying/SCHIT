@@ -1,4 +1,4 @@
-package action;
+package action.Forum;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;

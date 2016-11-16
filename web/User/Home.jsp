@@ -36,7 +36,7 @@
     <title>个人空间</title>
 </head>
 <body>
-    <%@include file="Head.jsp"%>
+    <%@include file="../Head.jsp"%>
     <div class="row">
         <div class="col-sm-12" align="center">
             <h2>${user.nickname}的个人空间</h2>
@@ -60,7 +60,7 @@
                 <div class="panel-body">
                     <div align="center">
                         <s:if test="%{user.head == ''}">
-                            <img src="photo/head.jpg">
+                            <img src="../photo/head.jpg">
                         </s:if>
                         <s:else>
                             <img src="photo/${user.username.hashCode()}${user.head}">

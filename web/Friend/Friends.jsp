@@ -23,7 +23,7 @@
     <title>查看好友</title>
 </head>
 <body>
-    <%@include file="Head.jsp"%>
+    <%@include file="../Head.jsp"%>
     <h3 align="center">${user.username.equals(sessionScope.get("username"))?"您":"Ta"}共有${friendCount}个好友</h3>
     <table class="table">
         <s:iterator value="friendList">

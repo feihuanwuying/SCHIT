@@ -1,4 +1,4 @@
-package action;
+package action.Friend;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
