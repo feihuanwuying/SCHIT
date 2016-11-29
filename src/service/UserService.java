@@ -5,6 +5,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.sun.javafx.collections.MappingChange;
 import dao.UserDao;
 import dao.VisitDao;
+import vo.Inform;
 import vo.User;
 import vo.Visit;
 
@@ -35,10 +36,12 @@ public class UserService extends BasicService{
         User user = userDao.getUser(username, password);
         userDao.close();
         if (user != null) {
-            ActionContext.getContext().getSession().put("username", username);
-            ActionContext.getContext().getSession().put("nickname", user.getNickname());
-            ActionContext.getContext().getSession().put("power", user.getPower());
-            ActionContext.getContext().getSession().put("id", user.getId());
+            Map<String, Object> session = ActionContext.getContext().getSession();
+            session.put("username", username);
+            session.put("nickname", user.getNickname());
+            session.put("power", user.getPower());
+            session.put("id", user.getId());
+            session.put("inform", new InformService().getNewInformCount(user.getId()));
             return true;
         }
         return false;
@@ -58,10 +61,12 @@ public class UserService extends BasicService{
             userDao.addUser(user);
             user = userDao.getUser(user.getUsername());
             userDao.close();
-            ActionContext.getContext().getSession().put("username", user.getUsername());
-            ActionContext.getContext().getSession().put("nickname", user.getNickname());
-            ActionContext.getContext().getSession().put("power", user.getPower());
-            ActionContext.getContext().getSession().put("id", user.getId());
+            Map<String, Object> session = ActionContext.getContext().getSession();
+            session.put("username", user.getUsername());
+            session.put("nickname", user.getNickname());
+            session.put("power", user.getPower());
+            session.put("id", user.getId());
+            session.put("inform", new InformService().getNewInformCount(user.getId()));
             return true;
         }
         userDao.close();
@@ -79,6 +84,7 @@ public class UserService extends BasicService{
             session.remove("nickname");
             session.remove("power");
             session.remove("id");
+            session.remove("inform");
             return true;
         }
         return false;

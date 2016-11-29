@@ -15,6 +15,13 @@ import java.util.List;
  * Created by ZouKaifa on 2016/11/14.
  */
 public class InformService extends BasicService {
+    public long getNewInformCount(int userId) {
+        InformDao informDao = new InformDao();
+        long count = informDao.getNewInformCount(userId);
+        informDao.close();
+        return count;
+    }
+
     public long getInformCount(int informType, int userId) {
         InformDao informDao = new InformDao();
         long count = informDao.getInformCount(informType, userId);

@@ -68,7 +68,12 @@
                 <s:else>
                     <!-- 该按钮通往个人主页 -->
                     <s:if test="#session.power == 1">
-                        <li><a href="showHome.action?id=${session.id}">${session.nickname}<span class="badge">管理员</span></a></li>
+                        <li><a href="showHome.action?id=${session.id}">${session.nickname}
+                            <span class="badge">管理员</span>
+                            <s:if test="#session.inform != 0">
+                                <span class="badge">${session.inform}</span>
+                            </s:if>
+                        </a></li>
                     </s:if>
                     <s:else>
                         <li><a href="showHome.action?id=${session.id}">${session.nickname}</a></li>

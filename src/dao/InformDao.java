@@ -77,4 +77,18 @@ public class InformDao extends Dao {
         }
         return count;
     }
+
+    public long getNewInformCount(int userId) {
+        long count = 0;
+        String sql = "SELECT count(*) FROM inform WHERE (user_id = ?) AND (treatment = 0)";
+        try {
+            ResultSet rs = executeQuery(sql, userId);
+            if (rs.next()) {
+                count = rs.getLong(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
 }
