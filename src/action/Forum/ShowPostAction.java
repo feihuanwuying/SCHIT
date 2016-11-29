@@ -1,7 +1,6 @@
 package action.Forum;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
 import service.ForumService;
 import vo.Post;
 import vo.Reply;
@@ -80,7 +79,7 @@ public class ShowPostAction extends ActionSupport {
     public String execute() throws Exception {
         ForumService forumService = new ForumService();
         post = forumService.getPost(pid);
-        if (post == null){
+        if (post == null || (only != 0 && only != 1)) {
             return ERROR;
         }
         pageCount = forumService.getReplyPageCount(pid);
