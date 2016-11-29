@@ -91,4 +91,25 @@ public class InformDao extends Dao {
         }
         return count;
     }
+
+    public List<Inform> getInformList(int userId, long pageNumber, int pageSize) {
+        String sql = "SELECT * FROM inform WHERE user_id = ? ORDER BY time DESC LIMIT ?, ?";
+        ResultSet rs = executeQuery(sql, userId, (pageNumber-1)*pageSize, pageSize);
+        List<Inform> informList = getInformList(rs);
+        return informList;
+    }
+
+    public long getInformCount(int userId) {
+        String sql = "SELECT count(*) FROM inform WHERE user_id = ?";
+        long count = 0;
+        try {
+            ResultSet rs = executeQuery(sql, userId);
+            if (rs.next()) {
+                count = rs.getLong(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
 }

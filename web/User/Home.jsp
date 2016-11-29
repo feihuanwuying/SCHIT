@@ -66,6 +66,16 @@
                             <img src="photo/${user.username.hashCode()}${user.head}">
                         </s:else>
                     </div>
+                    <br>
+                    <div align="center">
+                        <s:if test="%{user.username.equals(#session.username)}">
+                            <a href="showInform.action">查看消息(${session.inform})</a>
+                        </s:if>
+                        <s:else>
+                            <!-- todo 加入是否是好友的判断-->
+                            添加好友
+                        </s:else>
+                    </div>
                 </div>
             </div>
             <div class="panel panel-default">

@@ -57,7 +57,7 @@ public class InformService extends BasicService {
         int friendId = (int) ActionContext.getContext().getSession().get("id");
         Inform inform = new Inform();
         inform.setTime(new Date());
-        inform.setTreatment(0);
+        inform.setTreatment(userId == friendId ? 1 : 0);
         inform.setInformType(informType);
         Friend friend = new Friend();
         friend.setFriend(userDao.getUser(friendId));
@@ -70,5 +70,28 @@ public class InformService extends BasicService {
         userDao.close();
         return true;
     }
+
+    private long getInformCount() {
+        int userId = (int)ActionContext.getContext().getSession().get("id");
+        InformDao informDao = new InformDao();
+        long count = informDao.getInformCount(userId);
+        informDao.close();
+        return count;
+    }
+
+    public long getInformPageCount() {
+        long informCount = getInformCount();
+        pageCount = informCount%pageSize==0?informCount/pageSize:informCount/pageSize+1;
+        return pageCount;
+    }
+
+    public List<Inform> getInformList() {
+        int userId = (int)ActionContext.getContext().getSession().get("id");
+        InformDao informDao = new InformDao();
+        List<Inform> informList = informDao.getInformList(userId, pageNumber, pageSize);
+        informDao.close();
+        return informList;
+    }
+
 }
 

@@ -20,7 +20,7 @@ public class Inform {
     private Friend friend;  //好友或参与事件的另一用户
     private String friendMessage = "";  //好友私信或申请信息
     private Date time;  //事件发生的时间
-    private int treatment;  //处理方式（0未查看）
+    private int treatment;  //处理方式（0未查看,1已经查看，2同意，3拒绝）
 
     public int getId() {
         return id;
