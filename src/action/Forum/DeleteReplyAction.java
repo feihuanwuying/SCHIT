@@ -1,22 +1,22 @@
-package action;
+package action.Forum;
 
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
-import service.UserService;
+import service.ForumService;
 
 /**
- * Created by ZouKaifa on 2016/10/23.
+ * Created by ZouKaifa on 2016/10/27.
  */
-public class LogoutAction extends ActionSupport {
-    private String username;
+public class DeleteReplyAction extends ActionSupport {
+    private long id;
     private String url;
 
-    public String getUsername() {
-        return username;
+    public long getId() {
+        return id;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getUrl() {
@@ -29,9 +29,11 @@ public class LogoutAction extends ActionSupport {
 
     @Override
     public String execute() throws Exception {
-        UserService userService = new UserService();
-        userService.logout();
+        ForumService forumService = new ForumService();
         setUrl(ServletActionContext.getRequest().getHeader("referer"));
+        if (!forumService.deleteReply(id)) {
+            return ERROR;
+        }
         return SUCCESS;
     }
 }

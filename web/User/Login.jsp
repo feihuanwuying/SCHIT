@@ -9,8 +9,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <%@include file="Bootstrap.jsp"%>
-    <link rel="stylesheet" type="text/css" href="css/login_style.css">
+    <%@include file="../Bootstrap.jsp"%>
+    <link rel="stylesheet" type="text/css" href="../css/login_style.css">
     <title>登录</title>
 </head>
 <script type="text/javascript">

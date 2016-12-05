@@ -1,4 +1,4 @@
-package action;
+package action.User;
 
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;

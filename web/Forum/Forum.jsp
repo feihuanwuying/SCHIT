@@ -14,10 +14,10 @@
 <html>
 <head>
     <title>论坛区</title>
-    <link rel="stylesheet" type="text/css" href="css/forum_style.css">
+    <link rel="stylesheet" type="text/css" href="../css/forum_style.css">
 </head>
 <body>
-    <%@include file="Head.jsp"%>
+    <%@include file="../Head.jsp"%>
     <!--
     <section class="jumbotron">
         <div class="container">
@@ -69,7 +69,7 @@
         </div>
 
         <div class="col-sm-3" id="r1_c3">
-            <img src="photo/shop.jpg"/>
+            <img src="../photo/shop.jpg"/>
             <a href="showForumDetail.action?type=3">物品交易区</a>
             <br>主题数：<s:property value="map[3][0]"></s:property>
             回复数：<s:property value="map[3][1]"></s:property>
@@ -77,7 +77,7 @@
 
         <div class="col-sm-3" id="r1_c4">
             <!http://img5.imgtn.bdimg.com/it/u=3111751426,1434100115&fm=21&gp=0.jpg>
-            <img src="photo/teach.jpg"/>
+            <img src="../photo/teach.jpg"/>
             <a href="showForumDetail.action?type=4">家教兼职区</a>
             <br>主题数：<s:property value="map[4][0]"></s:property>
             回复数：<s:property value="map[4][1]"></s:property>
@@ -88,21 +88,21 @@
     <div class="row">
         <div class="col-sm-3" id="r2_c1">
             <!http://img3.imgtn.bdimg.com/it/u=2214176382,148781067&fm=21&gp=0.jpg>
-            <img src="photo/chat.png"/>
+            <img src="../photo/chat.png"/>
             <a href="showForumDetail.action?type=5">聊天灌水区</a>
             <br>主题数：<s:property value="map[5][0]"></s:property>
             回复数：<s:property value="map[5][1]"></s:property>
         </div>
 
         <div class="col-sm-3" id="r2_c2">
-            <img src="photo/study.jpg"/>
+            <img src="../photo/study.jpg"/>
             <a href="showForumDetail.action?type=6">学习交流区</a>
             <br>主题数：<s:property value="map[6][0]"></s:property>
             回复数：<s:property value="map[6][1]"></s:property>
         </div>
 
         <div class="col-sm-3" id="r2_c3">
-            <img src="photo/love.jpg"/>
+            <img src="../photo/love.jpg"/>
             <a href="showForumDetail.action?type=7">交友征婚区</a>
             <br>主题数：<s:property value="map[7][0]"></s:property>
             回复数：<s:property value="map[7][1]"></s:property>
@@ -110,7 +110,7 @@
 
         <div class="col-sm-3" id="r2_c4">
             <!http://img4.imgtn.bdimg.com/it/u=3946467442,3069249694&fm=21&gp=0.jpg>
-            <img src="photo/phy.jpg"/>
+            <img src="../photo/phy.jpg"/>
             <a href="showForumDetail.action?type=8">咨询求助区</a>
             <br>主题数：<s:property value="map[8][0]"></s:property>
             回复数：<s:property value="map[8][1]"></s:property>

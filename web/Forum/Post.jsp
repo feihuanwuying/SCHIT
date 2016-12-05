@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>${post.title}</title>
-    <link rel="stylesheet" type="text/css" href="css/post_style.css">
+    <link rel="stylesheet" type="text/css" href="../css/post_style.css">
 </head>
 <script type="text/javascript">
     function reply() {
@@ -72,7 +72,7 @@
     }
 </script>
 <body>
-<%@include file="Head.jsp"%>
+<%@include file="../Head.jsp"%>
 <div class="row">
     <table class="table-responsive table-bordered col-sm-offset-1 col-sm-10">
         <tr>
@@ -92,7 +92,7 @@
             <td bgcolor="#add8e6" class="col-sm-2" align="center">
                 <strong>${post.poster.nickname}</strong><br>
                 <s:if test="%{post.poster.head == ''}">
-                    <img id="img_user" src="photo/head.jpg">
+                    <img id="img_user" src="../photo/head.jpg">
                 </s:if>
                 <s:else>
                     <img id="img_user" src="photo/${post.poster.username.hashCode()}${post.poster.head}">
@@ -124,7 +124,7 @@
                     <td bgcolor="#add8e6" class="col-sm-2" align="center">
                         <strong>${replier.nickname}</strong><br>
                         <s:if test="%{replier.head == ''}">
-                            <img id="img_user" src="photo/head.jpg">
+                            <img id="img_user" src="../photo/head.jpg">
                         </s:if>
                         <s:else>
                             <img id="img_user" src="photo/${replier.username.hashCode()}${replier.head}">

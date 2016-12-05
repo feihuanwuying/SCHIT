@@ -2,10 +2,13 @@ package service;
 
 import com.opensymphony.xwork2.ActionContext;
 import dao.FriendDao;
+import dao.InformDao;
 import dao.UserDao;
 import vo.Friend;
+import vo.Inform;
 import vo.User;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -140,6 +143,39 @@ public class FriendService extends BasicService {
             success = false;  //是当前用户
         } else {
             friendDao.updateRemark(userId, friendId, remark);
+        }
+        userDao.close();
+        friendDao.close();
+        return success;
+    }
+
+    public boolean applyFriend(int friendId, String remark) {
+        boolean success = true;
+        UserDao userDao = new UserDao();
+        FriendDao friendDao = new FriendDao();
+        int userId = (int)ActionContext.getContext().getSession().get("id");
+        User friend = userDao.getUser(friendId);
+        if (friend == null) {  //存在
+            success = false;
+        } else if (friendDao.getFriend(userId, friendId) != null
+                || remark.length() > 30 || userId == friendId) {  //不是好友
+            success = false;
+        } else if (userId != (int)ActionContext.getContext().getSession().get("id")) {  //是当前用户
+            success = false;
+        } else {
+            //通知到被添加人
+            Friend friend1 = new Friend();
+            friend1.setFriend(userDao.getUser(userId));
+            friend1.setRemark(remark);
+            Inform inform = new Inform();
+            inform.setInformType(Inform.ADD_FRIEND);
+            inform.setUser(friend);
+            inform.setFriend(friend1);
+            inform.setTime(new Date());
+            inform.setTreatment(0);
+            InformDao informDao = new InformDao();
+            informDao.addInform(inform);
+            informDao.close();
         }
         userDao.close();
         friendDao.close();
