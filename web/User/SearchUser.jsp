@@ -9,12 +9,13 @@
 <html>
 <head>
     <%@include file="../Bootstrap.jsp"%>
+    <link rel="stylesheet" type="text/css" href="../css/searchuser_style.css">
     <title>好友搜索</title>
 </head>
 <body>
     <%@include file="../Head.jsp"%>
     <form action="searchUser.action" method="post">
-        请输入昵称进行搜索：
+        <div class="top-search">请输入昵称进行搜索：</div >
         <input type="text" name="nickname">
         <button type="submit">搜索</button>
     </form>
@@ -23,9 +24,16 @@
             没有用户！<br>
         </s:if>
         <s:else>
-            <s:iterator value="userList">
-                ${nickname}<br>
-            </s:iterator>
+            <div class="row">
+                <div class="col-sm-12">共搜索到${userList.size()}个用户</div>
+            </div>
+        <s:iterator value="userList">
+            <div class="row">
+                <div class="col-sm-4"><img src="photo/${username.hashCode()}.jpg"></div>
+                <div class="col-sm-7">${nickname}<br></div>
+            </div>
+        </s:iterator>
+
             <nav>
                 <ul class="pager">
                     <li><a href="searchUser.action?nickname=${nickname}&pageNumber=${1}">首页</a></li>
