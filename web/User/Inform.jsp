@@ -14,9 +14,27 @@
 </head>
 <body>
     <%@include file="../Head.jsp"%>
-    <s:iterator value="informList">
-        ${friend.friend.nickname} ${friendMessage}<br>
-    </s:iterator>
+    <table class="table-bordered table-responsive">
+        <tr>
+            <th>内容</th>
+            <th>时间</th>
+            <th>操作</th>
+        </tr>
+        <s:iterator value="informList">
+            <s:if test="%{informType==6}">
+                <s:if test="%{#session.id != friend.friend.id}">
+                    <tr>
+                        <td>
+                            ${friend.friend.nickname} 给您留言:
+                            ${friendMessage}
+                        </td>
+                        <td>${time}</td>
+                        <td><a href="#">回复</a> </td>
+                    </tr>
+                </s:if>
+            </s:if>
+        </s:iterator>
+    </table>
     <nav>
         <ul class="pager">
             <li><a href="showInform.action?pageNumber=${1}">首页</a></li>
