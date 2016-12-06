@@ -149,7 +149,7 @@ public class FriendService extends BasicService {
         return success;
     }
 
-    public boolean applyFriend(int friendId, String remark) {
+    public boolean applyFriend(int friendId, String message, String remark) {
         boolean success = true;
         UserDao userDao = new UserDao();
         FriendDao friendDao = new FriendDao();
@@ -171,6 +171,7 @@ public class FriendService extends BasicService {
             inform.setInformType(Inform.ADD_FRIEND);
             inform.setUser(friend);
             inform.setFriend(friend1);
+            inform.setFriendMessage(message);
             inform.setTime(new Date());
             inform.setTreatment(0);
             InformDao informDao = new InformDao();
