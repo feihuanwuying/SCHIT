@@ -9,8 +9,8 @@ import service.FriendService;
  */
 public class ApplyFriendAction extends ActionSupport {
     private int friendId;
-    private String message;  //附加信息
-    private String remark;  //备注
+    private String message = "";  //附加信息
+    private String remark = "";  //备注
     private String url;
 
     public int getFriendId() {

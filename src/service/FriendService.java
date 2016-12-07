@@ -158,7 +158,8 @@ public class FriendService extends BasicService {
         if (friend == null) {  //存在
             success = false;
         } else if (friendDao.getFriend(userId, friendId) != null
-                || remark.length() > 30 || userId == friendId) {  //不是好友
+                || remark.length() > 30 || userId == friendId
+                || message.length() > 100) {  //不是好友
             success = false;
         } else if (userId != (int)ActionContext.getContext().getSession().get("id")) {  //是当前用户
             success = false;

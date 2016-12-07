@@ -72,8 +72,9 @@
                             <a href="showInform.action">查看消息(${session.inform})</a>
                         </s:if>
                         <s:else>
-                            <!-- todo 加入是否是好友的判断-->
-                            添加好友
+                            <s:if test="%{isFriend == 1}">
+                                <a href="applyFriend.action?friendId=${user.id}">加为好友</a>
+                            </s:if>
                         </s:else>
                     </div>
                 </div>

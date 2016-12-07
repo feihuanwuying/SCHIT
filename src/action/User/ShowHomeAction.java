@@ -24,6 +24,7 @@ public class ShowHomeAction extends ActionSupport{
     private long replyCount = 0;
     private List<Inform> informList;
     private List<Post> postList;
+    private int isFriend = 0;  //0不是，1是
 
 
     public User getUser() {
@@ -98,6 +99,14 @@ public class ShowHomeAction extends ActionSupport{
         this.postList = postList;
     }
 
+    public int getIsFriend() {
+        return isFriend;
+    }
+
+    public void setIsFriend(int isFriend) {
+        this.isFriend = isFriend;
+    }
+
     @Override
     public String execute() throws Exception {
         UserService userService = new UserService();
@@ -120,6 +129,12 @@ public class ShowHomeAction extends ActionSupport{
         informService.getPageNumber(0);
         informList = informService.getInformList(Inform.MESSAGE, id);
         postList = forumService.getUserPostList(id);
+        int userId = (int)ActionContext.getContext().getSession().get("id");
+        if (friendService.getFriend(userId, id) != null) {
+            isFriend = 1;
+        } else {
+            isFriend = 0;
+        }
         return SUCCESS;
     }
 }
