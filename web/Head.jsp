@@ -76,7 +76,11 @@
                         </a></li>
                     </s:if>
                     <s:else>
-                        <li><a href="showHome.action?id=${session.id}">${session.nickname}</a></li>
+                        <li><a href="showHome.action?id=${session.id}">${session.nickname}
+                            <s:if test="#session.inform != 0">
+                                <span class="badge">${session.inform}</span>
+                            </s:if>
+                        </a></li>
                     </s:else>
                     <li><a href="friendList.action?id=${session.id}">好友</a></li>
                     <li><a href="logout.action">注销</a></li>
