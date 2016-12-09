@@ -149,7 +149,7 @@ public class FriendService extends BasicService {
         return success;
     }
 
-    public boolean applyFriend(int friendId, String remark) {
+    public boolean applyFriend(int friendId, String message, String remark) {
         boolean success = true;
         UserDao userDao = new UserDao();
         FriendDao friendDao = new FriendDao();
@@ -158,7 +158,8 @@ public class FriendService extends BasicService {
         if (friend == null) {  //存在
             success = false;
         } else if (friendDao.getFriend(userId, friendId) != null
-                || remark.length() > 30 || userId == friendId) {  //不是好友
+                || remark.length() > 30 || userId == friendId
+                || message.length() > 100) {  //不是好友
             success = false;
         } else if (userId != (int)ActionContext.getContext().getSession().get("id")) {  //是当前用户
             success = false;
@@ -171,6 +172,7 @@ public class FriendService extends BasicService {
             inform.setInformType(Inform.ADD_FRIEND);
             inform.setUser(friend);
             inform.setFriend(friend1);
+            inform.setFriendMessage(message);
             inform.setTime(new Date());
             inform.setTreatment(0);
             InformDao informDao = new InformDao();
