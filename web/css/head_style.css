@@ -24,3 +24,10 @@ B {
     width:10%;
     height:100%;
 }
+#first a {
+    text-align:right;
+    float:right;
+    margin-right:10px;
+    font-family:华文隶书, 微软雅黑;
+    font-size:24px;
+}

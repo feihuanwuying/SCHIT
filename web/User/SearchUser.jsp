@@ -31,6 +31,7 @@
             <div class="row">
                 <div class="col-sm-4"><img src="photo/${username.hashCode()}.jpg"></div>
                 <div class="col-sm-7">${nickname}<br></div>
+                <div class="col-sm-1"><a href="showHome.action?id=${friend.id}" target="_blank">更多信息</a></div>
             </div>
         </s:iterator>
 
