@@ -224,7 +224,13 @@
                 </div>
                 <div class="panel-body">
                     <s:if test="%{friendList.size() == 0}">
-                        ${user.id==session.id?"您":"Ta"}还没有好友哦！
+                        <s:if test="%{user.id==#session.id}">
+                            您还没有好友哦！
+                            <a href="searchUser.action">去添加</a>
+                        </s:if>
+                        <s:else>
+                           Ta还没有好友哦！
+                        </s:else>
                     </s:if>
                     <s:else>
                         <s:iterator value="friendList" status="st">
