@@ -84,6 +84,15 @@
                     <td></td>
                 </tr>
             </s:elseif>
+            <s:elseif test="%{informType == 6}">
+                <tr>
+                    <td>
+                        <strong>${friend.friend.nickname}</strong> 同意了您的好友请求
+                    </td>
+                    <td>${time}</td>
+                    <td></td>
+                </tr>
+            </s:elseif>
         </s:iterator>
     </table>
     <nav>
