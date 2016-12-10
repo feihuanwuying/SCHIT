@@ -112,4 +112,23 @@ public class InformDao extends Dao {
         }
         return count;
     }
+
+    public void updateTreatment(int informId, int treatment) {
+        String sql = "UPDATE inform SET treatment = ? WHERE id = ?";
+        executeUpdate(sql, treatment, informId);
+    }
+
+    public Inform getInform(int informId) {
+        Inform inform = null;
+        try {
+            String sql = "SELECT * FROM inform WHERE id = ?";
+            ResultSet rs = executeQuery(sql, informId);
+            if (rs.next()) {
+                inform = getInform(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return inform;
+    }
 }

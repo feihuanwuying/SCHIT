@@ -65,13 +65,15 @@ public class FriendService extends BasicService {
 
     /**
      * 单向添加好友
-     * @param username
-     * @param friend_name
-     * @param remark
+     * @param informId 同意的请求
+     * @param remark 给好友的备注
      * @return
      */
-    public boolean addFriend(int userId, int friendId, String remark) {
+    public boolean addFriend(int informId, String remark) {
         boolean success = true;
+        InformDao informDao = new InformDao();
+        //// TODO: 2016/12/10
+        int userId=0, friendId=0;
         UserDao userDao = new UserDao();
         FriendDao friendDao = new FriendDao();
         User user = userDao.getUser(userId);
@@ -183,5 +185,40 @@ public class FriendService extends BasicService {
         friendDao.close();
         return success;
     }
+
+    public boolean denyFriend(int informId, String message) {
+        InformDao informDao = new InformDao();
+        Inform inform = informDao.getInform(informId);
+        //验证
+        int userId = (int)ActionContext.getContext().getSession().get("id");
+        if (inform == null
+                ||inform.getUser().getId() != userId
+                || inform.getInformType() != Inform.ADD_FRIEND
+                || inform.getTreatment() == 2
+                || inform.getTreatment() == 3
+                || message.length() > 100
+                ) {
+            informDao.close();
+            return false;
+        }
+        informDao.updateTreatment(informId, 3);
+        //再通知到申请人
+        Inform newInform = new Inform();
+        newInform.setInformType(Inform.ADD_FAIL);
+        User user = new User();
+        user.setId(userId);
+        //user为被拒绝的人
+        newInform.setUser(inform.getFriend().getFriend());
+        Friend friend = new Friend();
+        friend.setFriend(user);
+        newInform.setFriend(friend);
+        newInform.setFriendMessage(message);
+        newInform.setTime(new Date());
+        newInform.setTreatment(0);
+        informDao.addInform(newInform);
+        informDao.close();
+        return true;
+    }
+
 
 }
