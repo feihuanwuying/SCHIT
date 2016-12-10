@@ -64,16 +64,14 @@ public class FriendService extends BasicService {
     }
 
     /**
-     * 单向添加好友
+     * 双向添加好友
      * @param informId 同意的请求
      * @param remark 给好友的备注
      * @return
      */
-    public boolean addFriend(int informId, String remark) {
+    public boolean addFriend(int userId, int friendId, String remark, String remark2) {
         boolean success = true;
         InformDao informDao = new InformDao();
-        //// TODO: 2016/12/10
-        int userId=0, friendId=0;
         UserDao userDao = new UserDao();
         FriendDao friendDao = new FriendDao();
         User user = userDao.getUser(userId);
@@ -86,10 +84,16 @@ public class FriendService extends BasicService {
         } else if (userId != (int)ActionContext.getContext().getSession().get("id")) {  //是当前用户
             success = false;
         } else {
+            //userId, friendId, remark
             Friend friend1 = new Friend();
             friend1.setFriend(friend);
             friend1.setRemark(remark);
             friendDao.addFriend(userId, friend1);
+            //friendId, userId, remark2
+            Friend friend2 = new Friend();
+            friend2.setFriend(user);
+            friend2.setRemark(remark2);
+            friendDao.addFriend(friendId, friend2);
         }
         userDao.close();
         friendDao.close();
@@ -220,5 +224,44 @@ public class FriendService extends BasicService {
         return true;
     }
 
+    public boolean agreeFriend(int informId, String remark) {
+        InformDao informDao = new InformDao();
+        Inform inform = informDao.getInform(informId);
+        //验证
+        int userId = (int)ActionContext.getContext().getSession().get("id");
+        if (inform == null
+                ||inform.getUser().getId() != userId
+                || inform.getInformType() != Inform.ADD_FRIEND
+                || inform.getTreatment() == 2
+                || inform.getTreatment() == 3
+                || remark.length() > 30
+                ) {
+            informDao.close();
+            return false;
+        }
+        //先添加好友
+        int friendId = inform.getFriend().getFriend().getId();
+        if (! addFriend(userId, friendId, remark, inform.getFriend().getRemark())) {
+            informDao.close();
+            return false;
+        }
+        informDao = new InformDao();
+        informDao.updateTreatment(informId, 2);
+        //通知申请人
+        Inform newInform = new Inform();
+        newInform.setInformType(Inform.ADD_SUCCESS);
+        User user = new User();
+        user.setId(userId);
+        //user为申请的人
+        newInform.setUser(inform.getFriend().getFriend());
+        Friend friend = new Friend();
+        friend.setFriend(user);
+        newInform.setFriend(friend);
+        newInform.setTime(new Date());
+        newInform.setTreatment(0);
+        informDao.addInform(newInform);
+        informDao.close();
+        return true;
+    }
 
 }
