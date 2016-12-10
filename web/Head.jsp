@@ -21,8 +21,13 @@
             <B>朋友，欢迎您的到来</B>
         </FONT>
         -->
-
     </li>
+    <s:if test="#session.username == null">
+    </s:if>
+    <s:else>
+        <a href="searchUser.action">好友搜索</a>
+        <img src="../photo/mirror.jpg" style="width:24px;height:24px;float:right"/>
+    </s:else>
 </div>
 <%--div class="row" id="first">
     <div class="col-sm-8">

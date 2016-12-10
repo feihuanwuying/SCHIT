@@ -83,8 +83,8 @@
                                                 <h4 class="modal-title" id="myModalLabel">添加好友</h4>
                                             </div>
                                             <form action="applyFriend.action" method="post">
-                                                <div class="modal-body">
-                                                    备注<input type="text" maxlength="30" name="remark"><br>
+                                                <div class="modal-body" style="text-align: center">
+                                                    备注信息<input type="text" maxlength="30" name="remark"><br>
                                                     附加信息<input type="text" maxlength="100" name="message">
                                                     <input type="hidden" name="friendId" value="${user.id}">
                                                 </div>
