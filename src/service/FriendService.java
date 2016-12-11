@@ -167,8 +167,6 @@ public class FriendService extends BasicService {
                 || remark.length() > 30 || userId == friendId
                 || message.length() > 100) {  //不是好友
             success = false;
-        } else if (userId != (int)ActionContext.getContext().getSession().get("id")) {  //是当前用户
-            success = false;
         } else {
             //通知到被添加人
             Friend friend1 = new Friend();

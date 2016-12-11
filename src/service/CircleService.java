@@ -12,6 +12,7 @@ import java.util.List;
  * Created by ZouKaifa on 2016/12/11.
  */
 public class CircleService extends BasicService {
+    protected int pageSize = 8;
     public boolean addCircle(int ownerId, int[] userIdList, String name, String label) {
         UserDao userDao = new UserDao();
         User owner = userDao.getUser(ownerId);

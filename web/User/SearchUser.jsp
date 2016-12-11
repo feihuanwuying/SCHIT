@@ -48,7 +48,7 @@
                                     <div class="modal-body">
                                         备注<input type="text" maxlength="30" name="remark"><br>
                                         附加信息<input type="text" maxlength="100" name="message">
-                                        <input type="hidden" name="friendId" value="${user.id}">
+                                        <input type="hidden" name="friendId" value="${id}">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>

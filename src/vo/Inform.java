@@ -14,6 +14,7 @@ public class Inform {
     public final static int REPLY_REPLY = 5;  //回复被回复
     public final static int MESSAGE = 6;  //留言
     public final static int ADD_FAIL = 7;  //好友请求被拒绝
+    public final static int INTO_CIRCLE = 8;  //被拉入圈子
     private int id;
     private User user;  //用户
     private int informType = 0;  //通知类型
