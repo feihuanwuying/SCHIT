@@ -1,8 +1,7 @@
-package action.User;
+package action.user;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
 import service.ForumService;
 import service.FriendService;
 import service.InformService;

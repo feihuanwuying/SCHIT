@@ -1,7 +1,7 @@
 <%@ page import="java.util.Date" %>
 <%--
   Created by IntelliJ IDEA.
-  User: ZouKaifa
+  user: ZouKaifa
   Date: 2016/11/12
   Time: 13:38
   To change this template use File | Settings | File Templates.

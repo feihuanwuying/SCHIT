@@ -1,16 +1,16 @@
-package action.Friend;
+package action.friend;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 import service.FriendService;
 
 /**
- * Created by ZouKaifa on 2016/11/15.
+ * Created by ZouKaifa on 2016/12/10.
  */
-public class DeleteFriendAction extends ActionSupport {
+public class DenyFriendAction extends ActionSupport{
     private String url;
-    private int friendId;
+    private String message;
+    private int informId;
 
     public String getUrl() {
         return url;
@@ -20,20 +20,27 @@ public class DeleteFriendAction extends ActionSupport {
         this.url = url;
     }
 
-    public int getFriendId() {
-        return friendId;
+    public String getMessage() {
+        return message;
     }
 
-    public void setFriendId(int friendId) {
-        this.friendId = friendId;
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public int getInformId() {
+        return informId;
+    }
+
+    public void setInformId(int informId) {
+        this.informId = informId;
     }
 
     @Override
     public String execute() throws Exception {
         FriendService friendService = new FriendService();
         setUrl(ServletActionContext.getRequest().getHeader("referer"));
-        int userId = (int) ActionContext.getContext().getSession().get("id");
-        if (! friendService.deleteFriend(userId, friendId)) {
+        if (! friendService.denyFriend(informId, message)) {
             return ERROR;
         }
         return SUCCESS;

@@ -1,4 +1,4 @@
-package action.User;
+package action.user;
 
 import com.opensymphony.xwork2.ActionSupport;
 import service.UserService;

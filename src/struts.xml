@@ -11,60 +11,60 @@
             <interceptor name="powerInterceptor" class="interceptor.PowerInterceptor"></interceptor>
             <interceptor name="hasLoginInterceptor" class="interceptor.HasLoginInterceptor"></interceptor>
         </interceptors>
-        <action name="login" class="action.User.LoginAction">
+        <action name="login" class="action.user.LoginAction">
             <result type="redirect">${url}</result>
             <result name="login">/User/Login.jsp</result>
             <result name="error">/Index.jsp</result>
             <interceptor-ref name="hasLoginInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
-        <action name="register" class="action.User.RegisterAction">
+        <action name="register" class="action.user.RegisterAction">
             <result type="redirect">${url}</result>
             <result name="input">/User/Login.jsp</result>
             <result name="error">/Index.jsp</result>
             <interceptor-ref name="hasLoginInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
-        <action name="logout" class="action.User.LogoutAction">
+        <action name="logout" class="action.user.LogoutAction">
             <result type="redirect">${url}</result>
             <result name="login" type="redirect">login.action</result>
             <interceptor-ref name="loginInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
-        <action name="showForum" class="action.Forum.ShowForumAction">
+        <action name="showForum" class="action.forum.ShowForumAction">
             <result>/Forum/Forum.jsp</result>
         </action>
-        <action name="showForumDetail" class="action.Forum.ShowForumDetailAction">
+        <action name="showForumDetail" class="action.forum.ShowForumDetailAction">
             <result>/Forum/ForumDetail.jsp</result>
         </action>
-        <action name="showPost" class="action.Forum.ShowPostAction">
+        <action name="showPost" class="action.forum.ShowPostAction">
             <result>/Forum/Post.jsp</result>
         </action>
-        <action name="addReply" class="action.Forum.AddReplyAction">
+        <action name="addReply" class="action.forum.AddReplyAction">
             <result type="redirect">${url}</result>
             <result name="login" type="redirect">login.action</result>
             <interceptor-ref name="loginInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
-        <action name="addPost" class="action.Forum.AddPostAction">
+        <action name="addPost" class="action.forum.AddPostAction">
             <result type="redirect">${url}</result>
             <result name="login" type="redirect">login.action</result>
             <interceptor-ref name="loginInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
-        <action name="deleteReply" class="action.Forum.DeleteReplyAction">
+        <action name="deleteReply" class="action.forum.DeleteReplyAction">
             <result type="redirect">${url}</result>
             <result name="login" type="redirect">login.action</result>
             <interceptor-ref name="powerInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
-        <action name="deletePost" class="action.Forum.DeletePostAction">
+        <action name="deletePost" class="action.forum.DeletePostAction">
             <result type="redirect">${url}</result>
             <result name="login" type="redirect">login.action</result>
             <interceptor-ref name="powerInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
-        <action name="friendList" class="action.Friend.ShowFriendListAction">
+        <action name="friendList" class="action.friend.ShowFriendListAction">
             <result>/Friend/Friends.jsp</result>
             <result name="login" type="redirect">login.action</result>
             <interceptor-ref name="loginInterceptor"></interceptor-ref>
@@ -74,56 +74,68 @@
             <result>/Index.jsp</result>
         </action>
 
-        <action name="showHome" class="action.User.ShowHomeAction">
+        <action name="showHome" class="action.user.ShowHomeAction">
             <result>/User/Home.jsp</result>
             <result name="login" type="redirect">login.action</result>
             <interceptor-ref name="loginInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
-        <action name="addMessage" class="action.User.AddMessageAction">
+        <action name="addMessage" class="action.user.AddMessageAction">
             <result type="redirect">${url}</result>
             <result name="login" type="redirect">login.action</result>
             <interceptor-ref name="loginInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
-        <action name="updateRemark" class="action.Friend.ChangeRemarkAction">
+        <action name="updateRemark" class="action.friend.ChangeRemarkAction">
             <result type="redirect">${url}</result>
             <result name="login" type="redirect">login.action</result>
             <interceptor-ref name="loginInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
-        <action name="deleteFriend" class="action.Friend.DeleteFriendAction">
+        <action name="deleteFriend" class="action.friend.DeleteFriendAction">
             <result type="redirect">${url}</result>
             <result name="login" type="redirect">login.action</result>
             <interceptor-ref name="loginInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
-        <action name="searchUser" class="action.User.SearchUserAction">
+        <action name="searchUser" class="action.user.SearchUserAction">
             <result>/User/SearchUser.jsp</result>
             <result name="login" type="redirect">login.action</result>
             <interceptor-ref name="loginInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
-        <action name="showInform" class="action.User.ShowInformAction">
+        <action name="showInform" class="action.user.ShowInformAction">
             <result>/User/Inform.jsp</result>
             <result name="login" type="redirect">login.action</result>
             <interceptor-ref name="loginInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
-        <action name="applyFriend" class="action.Friend.ApplyFriendAction">
+        <action name="applyFriend" class="action.friend.ApplyFriendAction">
             <result type="redirect">${url}</result>
             <result name="login" type="redirect">login.action</result>
             <interceptor-ref name="loginInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
-        <action name="denyFriend" class="action.Friend.DenyFriendAction">
+        <action name="denyFriend" class="action.friend.DenyFriendAction">
             <result type="redirect">${url}</result>
             <result name="login" type="redirect">login.action</result>
             <interceptor-ref name="loginInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
-        <action name="agreeFriend" class="action.Friend.AgreeFriendAction">
+        <action name="agreeFriend" class="action.friend.AgreeFriendAction">
             <result type="redirect">${url}</result>
+            <result name="login" type="redirect">login.action</result>
+            <interceptor-ref name="loginInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+        </action>
+        <action name="showCircle" class="action.circle.ShowCircleAction">
+            <result>/Circle/Circle.jsp</result>
+            <result name="login" type="redirect">login.action</result>
+            <interceptor-ref name="loginInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+        </action>
+        <action name="addCircle" class="action.circle.AddCircleAction">
+            <result type="redirect">showCircle.action</result>
             <result name="login" type="redirect">login.action</result>
             <interceptor-ref name="loginInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>

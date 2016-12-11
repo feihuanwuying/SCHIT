@@ -1,7 +1,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
-  User: ZouKaifa
+  user: ZouKaifa
   Date: 2016/10/10
   Time: 23:18
   用户登录、注册，置于页面头
@@ -63,7 +63,9 @@
             <ul class="nav navbar-nav">
                 <li><a href="showForum.action">论坛</a></li>
                 <li><a href="">今日哈工大</a></li>
-                <li><a href="">教务信息</a> </li>
+                <s:if test="#session.username != null">
+                    <li><a href="showCircle.action">圈子</a> </li>
+                </s:if>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

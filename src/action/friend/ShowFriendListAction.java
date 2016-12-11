@@ -1,6 +1,5 @@
-package action.Friend;
+package action.friend;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import service.FriendService;
 import service.UserService;

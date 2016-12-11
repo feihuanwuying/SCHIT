@@ -264,4 +264,12 @@ public class FriendService extends BasicService {
         return true;
     }
 
+    public List<Friend> getAllFriendList(int userId) {
+        FriendDao friendDao = new FriendDao();
+        List<Friend> friendList = friendDao.getFriendList(userId);
+        friendDao.close();
+        return friendList;
+    }
+
+
 }

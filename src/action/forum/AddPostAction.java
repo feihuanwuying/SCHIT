@@ -1,24 +1,24 @@
-package action.Forum;
+package action.forum;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import org.apache.struts2.ServletActionContext;
 import service.ForumService;
-import vo.Reply;
+import vo.Post;
 
 /**
- * Created by ZouKaifa on 2016/10/25.
+ * Created by ZouKaifa on 2016/10/26.
  */
-public class AddReplyAction extends ActionSupport implements ModelDriven<Reply> {
-    private Reply reply = new Reply();  //要添加的回复
+public class AddPostAction extends ActionSupport implements ModelDriven<Post> {
+    private Post post = new Post();
     private String url;
 
-    public Reply getReply() {
-        return reply;
+    public Post getPost() {
+        return post;
     }
 
-    public void setReply(Reply reply) {
-        this.reply = reply;
+    public void setPost(Post post) {
+        this.post = post;
     }
 
     public String getUrl() {
@@ -32,15 +32,15 @@ public class AddReplyAction extends ActionSupport implements ModelDriven<Reply> 
     @Override
     public String execute() throws Exception {
         ForumService forumService = new ForumService();
-        url = ServletActionContext.getRequest().getHeader("referer");
-        if (! forumService.addReply(reply)) {
+        setUrl(ServletActionContext.getRequest().getHeader("referer"));
+        if (! forumService.addPost(post)) {
             return ERROR;
         }
         return SUCCESS;
     }
 
     @Override
-    public Reply getModel() {
-        return reply;
+    public Post getModel() {
+        return post;
     }
 }
