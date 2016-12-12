@@ -143,17 +143,6 @@
             </div>
             <input type="hidden" name="type" value="${type}">
             <input type="hidden" name="poster.id" value="${session.id}">
-            <div class="col-sm-offset-2 col-sm-1"></div>
-            <div class="col-sm-7">
-                <div class="file-box">
-                    <input type="file" name="doc" id="doc" onchange="javascript:setImagePreview();"/>
-                    <p>
-                    <div id="localImag">
-                        <img id="preview" width="-1" height="-1" style="display:none"/>
-                    </div>
-                    </p>
-                </div>
-            </div>
 
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-2">

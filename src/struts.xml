@@ -182,6 +182,9 @@
             <interceptor-ref name="loginInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
+        <action name="sendFeedback" class="action.user.AddFeedbackAction">
+            <result type="redirect">${url}</result>
+        </action>
 
         <action name="*">
             <result type="redirect">index.action</result>

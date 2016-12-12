@@ -188,14 +188,16 @@
                     </tr>
                 </s:elseif>
                 <s:elseif test="%{informType == 8}">
-                    <td>
-                        <a href="showPost.action?id=${friend.friend.id}">
-                            <strong>${friend.friend.nickname}</strong></a>
+                    <tr>
+                        <td>
+                            <a href="showHome.action?id=${friend.friend.id}">
+                                <strong>${friend.friend.nickname}</strong></a>
                             邀请您加入了圈子：
                             <a href="showCircleDetail.action?id=${informId}">${friend.remark}</a>
-                        </a>
-                    </td>
-                    <td>${time}</td><td></td>
+                            </a>
+                        </td>
+                        <td>${time}</td><td></td>
+                    </tr>
                 </s:elseif>
             </s:iterator>
         </table>
