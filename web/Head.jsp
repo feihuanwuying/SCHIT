@@ -25,7 +25,7 @@
     <s:if test="#session.username == null">
     </s:if>
     <s:else>
-        <a href="searchUser.action">好友搜索</a>
+        <a href="searchUser.action">用户搜索</a>
         <img src="../photo/mirror.jpg" style="width:24px;height:24px;float:right"/>
     </s:else>
 </div>
