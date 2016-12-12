@@ -70,7 +70,7 @@ public class ReplyDao extends Dao {
             reply.setTime(TimeTransform.timeStampToDate(rs.getTimestamp("time")));
             reply.setType(rs.getInt("type"));
             reply.setFloor(rs.getLong("floor"));
-            reply.setReplier(userDao.getUser(rs.getString("replier_name")));
+            reply.setReplier(userDao.getUser(rs.getInt("replier_id")));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -82,11 +82,11 @@ public class ReplyDao extends Dao {
      * @param id
      * @return
      */
-    public long getReplyCount(long id) {
+    public long getPostReplyCount(int id) {
         long replies = 0;
         try {
             String sql = "SELECT count(*) FROM reply WHERE post_id = ?";
-            ResultSet rs = executeQuery(sql, new Object[]{id});
+            ResultSet rs = executeQuery(sql, id);
             if (rs.next()) {
                 replies = rs.getLong(1);
             }
@@ -138,12 +138,12 @@ public class ReplyDao extends Dao {
         String sql = null;
         Object[] param = null;
         if (reply.getParentId() == -1) {  //直接回复
-            sql = "INSERT INTO reply (post_id, replier_name, content, time, type, floor) values (?, ?, ?, ?, ?, ?)";
-            param = new Object[]{reply.getPostId(), reply.getReplier().getUsername(), reply.getContent(),
+            sql = "INSERT INTO reply (post_id, replier_id, content, time, type, floor) values (?, ?, ?, ?, ?, ?)";
+            param = new Object[]{reply.getPostId(), reply.getReplier().getId(), reply.getContent(),
             TimeTransform.dateTotimeStamp(reply.getTime()), reply.getType(), reply.getFloor()};
         } else {
-            sql = "INSERT INTO reply (post_id, parent_id, replier_name, content, time, type, floor) values (?, ?, ?, ?, ?, ?, ?)";
-            param = new Object[]{reply.getPostId(), reply.getParentId(), reply.getReplier().getUsername(),
+            sql = "INSERT INTO reply (post_id, parent_id, replier_id, content, time, type, floor) values (?, ?, ?, ?, ?, ?, ?)";
+            param = new Object[]{reply.getPostId(), reply.getParentId(), reply.getReplier().getId(),
             reply.getContent(), TimeTransform.dateTotimeStamp(reply.getTime()), reply.getType(), reply.getFloor()};
         }
         execute(sql, param);
@@ -174,5 +174,19 @@ public class ReplyDao extends Dao {
     public void deleteReply(long id) {
         String sql = "DELETE FROM reply WHERE id = ?";
         execute(sql, new Object[]{id});
+    }
+
+    public long getUserReplyCount(int userId) {
+        long count = 0;
+        try {
+            String sql = "SELECT count(*) FROM reply WHERE replier_id = ?";
+            ResultSet rs = executeQuery(sql, userId);
+            if (rs.next()) {
+                count = rs.getLong(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 }

@@ -4,6 +4,7 @@ import util.TimeTransform;
 import vo.Post;
 import vo.Reply;
 
+import java.security.interfaces.RSAKey;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -62,7 +63,7 @@ public class PostDao extends Dao {
         Post post = null;
         try {
             post = new Post();
-            post.setId(rs.getLong("id"));
+            post.setId(rs.getInt("id"));
             post.setTitle(rs.getString("title"));
             post.setContent(rs.getString("content"));
             if (post.getContent() == null) {
@@ -71,9 +72,9 @@ public class PostDao extends Dao {
             post.setType(rs.getInt("type"));
             post.setTime(TimeTransform.timeStampToDate(rs.getTimestamp("time")));
             ReplyDao replyDao = new ReplyDao();
-            post.setReplyCount(replyDao.getReplyCount(post.getId()));
+            post.setReplyCount(replyDao.getPostReplyCount(post.getId()));
             UserDao userDao = new UserDao();
-            post.setPoster(userDao.getUser(rs.getString("poster_name")));
+            post.setPoster(userDao.getUser(rs.getInt("poster_id")));
             post.setLastReply(replyDao.getLastReply(post.getId()));
             post.setLastReplyTime(TimeTransform.timeStampToDate(rs.getTimestamp("reply_time")));
         } catch (SQLException e) {
@@ -132,8 +133,8 @@ public class PostDao extends Dao {
      * @param post
      */
     public void addPost(Post post) {
-        String sql = "INSERT INTO post (id, poster_name, title, content, type, time, reply_time) values (?, ?, ?, ?, ?, ?, ?)";
-        Object[] params = {post.getId(), post.getPoster().getUsername(),
+        String sql = "INSERT INTO post (id, poster_id, title, content, type, time, reply_time) values (?, ?, ?, ?, ?, ?, ?)";
+        Object[] params = {post.getId(), post.getPoster().getId(),
         post.getTitle(), post.getContent(), post.getType(),
                 TimeTransform.dateTotimeStamp(post.getTime()),
         TimeTransform.dateTotimeStamp(post.getLastReplyTime())};
@@ -158,4 +159,25 @@ public class PostDao extends Dao {
         ResultSet rs = executeQuery(sql);
         return getPostList(rs);
     }
+
+    public long getUserPostCount(int userId) {
+        long count = 0;
+        try {
+            String sql = "SELECT count(*) FROM post WHERE poster_id = ?";
+            ResultSet rs = executeQuery(sql, userId);
+            if (rs.next()) {
+                count = rs.getLong(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    public List<Post> getUserPostList(int userId) {
+        String sql = "SELECT * FROM post WHERE poster_id = ? ORDER BY time DESC limit 5";
+        ResultSet rs = executeQuery(sql, userId);
+        return getPostList(rs);
+    }
+
 }

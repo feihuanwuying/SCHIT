@@ -9,7 +9,7 @@ img {
     margin-top:-25px;
 }
 .jumbotron {
-    background-image:url('http://attach.bbs.miui.com/forum/201311/24/215445jhkmukdk1p3urpur.jpg');
+
     background-size:cover;
     /*加上这个可以让这一块位置在中间而不是边上*/
     display:flex;
@@ -36,7 +36,7 @@ img {
     font-weight: bold;
     margin-bottom:50px;
 }
-.btn.btn-primary {
+.btn.btn-primar {
     margin-right:20px;
     border-radius:2px;
     border:1px solid black;
@@ -44,7 +44,7 @@ img {
     text-shadow:none;
     background-color:#afd9ee;
 }
-.btn.btn-primary:hover {
+.btn.btn-primar:hover {
     color:#ffffff;
     background-color: #fbd1d5;
 }

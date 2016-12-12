@@ -43,16 +43,22 @@
     background-image:url("http://image7.360doc.com/DownloadImg/2010/01/2405/2217239_2.jpg");
 }
 #center_2 .col-sm-3{
-    border:1px solid #ffffff;
     min-height:33%;
-    background:rgba(230, 230, 230, 0.9) none repeat scroll 0 0 !important;/*实现FF背景透明，文字不透明*/
-    filter:Alpha(opacity=40); background:#000000;/*实现IE背景透明*/
+    /*background:rgba(230, 230, 230, 0.9) none repeat scroll 0 0 !important;实现FF背景透明，文字不透明*/
+    /*filter:Alpha(opacity=40); background:#000000;实现IE背景透明*/
 }
-#center_2 .col-sm-3 h1 {
-    margin-top:10px;
-    margin-bottom:10px;
+#center_2 .col-sm-3 h3 {
     color:#ff0000;
     text-shadow:0.25px 0.25px 0.25px #000000;
-
+    font-family: 华文新魏,arial, 'Hiragino Sans GB';
+}
+.carousel-caption {
+    height:12%;
+    background:rgba(155,155,155,0.8) none repeat scroll 0 0 !important;
+    filter:Alpha(opacity=40);
+}
+.carousel-caption h3 {
+    margin-top:-2.5%;
+    font-weight:bold;
 }
 

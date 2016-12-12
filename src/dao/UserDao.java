@@ -5,7 +5,9 @@ import vo.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 与数据库交互，获得user表的信息
@@ -140,4 +142,38 @@ public class UserDao extends Dao{
         return user;
     }
 
+    private List<User> getUserList(ResultSet rs) {
+        List<User> userList = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                userList.add(getUser(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userList;
+    }
+
+
+    public List<User> getUserList(String nickname, long pageNumber, int pageSize) {
+        List<User> userList;
+        String sql = "SELECT * FROM user WHERE nickname LIKE ? LIMIT ?, ?";
+        ResultSet rs = executeQuery(sql, "%"+nickname+"%", (pageNumber-1)*pageSize, pageSize);
+        userList = getUserList(rs);
+        return userList;
+    }
+
+    public long getUserCount(String nickname) {
+        long count = 0;
+        try {
+            String sql = "SELECT count(*) FROM user WHERE nickname LIKE ?";
+            ResultSet rs = executeQuery(sql, "%"+nickname+"%");
+            if (rs.next()) {
+                count = rs.getLong(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
 }

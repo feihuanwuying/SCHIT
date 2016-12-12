@@ -7,7 +7,7 @@ import java.util.Date;
  * Created by ZouKaifa on 2016/10/10.
  */
 public class Post {
-    private long id;
+    private int id;
     private User poster = new User();  //发帖人
     private String title = "";  //题目
     private String content = "";  //内容
@@ -17,11 +17,11 @@ public class Post {
     private long replyCount;  //回复量
     private Date lastReplyTime;  //最后回帖时间
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
