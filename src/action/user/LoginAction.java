@@ -56,6 +56,7 @@ public class LoginAction extends ActionSupport {
             setErrCode(0);
         } else if (userService.login(username, password)) {
             setErrCode(2);
+            UserService.updateInform();
             return SUCCESS;
         } else {
             setErrCode(1);

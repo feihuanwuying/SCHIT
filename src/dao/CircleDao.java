@@ -160,13 +160,13 @@ public class CircleDao extends Dao {
         return count;
     }
 
-    public void addCircle(Circle circle, int[] userList) {
+    public int addCircle(Circle circle, int[] userList) {
+        int id = 0;
         try {
             String sql = "INSERT INTO circle (name, label, owner_id) values (?, ?, ?)";
             execute(sql, circle.getName(), circle.getLabel(), circle.getOwner().getId());
             sql = "SELECT LAST_INSERT_ID()";
             ResultSet rs = executeQuery(sql);
-            int id = 0;
             if (rs.next()) {
                 id = rs.getInt(1);
             }
@@ -179,6 +179,7 @@ public class CircleDao extends Dao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return id;
     }
 
     public List<Circle> getRandomCircleList(int number) {
@@ -190,7 +191,7 @@ public class CircleDao extends Dao {
         CirclePost post = null;
         try {
             post = new CirclePost();
-            post.setId(rs.getLong("id"));
+            post.setId(rs.getInt("id"));
             post.setTitle(rs.getString("title"));
             post.setContent(rs.getString("content"));
             if (post.getContent() == null) {
@@ -198,11 +199,10 @@ public class CircleDao extends Dao {
             }
             post.setCircleId(rs.getInt("circle_id"));
             post.setTime(TimeTransform.timeStampToDate(rs.getTimestamp("time")));
-            ReplyDao replyDao = new ReplyDao();
-            post.setReplyCount(replyDao.getReplyCount(post.getId()));
+            post.setReplyCount(getPostReplyCount(post.getId()));
             UserDao userDao = new UserDao();
             post.setPoster(userDao.getUser(rs.getInt("poster_id")));
-            post.setLastReply(replyDao.getLastReply(post.getId()));
+            post.setLastReply(getLastCircleReply(post.getId()));
             post.setLastReplyTime(TimeTransform.timeStampToDate(rs.getTimestamp("reply_time")));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -257,6 +257,20 @@ public class CircleDao extends Dao {
                 post.getTitle(), post.getContent(), post.getCircleId(),
                 TimeTransform.dateTotimeStamp(post.getTime()),
                 TimeTransform.dateTotimeStamp(post.getLastReplyTime()));
+        try {
+            sql = "SELECT * FROM circle_member WHERE circle_id = ?";
+            ResultSet rs = executeQuery(sql, post.getCircleId());
+            while (rs.next()) {
+                int inform = rs.getInt("inform")+1;
+                int memberId = rs.getInt("member_id");
+                sql = "UPDATE circle_member SET inform = ? WHERE (circle_id = ?) AND (member_id = ?)";
+                if (memberId != post.getPoster().getId()) {
+                    executeUpdate(sql, inform, post.getCircleId(), memberId);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void deletePost(long id) {
@@ -336,6 +350,20 @@ public class CircleDao extends Dao {
                     reply.getContent(), TimeTransform.dateTotimeStamp(reply.getTime()), reply.getCircleId(), reply.getFloor()};
         }
         execute(sql, param);
+        try {
+            sql = "SELECT * FROM circle_member WHERE circle_id = ?";
+            ResultSet rs = executeQuery(sql, reply.getCircleId());
+            while (rs.next()) {
+                int inform = rs.getInt("inform")+1;
+                int memberId = rs.getInt("member_id");
+                if (memberId != reply.getReplier().getId()) {
+                    sql = "UPDATE circle_member SET inform = ? WHERE (circle_id = ?) AND (member_id = ?)";
+                    executeUpdate(sql, inform, reply.getCircleId(), memberId);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public CircleReply getLastCircleReply(long id) {
@@ -382,5 +410,38 @@ public class CircleDao extends Dao {
             e.printStackTrace();
         }
         return is;
+    }
+
+    public int getInformCount(int userId, int circleId) {
+        int count = 0;
+        try {
+            String sql = "SELECT inform FROM circle_member WHERE (member_id = ?) AND (circle_id = ?)";
+            ResultSet rs = executeQuery(sql, userId, circleId);
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    public int getInformCount(int userId) {
+        int count = 0;
+        try {
+            String sql = "SELECT inform FROM circle_member WHERE member_id = ?";
+            ResultSet rs = executeQuery(sql, userId);
+            while (rs.next()) {
+                count += rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    public void viewCircle(int userId, int circleId) {
+        String sql = "UPDATE circle_member SET inform = 0 WHERE (member_id = ?) AND (circle_id = ?)";
+        executeUpdate(sql, userId, circleId);
     }
 }

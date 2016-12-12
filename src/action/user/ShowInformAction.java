@@ -44,11 +44,6 @@ public class ShowInformAction extends ActionSupport {
         pageCount = informService.getInformPageCount();
         pageNumber = informService.getPageNumber(pageNumber);
         informList = informService.getInformList();
-        for (int i = 0; i < informList.size(); i++) {
-            if (informList.get(i).getTreatment() == 0) {
-                informList.get(i).setTreatment(1);
-            }
-        }
         return SUCCESS;
     }
 }

@@ -230,4 +230,11 @@ public class UserService extends BasicService{
         return pageCount;
     }
 
+    public static void updateInform() {
+        int userId = (int)ActionContext.getContext().getSession().get("id");
+        Map<String, Object> session = ActionContext.getContext().getSession();
+        session.put("inform", new InformService().getNewInformCount(userId));
+        session.put("circleInform", new CircleService().getInform(userId));
+    }
+
 }

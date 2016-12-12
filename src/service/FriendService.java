@@ -269,5 +269,24 @@ public class FriendService extends BasicService {
         return friendList;
     }
 
+    public boolean sendMessage(int friendId, String message) {
+        UserDao userDao = new UserDao();
+        int userId = (int)ActionContext.getContext().getSession().get("id");
+        Inform inform = new Inform();
+        inform.setUser(userDao.getUser(friendId));
+        Friend friend = new Friend();
+        friend.setFriend(userDao.getUser(userId));
+        inform.setFriend(friend);
+        inform.setFriendMessage(message);
+        inform.setTime(new Date());
+        inform.setTreatment(0);
+        inform.setInformType(Inform.FRIEND_CHAT);
+        InformDao informDao = new InformDao();
+        informDao.addInform(inform);
+        informDao.close();
+        userDao.close();
+        return true;
+    }
+
 
 }

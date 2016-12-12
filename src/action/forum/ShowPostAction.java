@@ -13,7 +13,7 @@ import java.util.List;
 public class ShowPostAction extends ActionSupport {
     private Post post = new Post();  //帖子
     private List<Reply> replyList;  //回复列表
-    private long pid;  //帖子id
+    private int pid;  //帖子id
     private long pageNumber;
     private long pageCount;
     private int pageSize;
@@ -35,11 +35,11 @@ public class ShowPostAction extends ActionSupport {
         this.replyList = replyList;
     }
 
-    public long getPid() {
+    public int getPid() {
         return pid;
     }
 
-    public void setPid(long pid) {
+    public void setPid(int pid) {
         this.pid = pid;
     }
 

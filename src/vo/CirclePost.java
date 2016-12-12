@@ -6,21 +6,21 @@ import java.util.Date;
  * Created by ZouKaifa on 2016/12/11.
  */
 public class CirclePost {
-    private long id;
+    private int id;
     private User poster = new User();  //发帖人
     private String title = "";  //题目
     private String content = "";  //内容
     private int circleId;  //所属圈子
     private Date time;  //发帖时间
-    private Reply lastReply;  //最后回复
+    private CircleReply lastReply;  //最后回复
     private long replyCount;  //回复量
     private Date lastReplyTime;  //最后回帖时间
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -73,11 +73,11 @@ public class CirclePost {
         this.poster.setPassword("");
     }
 
-    public Reply getLastReply() {
+    public CircleReply getLastReply() {
         return lastReply;
     }
 
-    public void setLastReply(Reply lastReply) {
+    public void setLastReply(CircleReply lastReply) {
         this.lastReply = lastReply;
     }
 

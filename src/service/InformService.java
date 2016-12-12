@@ -89,6 +89,11 @@ public class InformService extends BasicService {
         int userId = (int)ActionContext.getContext().getSession().get("id");
         InformDao informDao = new InformDao();
         List<Inform> informList = informDao.getInformList(userId, pageNumber, pageSize);
+        for (int i = 0; i < informList.size(); i++) {
+            if (informList.get(i).getTreatment() == 0) {
+                informDao.updateTreatment(informList.get(i).getId(), 1);
+            }
+        }
         informDao.close();
         return informList;
     }

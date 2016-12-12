@@ -23,7 +23,10 @@ public class LoginInterceptor extends AbstractInterceptor {
                 || !new UserService().exist((String)session.get("username"))) {
             return Action.LOGIN;
         }
-        session.put("inform", new InformService().getNewInformCount((int)session.get("id")));
-        return actionInvocation.invoke();
+        String result = actionInvocation.invoke();
+        if (session.containsKey("username")) {
+            UserService.updateInform();
+        }
+        return result;
     }
 }

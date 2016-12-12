@@ -54,6 +54,7 @@ public class RegisterAction extends ActionSupport implements ModelDriven<User>{
             setErrCode(4);
         } else if (userService.register(getUser())) {
             setErrCode(2);
+            UserService.updateInform();
             return SUCCESS;
         } else {
             setErrCode(3);

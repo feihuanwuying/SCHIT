@@ -2,11 +2,9 @@ package service;
 
 import com.opensymphony.xwork2.ActionContext;
 import dao.CircleDao;
+import dao.InformDao;
 import dao.UserDao;
-import vo.Circle;
-import vo.CirclePost;
-import vo.CircleReply;
-import vo.User;
+import vo.*;
 
 import java.util.Date;
 import java.util.List;
@@ -35,7 +33,21 @@ public class CircleService extends BasicService {
         circle.setLabel(label);
         circle.setOwner(owner);
         CircleDao circleDao = new CircleDao();
-        circleDao.addCircle(circle, userIdList);
+        int id = circleDao.addCircle(circle, userIdList);
+        //对各个成员发送通知
+        InformDao informDao = new InformDao();
+        Friend friend = new Friend();
+        friend.setFriend(owner);
+        friend.setRemark(circle.getName());
+        for (int i = 0; i < userIdList.length; i++) {
+            Inform inform = new Inform();
+            inform.setUser(userDao.getUser(userIdList[i]));
+            inform.setTime(new Date());
+            inform.setFriend(friend);
+            inform.setInformId(id);
+            inform.setInformType(Inform.INTO_CIRCLE);
+            informDao.addInform(inform);
+        }
         circleDao.close();
         return true;
     }
@@ -68,6 +80,7 @@ public class CircleService extends BasicService {
                 postList = circleDao.getCirclePostList(circleId, this.pageNumber, pageSize);
             }
         }
+        circleDao.viewCircle(userId, circleId);
         circleDao.close();
         return postList;
     }
@@ -227,6 +240,13 @@ public class CircleService extends BasicService {
         boolean is = circleDao.isOwner(userId, circleId);
         circleDao.close();
         return is?1:0;
+    }
+
+    public int getInform(int userId) {
+        CircleDao circleDao = new CircleDao();
+        int inform = circleDao.getInformCount(userId);
+        circleDao.close();
+        return inform;
     }
 
 }

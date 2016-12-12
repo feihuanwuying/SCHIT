@@ -64,7 +64,7 @@
                 <li><a href="showForum.action">论坛</a></li>
                 <li><a href="">今日哈工大</a></li>
                 <s:if test="#session.username != null">
-                    <li><a href="showCircle.action">圈子</a> </li>
+                    <li><a href="showCircle.action">圈子<span class="badge">${session.circleInform}</span></a></li>
                 </s:if>
             </ul>
 

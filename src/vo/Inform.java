@@ -11,7 +11,6 @@ public class Inform {
     public final static int FRIEND_CHAT = 2;  //好友聊天
     public final static int ADD_SUCCESS = 3;  //好友请求通过
     public final static int POST_REPLY = 4;  //主题被回复
-    public final static int REPLY_REPLY = 5;  //回复被回复
     public final static int MESSAGE = 6;  //留言
     public final static int ADD_FAIL = 7;  //好友请求被拒绝
     public final static int INTO_CIRCLE = 8;  //被拉入圈子

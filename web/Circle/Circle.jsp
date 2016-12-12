@@ -33,8 +33,10 @@
                         <a href="showCircleDetail.action?circleId=${id}">
                                 ${name}
                         </a><br>人数：${members}<br>
+                        未查看：${inform}<br>
                         主题数：${postCount}<br>
                         回帖数：${replyCount}
+                        <br><br>
                     </div>
                 </s:iterator>
             </div>

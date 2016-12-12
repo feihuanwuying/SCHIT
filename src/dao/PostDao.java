@@ -63,7 +63,7 @@ public class PostDao extends Dao {
         Post post = null;
         try {
             post = new Post();
-            post.setId(rs.getLong("id"));
+            post.setId(rs.getInt("id"));
             post.setTitle(rs.getString("title"));
             post.setContent(rs.getString("content"));
             if (post.getContent() == null) {
@@ -72,7 +72,7 @@ public class PostDao extends Dao {
             post.setType(rs.getInt("type"));
             post.setTime(TimeTransform.timeStampToDate(rs.getTimestamp("time")));
             ReplyDao replyDao = new ReplyDao();
-            post.setReplyCount(replyDao.getReplyCount(post.getId()));
+            post.setReplyCount(replyDao.getPostReplyCount(post.getId()));
             UserDao userDao = new UserDao();
             post.setPoster(userDao.getUser(rs.getInt("poster_id")));
             post.setLastReply(replyDao.getLastReply(post.getId()));

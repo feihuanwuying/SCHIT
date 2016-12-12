@@ -97,6 +97,32 @@
                                     </div>
                                 </div>
                             </s:if>
+                            <a href="" onclick="return false;"
+                               data-toggle="modal" data-target="#message">发送信息</a>
+                            <div class="modal fade" id="message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">私信</h4>
+                                        </div>
+                                        <form action="sendMessage.action" method="post">
+                                            <div class="modal-body" style="text-align: center">
+                                                <textarea id="area" rows="10" cols="50"
+                                                          name="message" maxlength="1000" minlength="2"
+                                                          placeholder="请输入私信内容，2~1000字符"
+                                                          class="form-control" required
+                                                ></textarea>
+                                                <input type="hidden" name="id" value="${user.id}">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                                <button type="submit" class="btn btn-primary">发送</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </s:else>
                     </div>
                 </div>

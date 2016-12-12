@@ -2,9 +2,12 @@ package service;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.sun.org.apache.regexp.internal.RE;
+import dao.InformDao;
 import dao.PostDao;
 import dao.ReplyDao;
 import dao.UserDao;
+import vo.Friend;
+import vo.Inform;
 import vo.Post;
 import vo.Reply;
 
@@ -141,9 +144,9 @@ public class ForumService extends BasicService {
      * @param id
      * @return
      */
-    public long getReplyCount(long id) {
+    public long getReplyCount(int id) {
         ReplyDao replyDao = new ReplyDao();
-        long result = replyDao.getReplyCount(id);
+        long result = replyDao.getPostReplyCount(id);
         replyDao.close();
         return result;
     }
@@ -153,7 +156,7 @@ public class ForumService extends BasicService {
      * @param id
      * @return
      */
-    public long getReplyPageCount(long id) {
+    public long getReplyPageCount(int id) {
         long replyCount = getReplyCount(id);
         pageCount = replyCount % pageSize == 0? (replyCount/pageSize) : replyCount/pageSize+1;
         return pageCount;
@@ -201,6 +204,35 @@ public class ForumService extends BasicService {
         post.setLastReplyTime(reply.getTime());
         replyDao.addReply(reply);
         postDao.updatePost(post);
+        //给被回复人发通知
+        InformDao informDao = new InformDao();
+        Inform inform = new Inform();
+        inform.setTime(new Date());
+        inform.setFriendMessage(reply.getContent());
+        inform.setInformId(post.getId());
+        Friend friend = new Friend();
+        friend.setFriend(reply.getReplier());
+        friend.setRemark(post.getTitle());
+        inform.setFriend(friend);
+        inform.setInformType(Inform.POST_REPLY);
+        if (reply.getParentId() == -1) {
+            inform.setUser(post.getPoster());
+            if (post.getPoster().getId() == reply.getReplier().getId()) {
+                inform.setTreatment(1);
+            } else {  //不是自己回的贴
+                inform.setTreatment(0);
+            }
+        } else {
+            Reply parentReply = replyDao.getReply(reply.getParentId());
+            inform.setUser(parentReply.getReplier());
+            if (parentReply.getId() == reply.getReplier().getId()) {
+                inform.setTreatment(1);
+            } else {
+                inform.setTreatment(0);
+            }
+        }
+        informDao.addInform(inform);
+        informDao.close();
         userDao.close();
         postDao.close();
         replyDao.close();
