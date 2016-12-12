@@ -70,6 +70,20 @@ public class FriendDao extends Dao {
         return list;
     }
 
+    public List<Friend> getFriendList(int userId) {
+        List<Friend> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM friend WHERE user_id = ?";
+            ResultSet rs = executeQuery(sql, userId);
+            while (rs.next()) {
+                list.add(getFreind(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
     /**
      * 获得某用户好友总数
      * @param username

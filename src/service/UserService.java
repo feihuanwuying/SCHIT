@@ -5,6 +5,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.sun.javafx.collections.MappingChange;
 import dao.UserDao;
 import dao.VisitDao;
+import vo.Inform;
 import vo.User;
 import vo.Visit;
 
@@ -17,7 +18,7 @@ import java.util.Map;
 /** 登录相关的服务
  * Created by ZouKaifa on 2016/10/13.
  */
-public class UserService {
+public class UserService extends BasicService{
     /**
      * 登录
      * @param username 用户名
@@ -35,10 +36,12 @@ public class UserService {
         User user = userDao.getUser(username, password);
         userDao.close();
         if (user != null) {
-            ActionContext.getContext().getSession().put("username", username);
-            ActionContext.getContext().getSession().put("nickname", user.getNickname());
-            ActionContext.getContext().getSession().put("power", user.getPower());
-            ActionContext.getContext().getSession().put("id", user.getId());
+            Map<String, Object> session = ActionContext.getContext().getSession();
+            session.put("username", username);
+            session.put("nickname", user.getNickname());
+            session.put("power", user.getPower());
+            session.put("id", user.getId());
+            session.put("inform", new InformService().getNewInformCount(user.getId()));
             return true;
         }
         return false;
@@ -58,10 +61,12 @@ public class UserService {
             userDao.addUser(user);
             user = userDao.getUser(user.getUsername());
             userDao.close();
-            ActionContext.getContext().getSession().put("username", user.getUsername());
-            ActionContext.getContext().getSession().put("nickname", user.getNickname());
-            ActionContext.getContext().getSession().put("power", user.getPower());
-            ActionContext.getContext().getSession().put("id", user.getId());
+            Map<String, Object> session = ActionContext.getContext().getSession();
+            session.put("username", user.getUsername());
+            session.put("nickname", user.getNickname());
+            session.put("power", user.getPower());
+            session.put("id", user.getId());
+            session.put("inform", new InformService().getNewInformCount(user.getId()));
             return true;
         }
         userDao.close();
@@ -79,6 +84,7 @@ public class UserService {
             session.remove("nickname");
             session.remove("power");
             session.remove("id");
+            session.remove("inform");
             return true;
         }
         return false;
@@ -201,6 +207,34 @@ public class UserService {
         List<Visit> visitList = visitDao.getVisitList(userId);
         visitDao.close();
         return visitList;
+    }
+
+
+    public List<User> getUserList(String nickname) {
+        UserDao userDao = new UserDao();
+        List<User> userList = userDao.getUserList(nickname, pageNumber, pageSize);
+        userDao.close();
+        return userList;
+    }
+
+    private long getUserCount(String nickname) {
+        UserDao userDao = new UserDao();
+        long count = userDao.getUserCount(nickname);
+        userDao.close();
+        return count;
+    }
+
+    public long getUserPageCount(String nickname) {
+        long userCount = getUserCount(nickname);
+        pageCount = userCount % pageSize == 0? (userCount/pageSize) : userCount/pageSize+1;
+        return pageCount;
+    }
+
+    public static void updateInform() {
+        int userId = (int)ActionContext.getContext().getSession().get("id");
+        Map<String, Object> session = ActionContext.getContext().getSession();
+        session.put("inform", new InformService().getNewInformCount(userId));
+        session.put("circleInform", new CircleService().getInform(userId));
     }
 
 }

@@ -26,11 +26,7 @@ public class Dao {
     private void setCon() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            BufferedReader br = new BufferedReader(new InputStreamReader(
-                    new FileInputStream(ServletActionContext.getServletContext().getRealPath(File.separator)+"/static/context"),
-                    "utf8")
-            );
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/SCHIT", br.readLine(), br.readLine());
+            con = DriverManager.getConnection("jdbc:mysql://syipvbkxvsaf.mysql.sae.sina.com.cn:10587/schit", "root", "960331");
         } catch (Exception e) {
             e.printStackTrace();
         }

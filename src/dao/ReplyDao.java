@@ -82,11 +82,11 @@ public class ReplyDao extends Dao {
      * @param id
      * @return
      */
-    public long getReplyCount(long id) {
+    public long getPostReplyCount(int id) {
         long replies = 0;
         try {
             String sql = "SELECT count(*) FROM reply WHERE post_id = ?";
-            ResultSet rs = executeQuery(sql, new Object[]{id});
+            ResultSet rs = executeQuery(sql, id);
             if (rs.next()) {
                 replies = rs.getLong(1);
             }

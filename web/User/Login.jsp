@@ -1,7 +1,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
-  User: ZouKaifa
+  user: ZouKaifa
   Date: 2016/10/13
   Time: 16:01
   To change this template use File | Settings | File Templates.
