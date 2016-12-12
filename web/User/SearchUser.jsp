@@ -30,8 +30,13 @@
             </div>
         <s:iterator value="userList">
             <div class="row col-sm-offset-4">
-                <div class="col-sm-2" align="center"><img style="width: 66px;height:66px;"
-                                                          src="photo/${username.hashCode()}.jpg">
+                <div class="col-sm-2" align="center">
+                    <s:if test="%{head == ''}">
+                        <img style="width: 66px;height:66px;" src="../photo/head.jpg">
+                    </s:if>
+                    <s:else>
+                        <img style="width: 66px;height:66px;" src="../photo/${username.hashCode()}${head}">
+                    </s:else>
                         <br>${nickname}</div>
                 <div class="col-sm-2" align="center"><a href="showHome.action?id=${id}" target="_blank">更多信息</a></div>
                 <div class="col-sm-2" align="center">

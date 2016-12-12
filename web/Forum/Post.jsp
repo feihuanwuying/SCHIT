@@ -185,14 +185,6 @@
                               placeholder="请输入回复内容，4~4000字符"
                               class="form-control"
                     ></textarea>
-                    <div class="file-box">
-                        <input type="file" name="doc" id="doc" onchange="javascript:setImagePreview();"/>
-                        <p>
-                            <div id="localImag">
-                                <img id="preview" width="-1" height="-1" style="display:none"/>
-                            </div>
-                        </p>
-                    </div>
                 </div>
             </div>
             <input type="hidden" name="postId" value="${post.id}">
