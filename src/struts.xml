@@ -140,6 +140,42 @@
             <interceptor-ref name="loginInterceptor"></interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
         </action>
+        <action name="addCirclePost" class="action.circle.AddCirclePostAction">
+            <result type="redirect">${url}</result>
+            <result name="login" type="redirect">login.action</result>
+            <interceptor-ref name="loginInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+        </action>
+        <action name="addCircleReply" class="action.circle.AddCircleReplyAction">
+            <result type="redirect">${url}</result>
+            <result name="login" type="redirect">login.action</result>
+            <interceptor-ref name="loginInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+        </action>
+        <action name="deleteCircleReply" class="action.circle.DeleteCircleReplyAction">
+            <result type="redirect">${url}</result>
+            <result name="login" type="redirect">login.action</result>
+            <interceptor-ref name="loginInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+        </action>
+        <action name="deleteCirclePost" class="action.circle.DeleteCirclePostAction">
+            <result type="redirect">${url}</result>
+            <result name="login" type="redirect">login.action</result>
+            <interceptor-ref name="loginInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+        </action>
+        <action name="showCircleDetail" class="action.circle.ShowCircleDetailAction">
+            <result>/Circle/CircleDetail.jsp</result>
+            <result name="login" type="redirect">login.action</result>
+            <interceptor-ref name="loginInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+        </action>
+        <action name="showCirclePost" class="action.circle.ShowCirclePostAction">
+            <result>/Circle/CirclePost.jsp</result>
+            <result name="login" type="redirect">login.action</result>
+            <interceptor-ref name="loginInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+        </action>
 
         <action name="*">
             <result type="redirect">index.action</result>

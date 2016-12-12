@@ -40,11 +40,11 @@ public class CircleDao extends Dao {
         return count;
     }
 
-    public long getReplyCount(int circleId, int postId) {
+    public long getPostReplyCount(int postId) {
         long count = 0;
         try {
-            String sql = "SELECT count(*) FROM circle_reply WHERE (circle_id = ?) AND (post_id = ?)";
-            ResultSet rs = executeQuery(sql, circleId, postId);
+            String sql = "SELECT count(*) FROM circle_reply WHERE post_id = ?";
+            ResultSet rs = executeQuery(sql, postId);
             if (rs.next()) {
                 count = rs.getLong(1);
             }
@@ -301,7 +301,6 @@ public class CircleDao extends Dao {
         return reply;
     }
 
-
     private List<CircleReply> getCircleReplyList(ResultSet rs) {
         List<CircleReply> replyList = new ArrayList<>();
         try {
@@ -316,5 +315,72 @@ public class CircleDao extends Dao {
             e.printStackTrace();
         }
         return replyList;
+    }
+
+    public List<CircleReply> getCircleReplyList(long id, long pageNumber, int pageSize) {
+        String sql = "SELECT * FROM circle_reply WHERE post_id = ? ORDER BY time LIMIT ?, ? ";
+        ResultSet rs = executeQuery(sql, id, (pageNumber-1)*pageSize, pageSize);
+        return getCircleReplyList(rs);
+    }
+
+    public void addCircleReply(CircleReply reply) {
+        String sql = null;
+        Object[] param = null;
+        if (reply.getParentId() == -1) {  //直接回复
+            sql = "INSERT INTO circle_reply (post_id, replier_id, content, time, circle_id, floor) values (?, ?, ?, ?, ?, ?)";
+            param = new Object[]{reply.getPostId(), reply.getReplier().getId(), reply.getContent(),
+                    TimeTransform.dateTotimeStamp(reply.getTime()), reply.getCircleId(), reply.getFloor()};
+        } else {
+            sql = "INSERT INTO circle_reply (post_id, parent_id, replier_id, content, time, circle_id, floor) values (?, ?, ?, ?, ?, ?, ?)";
+            param = new Object[]{reply.getPostId(), reply.getParentId(), reply.getReplier().getId(),
+                    reply.getContent(), TimeTransform.dateTotimeStamp(reply.getTime()), reply.getCircleId(), reply.getFloor()};
+        }
+        execute(sql, param);
+    }
+
+    public CircleReply getLastCircleReply(long id) {
+        try {
+            String sql = "SELECT * FROM circle_reply WHERE post_id = ? order by floor desc limit 1";
+            ResultSet rs = executeQuery(sql, id);
+            if (rs.next()) {
+                return getCircleReply(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void deleteCircleReply(long id) {
+        String sql = "DELETE FROM circle_reply WHERE id = ?";
+        execute(sql, id);
+    }
+
+    public boolean isOwner(int userId, int circleId) {
+        boolean is = false;
+        try {
+            String sql = "SELECT * FROM circle WHERE (owner_id = ?) AND (id = ?)";
+            ResultSet rs = executeQuery(sql, userId, circleId);
+            if (rs.next()) {
+                is = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return is;
+    }
+
+    public boolean isMember(int memberId, int circleId) {
+        boolean is = false;
+        try {
+            String sql = "SELECT * FROM circle_member WHERE (member_id = ?) AND (circle_id = ?)";
+            ResultSet rs = executeQuery(sql, memberId, circleId);
+            if (rs.next()) {
+                is = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return is;
     }
 }

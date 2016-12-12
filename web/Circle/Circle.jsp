@@ -30,7 +30,9 @@
                         <img src="../photo/${label}.jpg" style="width:100px;
                      height:100px;
                      float:left;"/>
-                            ${name}<br>人数：${members}<br>
+                        <a href="showCircleDetail.action?circleId=${id}">
+                                ${name}
+                        </a><br>人数：${members}<br>
                         主题数：${postCount}<br>
                         回帖数：${replyCount}
                     </div>
