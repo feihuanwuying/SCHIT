@@ -17,11 +17,11 @@
     <form action="searchUser.action" method="post">
         <div class="top-search">请输入昵称进行搜索：</div >
         <input type="text" name="nickname">
-        <button type="submit">搜索</button>
+        <button class="btn btn-primary" type="submit">搜索</button>
     </form>
     <s:if test="%{userList != null}">
         <s:if test="%{userList.size() == 0}">
-            没有用户！<br>
+            <h2 align="center">没有用户！</h2>
         </s:if>
         <s:else>
 
