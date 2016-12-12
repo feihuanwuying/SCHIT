@@ -89,28 +89,29 @@
                                     </form>
                                 </div>
                             </div>
-                            <a href="" onclick="return false;"
-                               data-toggle="modal" data-target="#denyModal">拒绝</a>
-                            <div class="modal fade" id="denyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                            <h4 class="modal-title" id="myModalLabel">拒绝</h4>
-                                        </div>
-                                        <form action="denyFriend.action" method="post">
-                                            <div class="modal-body">
-                                                附加信息<input type="text" maxlength="100" name="message">
-                                                <input type="hidden" name="informId" value="${id}">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                                <button type="submit" class="btn btn-primary">发送</button>
-                                            </div>
-                                        </form>
+                        </div>
+                        <a href="" onclick="return false;"
+                           data-toggle="modal" data-target="#denyModal">拒绝</a>
+                        <div class="modal fade" id="denyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">拒绝</h4>
                                     </div>
+                                    <form action="denyFriend.action" method="post">
+                                        <div class="modal-body">
+                                            附加信息<input type="text" maxlength="100" name="message">
+                                            <input type="hidden" name="informId" value="${id}">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                            <button type="submit" class="btn btn-primary">发送</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
+                        </div>
                         </s:if>
                             <s:elseif test="%{treatment == 2}">
                                 已同意
@@ -193,7 +194,7 @@
                             <a href="showHome.action?id=${friend.friend.id}">
                                 <strong>${friend.friend.nickname}</strong></a>
                             邀请您加入了圈子：
-                            <a href="showCircleDetail.action?id=${informId}">${friend.remark}</a>
+                            <a href="showCircleDetail.action?circleId=${informId}">${friend.remark}</a>
                             </a>
                         </td>
                         <td>${time}</td><td></td>
